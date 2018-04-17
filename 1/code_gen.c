@@ -1,12 +1,26 @@
-#include <stdio.h>
-#include "shubz.h"    
-#include "lex.c"    
+#include "lex.c"
 #include "name.c"    
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 int label_index;
 
+void stmt();
+char* expr();
+char* term();
+char* factor();
+char* expr2();
+char* term2();
+char* term1(char* prev);
+char* factor2();
+char* expr1(char* prev);
+char* exprc();
+void exprcwhile();
+void opt_stmts();
+void stmt_list();
+
+extern FILE *fp;
 
 void stmt()
 {
@@ -17,7 +31,7 @@ void stmt()
     {
         advance();
         char* tempvar=exprc();
-        printf("\tIFZ %s goto _L%d\n",tempvar,label_index);
+        fprintf(fp , "\tIFZ %s goto L%d\n",tempvar,label_index);
         temp_index=label_index;
         label_index++;
         freename(tempvar);
@@ -25,7 +39,7 @@ void stmt()
         {
             advance();
             stmt();
-            printf("_L%d:\n",temp_index);
+            fprintf(fp,"L%d:\n",temp_index);
 
         }
         else
@@ -36,17 +50,17 @@ void stmt()
     else if(match(WHILE))
     {
         advance();
-        printf("_L%d:\n",label_index);
+        fprintf(fp,"L%d:\n",label_index);
         temp_index=label_index;
         label_index++;
         char* tempvar=exprc();
-        printf("\tIFZ %s goto _L%d\n",tempvar,label_index);
+        fprintf(fp,"\tIFZ %s goto L%d\n",tempvar,label_index);
         if(match(DO))
         {
             advance();
             stmt();
-            printf("\tgoto _L%d\n", temp_index);
-            printf("_L%d:\n", label_index);
+            fprintf(fp,"\tgoto L%d\n", temp_index);
+            fprintf(fp,"L%d:\n", label_index);
         }
         else
         {
@@ -135,7 +149,7 @@ char* factor()
     }
     else if( match(NUM))
     {
-        printf("\t%s = %0.*s\n", tempvar = newname(), yyleng, yytext );
+        fprintf(fp,"\t%s = %0.*s\n", tempvar = newname(), yyleng, yytext );
         advance();
         return tempvar;
     }
@@ -154,12 +168,12 @@ char* factor()
             advance();
             advance();
             char* rightside=expr();
-            printf("\t%s = %s\n",tempid,rightside);   
+            fprintf(fp,"\t%s = %s\n",tempid,rightside);   
             return rightside;
         }
         else
         {
-            printf("\t%s = %s\n", tempvar = newname(),tempid);
+            fprintf(fp,"\t%s = %s\n", tempvar = newname(),tempid);
             return tempvar;
         }
     }
@@ -192,7 +206,7 @@ char* term1(char* prev)
     {
         advance();
         tempvar=factor2();
-        printf("\t%s *= %s\n", prev, tempvar );
+        fprintf(fp,"\t%s *= %s\n", prev, tempvar );
         freename(tempvar);
         return term1(prev);
     }
@@ -200,7 +214,7 @@ char* term1(char* prev)
     {
         advance();
         tempvar=factor2();
-        printf("\t%s /= %s\n", prev, tempvar );
+        fprintf(fp,"\t%s /= %s\n", prev, tempvar );
         freename(tempvar);
         return term1(prev);
     }
@@ -213,7 +227,7 @@ char* factor2()
     char tempid[25];
     if(match(NUM))
     {
-        printf("\t%s = %0.*s\n", tempvar = newname(), yyleng, yytext );
+        fprintf(fp,"\t%s = %0.*s\n", tempvar = newname(), yyleng, yytext );
         advance();
         return tempvar;
     }
@@ -234,7 +248,7 @@ char* factor2()
         }
         else
         {   
-            printf("\t%s = %s\n", tempvar = newname(),tempid);
+            fprintf(fp,"\t%s = %s\n", tempvar = newname(),tempid);
             advance();
         }
         return tempvar;
@@ -263,7 +277,7 @@ char* expr1(char* prev)
     {   
         advance();
         tempvar=term2();
-        printf("\t%s += %s\n", prev, tempvar );
+        fprintf(fp,"\t%s += %s\n", prev, tempvar );
         freename(tempvar);
         return expr1(prev);
     }
@@ -271,7 +285,7 @@ char* expr1(char* prev)
     {
         advance();
         tempvar=term2();
-        printf("\t%s -= %s\n", prev, tempvar );
+        fprintf(fp,"\t%s -= %s\n", prev, tempvar );
         freename(tempvar);
         return expr1(prev);
     }
@@ -287,7 +301,7 @@ char* exprc()
         advance();
         char* tempvar2=expr2(); 
         
-        printf("\t%s=%s %c %s\n",tempvar1,tempvar1,symbol,tempvar2);
+        fprintf(fp,"\t%s=%s %c %s\n",tempvar1,tempvar1,symbol,tempvar2);
         freename(tempvar2);
         return tempvar1;
     }

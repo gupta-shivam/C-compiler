@@ -26,5 +26,11 @@
 #define TEMPID 24
 #define LABELID 25
 
+extern char * yytext;
+extern int yyleng;
+extern int yylineno;
 
 
+int lex();
+int match(int);
+void advance(void);

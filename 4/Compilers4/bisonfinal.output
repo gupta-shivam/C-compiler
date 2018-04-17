@@ -1,0 +1,5624 @@
+Terminals unused in grammar
+
+   COLON
+   INTEGER_LITERAL
+
+
+Grammar
+
+    0 $accept: grammar_start $end
+
+    1 grammar_start: stmtlist
+
+    2 stmtlist: stmt stmtlist
+    3         | %empty
+
+    4 stmt: IF LP exprc rp LCP stmtlist RCP elsestmt
+    5     | WHILE LP exprc rp LCP stmtlist RCP
+    6     | FOR LP exprfor rp LCP stmtlist RCP
+    7     | SWITCH LP arithexpr rp switchstmt
+    8     | expression semi
+    9     | d semi
+
+   10 d: type list_var
+
+   11 type: INT
+   12     | CHAR
+   13     | FLOAT
+
+   14 list_var: id_arr
+   15         | id_arr EQ mathexpr
+   16         | id_arr COMMA list_var
+
+   17 id_arr: ID
+   18       | ID br_dimlist
+
+   19 br_dimlist: LSP NUM RSP
+   20           | br_dimlist LSP NUM RSP
+
+   21 elsestmt: ELSEIF LP exprc rp LCP stmtlist RCP elsestmt
+   22         | ELSE LCP stmtlist RCP
+   23         | %empty
+
+   24 exprc: exprc OR expression A
+   25      | exprc AND expression A
+   26      | expression A
+
+   27 A: LT expression
+   28  | GT expression
+   29  | EQEQ expression
+   30  | GT EQ expression
+   31  | LT EQ expression
+   32  | %empty
+
+   33 switchstmt: CASE LP arithexpr rp LCP stmtlist RCP switchstmt
+   34           | DEFAULT LCP stmtlist RCP
+   35           | %empty
+
+   36 exprfor: expression semi exprc semi expression
+
+   37 expression: RUN LP func_arg_list rp
+   38           | SET_JOB_AFFINITY LP func_arg_list rp
+   39           | SET_ALGO LP func_arg_list rp
+   40           | DISCARD_JOB LP func_arg_list rp
+   41           | WAIT LP func_arg_list rp
+   42           | init
+   43           | mathexpr
+
+   44 init: id_arr EQ constructor
+   45     | %empty
+
+   46 mathexpr: assignexpr
+   47         | arithexpr
+
+   48 assignexpr: id_arr EQ mathexpr
+   49           | id_arr PLUSEQ mathexpr
+   50           | id_arr MINUSEQ mathexpr
+   51           | id_arr MULTIPLYEQ mathexpr
+   52           | id_arr DIVIDEEQ mathexpr
+   53           | id_arr MINUSMINUS
+   54           | id_arr PLUSPLUS
+
+   55 arithexpr: expr1 BITAND arithexpr
+   56          | expr1
+
+   57 expr1: expr2 BITOR expr1
+   58      | expr2
+
+   59 expr2: expr2 PLUS expr3
+   60      | expr2 MINUS expr3
+   61      | expr3
+
+   62 expr3: expr3 MULTIPLY expr4
+   63      | expr3 DIVIDE expr4
+   64      | expr4
+
+   65 expr4: NOT factor
+   66      | factor
+
+   67 factor: NUM
+   68       | id_arr DOT function
+   69       | constructor DOT function
+   70       | id_arr
+   71       | LP arithexpr rp
+
+   72 constructor: PROCESSOR LP proc_parameter_list rp
+   73            | LINK LP link_parameter_list rp
+   74            | MEMORY LP memory_parameter_list rp
+   75            | JOB LP job_parameter_list rp
+   76            | CLUSTER LP cluster_parameter_list rp
+   77            | SCHEDULER LP scheduler_parameter_list rp
+
+   78 proc_parameter_list: proc_parameter C
+
+   79 C: COMMA proc_parameter_list
+   80  | %empty
+
+   81 link_parameter_list: link_parameter D
+
+   82 D: COMMA link_parameter_list
+   83  | %empty
+
+   84 memory_parameter_list: memory_parameter E
+
+   85 E: COMMA memory_parameter_list
+   86  | %empty
+
+   87 job_parameter_list: job_parameter F
+
+   88 F: COMMA job_parameter_list
+   89  | %empty
+
+   90 cluster_parameter_list: cluster_parameter G
+
+   91 G: COMMA cluster_parameter_list
+   92  | %empty
+
+   93 scheduler_parameter_list: scheduler_parameter Z
+
+   94 Z: COMMA scheduler_parameter_list
+   95  | %empty
+
+   96 proc_parameter: ARCHITECTURE_TYPE EQ value
+   97               | ISA EQ value
+   98               | CLOCK_SPEED EQ value
+   99               | L1_MEMORY EQ value
+  100               | L2_MEMORY EQ value
+  101               | NAME EQ value
+  102               | argument
+  103               | %empty
+
+  104 argument: value
+  105         | LSP valuearray rsp
+
+  106 valuearray: value H
+  107           | %empty
+
+  108 H: COMMA valuearray
+  109  | %empty
+
+  110 link_parameter: START_POINT EQ value
+  111               | END_POINT EQ value
+  112               | BANDWIDTH EQ value
+  113               | CHANNEL_CAPACITY EQ value
+  114               | NAME EQ value
+  115               | value
+  116               | %empty
+
+  117 memory_parameter: MEMORY_TYPE EQ value
+  118                 | MEM_SIZE EQ value
+  119                 | NAME EQ value
+  120                 | value
+  121                 | %empty
+
+  122 job_parameter: JOB_ID EQ value
+  123              | FLOPS_REQUIRED EQ value
+  124              | DEADLINE EQ value
+  125              | MEM_REQUIRED EQ value
+  126              | AFFINITY EQ argument
+  127              | argument
+  128              | %empty
+
+  129 cluster_parameter: PROCESSORS EQ argument
+  130                  | TOPOLOGY EQ value
+  131                  | LINK_BANDWIDTH EQ value
+  132                  | LINK_CAPACITY EQ value
+  133                  | NAME EQ value
+  134                  | argument
+  135                  | %empty
+
+  136 scheduler_parameter: CLUSTER EQ value
+  137                    | JOB_ARRAY EQ argument
+  138                    | PROCESSOR_ARRAY EQ argument
+  139                    | argument
+  140                    | %empty
+
+  141 function: IS_RUNNING LP func_arg_list rp
+  142         | SUBMIT_JOBS LP func_arg_list rp
+  143         | GET_CLOCK_SPEED LP func_arg_list rp
+  144         | GET_AVAILABLE_MEMORY LP func_arg_list rp
+  145         | GET_MEMORY LP func_arg_list rp
+  146         | GET_LOAD LP func_arg_list rp
+  147         | MAX_JOBS LP func_arg_list rp
+
+  148 func_arg_list: argument I
+  149              | %empty
+
+  150 I: COMMA func_arg_list
+  151  | %empty
+
+  152 value: SQUOTE id_arr SQUOTE
+  153      | DQUOTE id_arr DQUOTE
+  154      | arithexpr
+  155      | constructor
+
+  156 semi: SEMI
+  157     | error
+
+  158 rp: RP
+  159   | error
+
+  160 rsp: RSP
+  161    | error
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256) 157 159 161
+IF (258) 4
+ELSE (259) 22
+WHILE (260) 5
+FOR (261) 6
+SWITCH (262) 7
+CASE (263) 33
+DEFAULT (264) 34
+LP (265) 4 5 6 7 21 33 37 38 39 40 41 71 72 73 74 75 76 77 141 142
+    143 144 145 146 147
+RP (266) 158
+LCP (267) 4 5 6 21 22 33 34
+RCP (268) 4 5 6 21 22 33 34
+LSP (269) 19 20 105
+RSP (270) 19 20 160
+SEMI (271) 156
+COLON (272)
+LT (273) 27 31
+GT (274) 28 30
+EQ (275) 15 30 31 44 48 96 97 98 99 100 101 110 111 112 113 114 117
+    118 119 122 123 124 125 126 129 130 131 132 133 136 137 138
+PLUS (276) 59
+MINUS (277) 60
+MULTIPLY (278) 62
+DIVIDE (279) 63
+BITOR (280) 57
+BITAND (281) 55
+NOT (282) 65
+ID (283) 17 18
+NUM (284) 19 20 67
+DOT (285) 68 69
+COMMA (286) 16 79 82 85 88 91 94 108 150
+PROCESSOR (287) 72
+LINK (288) 73
+MEMORY (289) 74
+JOB (290) 75
+CLUSTER (291) 76 136
+ISA (292) 97
+CLOCK_SPEED (293) 98
+L1_MEMORY (294) 99
+L2_MEMORY (295) 100
+NAME (296) 101 114 119 133
+START_POINT (297) 110
+END_POINT (298) 111
+BANDWIDTH (299) 112
+CHANNEL_CAPACITY (300) 113
+MEMORY_TYPE (301) 117
+MEM_SIZE (302) 118
+JOB_ID (303) 122
+FLOPS_REQUIRED (304) 123
+DEADLINE (305) 124
+MEM_REQUIRED (306) 125
+PROCESSORS (307) 129
+TOPOLOGY (308) 130
+LINK_BANDWIDTH (309) 131
+LINK_CAPACITY (310) 132
+IS_RUNNING (311) 141
+SUBMIT_JOBS (312) 142
+OR (313) 24
+AND (314) 25
+PLUSEQ (315) 49
+MINUSEQ (316) 50
+MULTIPLYEQ (317) 51
+DIVIDEEQ (318) 52
+MINUSMINUS (319) 53
+PLUSPLUS (320) 54
+GET_CLOCK_SPEED (321) 143
+RUN (322) 37
+DISCARD_JOB (323) 40
+GET_AVAILABLE_MEMORY (324) 144
+GET_MEMORY (325) 145
+ELSEIF (326) 21
+AFFINITY (327) 126
+EQEQ (328) 29
+DQUOTE (329) 153
+SQUOTE (330) 152
+ARCHITECTURE_TYPE (331) 96
+WAIT (332) 41
+SCHEDULER (333) 77
+JOB_ARRAY (334) 137
+PROCESSOR_ARRAY (335) 138
+SET_JOB_AFFINITY (336) 38
+MAX_JOBS (337) 147
+GET_LOAD (338) 146
+SET_ALGO (339) 39
+INT (340) 11
+FLOAT (341) 13
+CHAR (342) 12
+INTEGER_LITERAL (343)
+
+
+Nonterminals, with rules where they appear
+
+$accept (89)
+    on left: 0
+grammar_start (90)
+    on left: 1, on right: 0
+stmtlist (91)
+    on left: 2 3, on right: 1 2 4 5 6 21 22 33 34
+stmt (92)
+    on left: 4 5 6 7 8 9, on right: 2
+d (93)
+    on left: 10, on right: 9
+type (94)
+    on left: 11 12 13, on right: 10
+list_var (95)
+    on left: 14 15 16, on right: 10 16
+id_arr (96)
+    on left: 17 18, on right: 14 15 16 44 48 49 50 51 52 53 54 68 70
+    152 153
+br_dimlist (97)
+    on left: 19 20, on right: 18 20
+elsestmt (98)
+    on left: 21 22 23, on right: 4 21
+exprc (99)
+    on left: 24 25 26, on right: 4 5 21 24 25 36
+A (100)
+    on left: 27 28 29 30 31 32, on right: 24 25 26
+switchstmt (101)
+    on left: 33 34 35, on right: 7 33
+exprfor (102)
+    on left: 36, on right: 6
+expression (103)
+    on left: 37 38 39 40 41 42 43, on right: 8 24 25 26 27 28 29 30
+    31 36
+init (104)
+    on left: 44 45, on right: 42
+mathexpr (105)
+    on left: 46 47, on right: 15 43 48 49 50 51 52
+assignexpr (106)
+    on left: 48 49 50 51 52 53 54, on right: 46
+arithexpr (107)
+    on left: 55 56, on right: 7 33 47 55 71 154
+expr1 (108)
+    on left: 57 58, on right: 55 56 57
+expr2 (109)
+    on left: 59 60 61, on right: 57 58 59 60
+expr3 (110)
+    on left: 62 63 64, on right: 59 60 61 62 63
+expr4 (111)
+    on left: 65 66, on right: 62 63 64
+factor (112)
+    on left: 67 68 69 70 71, on right: 65 66
+constructor (113)
+    on left: 72 73 74 75 76 77, on right: 44 69 155
+proc_parameter_list (114)
+    on left: 78, on right: 72 79
+C (115)
+    on left: 79 80, on right: 78
+link_parameter_list (116)
+    on left: 81, on right: 73 82
+D (117)
+    on left: 82 83, on right: 81
+memory_parameter_list (118)
+    on left: 84, on right: 74 85
+E (119)
+    on left: 85 86, on right: 84
+job_parameter_list (120)
+    on left: 87, on right: 75 88
+F (121)
+    on left: 88 89, on right: 87
+cluster_parameter_list (122)
+    on left: 90, on right: 76 91
+G (123)
+    on left: 91 92, on right: 90
+scheduler_parameter_list (124)
+    on left: 93, on right: 77 94
+Z (125)
+    on left: 94 95, on right: 93
+proc_parameter (126)
+    on left: 96 97 98 99 100 101 102 103, on right: 78
+argument (127)
+    on left: 104 105, on right: 102 126 127 129 134 137 138 139 148
+valuearray (128)
+    on left: 106 107, on right: 105 108
+H (129)
+    on left: 108 109, on right: 106
+link_parameter (130)
+    on left: 110 111 112 113 114 115 116, on right: 81
+memory_parameter (131)
+    on left: 117 118 119 120 121, on right: 84
+job_parameter (132)
+    on left: 122 123 124 125 126 127 128, on right: 87
+cluster_parameter (133)
+    on left: 129 130 131 132 133 134 135, on right: 90
+scheduler_parameter (134)
+    on left: 136 137 138 139 140, on right: 93
+function (135)
+    on left: 141 142 143 144 145 146 147, on right: 68 69
+func_arg_list (136)
+    on left: 148 149, on right: 37 38 39 40 41 141 142 143 144 145
+    146 147 150
+I (137)
+    on left: 150 151, on right: 148
+value (138)
+    on left: 152 153 154 155, on right: 96 97 98 99 100 101 104 106
+    110 111 112 113 114 115 117 118 119 120 122 123 124 125 130 131
+    132 133 136
+semi (139)
+    on left: 156 157, on right: 8 9 36
+rp (140)
+    on left: 158 159, on right: 4 5 6 7 21 33 37 38 39 40 41 71 72
+    73 74 75 76 77 141 142 143 144 145 146 147
+rsp (141)
+    on left: 160 161, on right: 105
+
+
+State 0
+
+    0 $accept: . grammar_start $end
+
+    IF                shift, and go to state 1
+    WHILE             shift, and go to state 2
+    FOR               shift, and go to state 3
+    SWITCH            shift, and go to state 4
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+    INT               shift, and go to state 20
+    FLOAT             shift, and go to state 21
+    CHAR              shift, and go to state 22
+
+    $end      reduce using rule 3 (stmtlist)
+    $default  reduce using rule 45 (init)
+
+    grammar_start  go to state 23
+    stmtlist       go to state 24
+    stmt           go to state 25
+    d              go to state 26
+    type           go to state 27
+    id_arr         go to state 28
+    expression     go to state 29
+    init           go to state 30
+    mathexpr       go to state 31
+    assignexpr     go to state 32
+    arithexpr      go to state 33
+    expr1          go to state 34
+    expr2          go to state 35
+    expr3          go to state 36
+    expr4          go to state 37
+    factor         go to state 38
+    constructor    go to state 39
+
+
+State 1
+
+    4 stmt: IF . LP exprc rp LCP stmtlist RCP elsestmt
+
+    LP  shift, and go to state 40
+
+
+State 2
+
+    5 stmt: WHILE . LP exprc rp LCP stmtlist RCP
+
+    LP  shift, and go to state 41
+
+
+State 3
+
+    6 stmt: FOR . LP exprfor rp LCP stmtlist RCP
+
+    LP  shift, and go to state 42
+
+
+State 4
+
+    7 stmt: SWITCH . LP arithexpr rp switchstmt
+
+    LP  shift, and go to state 43
+
+
+State 5
+
+   71 factor: LP . arithexpr rp
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 45
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 6
+
+   65 expr4: NOT . factor
+
+    LP         shift, and go to state 5
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    factor       go to state 46
+    constructor  go to state 39
+
+
+State 7
+
+   17 id_arr: ID .
+   18       | ID . br_dimlist
+
+    LSP  shift, and go to state 47
+
+    $default  reduce using rule 17 (id_arr)
+
+    br_dimlist  go to state 48
+
+
+State 8
+
+   67 factor: NUM .
+
+    $default  reduce using rule 67 (factor)
+
+
+State 9
+
+   72 constructor: PROCESSOR . LP proc_parameter_list rp
+
+    LP  shift, and go to state 49
+
+
+State 10
+
+   73 constructor: LINK . LP link_parameter_list rp
+
+    LP  shift, and go to state 50
+
+
+State 11
+
+   74 constructor: MEMORY . LP memory_parameter_list rp
+
+    LP  shift, and go to state 51
+
+
+State 12
+
+   75 constructor: JOB . LP job_parameter_list rp
+
+    LP  shift, and go to state 52
+
+
+State 13
+
+   76 constructor: CLUSTER . LP cluster_parameter_list rp
+
+    LP  shift, and go to state 53
+
+
+State 14
+
+   37 expression: RUN . LP func_arg_list rp
+
+    LP  shift, and go to state 54
+
+
+State 15
+
+   40 expression: DISCARD_JOB . LP func_arg_list rp
+
+    LP  shift, and go to state 55
+
+
+State 16
+
+   41 expression: WAIT . LP func_arg_list rp
+
+    LP  shift, and go to state 56
+
+
+State 17
+
+   77 constructor: SCHEDULER . LP scheduler_parameter_list rp
+
+    LP  shift, and go to state 57
+
+
+State 18
+
+   38 expression: SET_JOB_AFFINITY . LP func_arg_list rp
+
+    LP  shift, and go to state 58
+
+
+State 19
+
+   39 expression: SET_ALGO . LP func_arg_list rp
+
+    LP  shift, and go to state 59
+
+
+State 20
+
+   11 type: INT .
+
+    $default  reduce using rule 11 (type)
+
+
+State 21
+
+   13 type: FLOAT .
+
+    $default  reduce using rule 13 (type)
+
+
+State 22
+
+   12 type: CHAR .
+
+    $default  reduce using rule 12 (type)
+
+
+State 23
+
+    0 $accept: grammar_start . $end
+
+    $end  shift, and go to state 60
+
+
+State 24
+
+    1 grammar_start: stmtlist .
+
+    $default  reduce using rule 1 (grammar_start)
+
+
+State 25
+
+    2 stmtlist: stmt . stmtlist
+
+    IF                shift, and go to state 1
+    WHILE             shift, and go to state 2
+    FOR               shift, and go to state 3
+    SWITCH            shift, and go to state 4
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+    INT               shift, and go to state 20
+    FLOAT             shift, and go to state 21
+    CHAR              shift, and go to state 22
+
+    error     reduce using rule 45 (init)
+    SEMI      reduce using rule 45 (init)
+    $default  reduce using rule 3 (stmtlist)
+
+    stmtlist     go to state 61
+    stmt         go to state 25
+    d            go to state 26
+    type         go to state 27
+    id_arr       go to state 28
+    expression   go to state 29
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 26
+
+    9 stmt: d . semi
+
+    error  shift, and go to state 62
+    SEMI   shift, and go to state 63
+
+    semi  go to state 64
+
+
+State 27
+
+   10 d: type . list_var
+
+    ID  shift, and go to state 7
+
+    list_var  go to state 65
+    id_arr    go to state 66
+
+
+State 28
+
+   44 init: id_arr . EQ constructor
+   48 assignexpr: id_arr . EQ mathexpr
+   49           | id_arr . PLUSEQ mathexpr
+   50           | id_arr . MINUSEQ mathexpr
+   51           | id_arr . MULTIPLYEQ mathexpr
+   52           | id_arr . DIVIDEEQ mathexpr
+   53           | id_arr . MINUSMINUS
+   54           | id_arr . PLUSPLUS
+   68 factor: id_arr . DOT function
+   70       | id_arr .
+
+    EQ          shift, and go to state 67
+    DOT         shift, and go to state 68
+    PLUSEQ      shift, and go to state 69
+    MINUSEQ     shift, and go to state 70
+    MULTIPLYEQ  shift, and go to state 71
+    DIVIDEEQ    shift, and go to state 72
+    MINUSMINUS  shift, and go to state 73
+    PLUSPLUS    shift, and go to state 74
+
+    $default  reduce using rule 70 (factor)
+
+
+State 29
+
+    8 stmt: expression . semi
+
+    error  shift, and go to state 62
+    SEMI   shift, and go to state 63
+
+    semi  go to state 75
+
+
+State 30
+
+   42 expression: init .
+
+    $default  reduce using rule 42 (expression)
+
+
+State 31
+
+   43 expression: mathexpr .
+
+    $default  reduce using rule 43 (expression)
+
+
+State 32
+
+   46 mathexpr: assignexpr .
+
+    $default  reduce using rule 46 (mathexpr)
+
+
+State 33
+
+   47 mathexpr: arithexpr .
+
+    $default  reduce using rule 47 (mathexpr)
+
+
+State 34
+
+   55 arithexpr: expr1 . BITAND arithexpr
+   56          | expr1 .
+
+    BITAND  shift, and go to state 76
+
+    $default  reduce using rule 56 (arithexpr)
+
+
+State 35
+
+   57 expr1: expr2 . BITOR expr1
+   58      | expr2 .
+   59 expr2: expr2 . PLUS expr3
+   60      | expr2 . MINUS expr3
+
+    PLUS   shift, and go to state 77
+    MINUS  shift, and go to state 78
+    BITOR  shift, and go to state 79
+
+    $default  reduce using rule 58 (expr1)
+
+
+State 36
+
+   61 expr2: expr3 .
+   62 expr3: expr3 . MULTIPLY expr4
+   63      | expr3 . DIVIDE expr4
+
+    MULTIPLY  shift, and go to state 80
+    DIVIDE    shift, and go to state 81
+
+    $default  reduce using rule 61 (expr2)
+
+
+State 37
+
+   64 expr3: expr4 .
+
+    $default  reduce using rule 64 (expr3)
+
+
+State 38
+
+   66 expr4: factor .
+
+    $default  reduce using rule 66 (expr4)
+
+
+State 39
+
+   69 factor: constructor . DOT function
+
+    DOT  shift, and go to state 82
+
+
+State 40
+
+    4 stmt: IF LP . exprc rp LCP stmtlist RCP elsestmt
+
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+
+    $default  reduce using rule 45 (init)
+
+    id_arr       go to state 28
+    exprc        go to state 83
+    expression   go to state 84
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 41
+
+    5 stmt: WHILE LP . exprc rp LCP stmtlist RCP
+
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+
+    $default  reduce using rule 45 (init)
+
+    id_arr       go to state 28
+    exprc        go to state 85
+    expression   go to state 84
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 42
+
+    6 stmt: FOR LP . exprfor rp LCP stmtlist RCP
+
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+
+    $default  reduce using rule 45 (init)
+
+    id_arr       go to state 28
+    exprfor      go to state 86
+    expression   go to state 87
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 43
+
+    7 stmt: SWITCH LP . arithexpr rp switchstmt
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 88
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 44
+
+   68 factor: id_arr . DOT function
+   70       | id_arr .
+
+    DOT  shift, and go to state 68
+
+    $default  reduce using rule 70 (factor)
+
+
+State 45
+
+   71 factor: LP arithexpr . rp
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 91
+
+
+State 46
+
+   65 expr4: NOT factor .
+
+    $default  reduce using rule 65 (expr4)
+
+
+State 47
+
+   19 br_dimlist: LSP . NUM RSP
+
+    NUM  shift, and go to state 92
+
+
+State 48
+
+   18 id_arr: ID br_dimlist .
+   20 br_dimlist: br_dimlist . LSP NUM RSP
+
+    LSP  shift, and go to state 93
+
+    $default  reduce using rule 18 (id_arr)
+
+
+State 49
+
+   72 constructor: PROCESSOR LP . proc_parameter_list rp
+
+    LP                 shift, and go to state 5
+    LSP                shift, and go to state 94
+    NOT                shift, and go to state 6
+    ID                 shift, and go to state 7
+    NUM                shift, and go to state 8
+    PROCESSOR          shift, and go to state 9
+    LINK               shift, and go to state 10
+    MEMORY             shift, and go to state 11
+    JOB                shift, and go to state 12
+    CLUSTER            shift, and go to state 13
+    ISA                shift, and go to state 95
+    CLOCK_SPEED        shift, and go to state 96
+    L1_MEMORY          shift, and go to state 97
+    L2_MEMORY          shift, and go to state 98
+    NAME               shift, and go to state 99
+    DQUOTE             shift, and go to state 100
+    SQUOTE             shift, and go to state 101
+    ARCHITECTURE_TYPE  shift, and go to state 102
+    SCHEDULER          shift, and go to state 17
+
+    $default  reduce using rule 103 (proc_parameter)
+
+    id_arr               go to state 44
+    arithexpr            go to state 103
+    expr1                go to state 34
+    expr2                go to state 35
+    expr3                go to state 36
+    expr4                go to state 37
+    factor               go to state 38
+    constructor          go to state 104
+    proc_parameter_list  go to state 105
+    proc_parameter       go to state 106
+    argument             go to state 107
+    value                go to state 108
+
+
+State 50
+
+   73 constructor: LINK LP . link_parameter_list rp
+
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    NAME              shift, and go to state 109
+    START_POINT       shift, and go to state 110
+    END_POINT         shift, and go to state 111
+    BANDWIDTH         shift, and go to state 112
+    CHANNEL_CAPACITY  shift, and go to state 113
+    DQUOTE            shift, and go to state 100
+    SQUOTE            shift, and go to state 101
+    SCHEDULER         shift, and go to state 17
+
+    $default  reduce using rule 116 (link_parameter)
+
+    id_arr               go to state 44
+    arithexpr            go to state 103
+    expr1                go to state 34
+    expr2                go to state 35
+    expr3                go to state 36
+    expr4                go to state 37
+    factor               go to state 38
+    constructor          go to state 104
+    link_parameter_list  go to state 114
+    link_parameter       go to state 115
+    value                go to state 116
+
+
+State 51
+
+   74 constructor: MEMORY LP . memory_parameter_list rp
+
+    LP           shift, and go to state 5
+    NOT          shift, and go to state 6
+    ID           shift, and go to state 7
+    NUM          shift, and go to state 8
+    PROCESSOR    shift, and go to state 9
+    LINK         shift, and go to state 10
+    MEMORY       shift, and go to state 11
+    JOB          shift, and go to state 12
+    CLUSTER      shift, and go to state 13
+    NAME         shift, and go to state 117
+    MEMORY_TYPE  shift, and go to state 118
+    MEM_SIZE     shift, and go to state 119
+    DQUOTE       shift, and go to state 100
+    SQUOTE       shift, and go to state 101
+    SCHEDULER    shift, and go to state 17
+
+    $default  reduce using rule 121 (memory_parameter)
+
+    id_arr                 go to state 44
+    arithexpr              go to state 103
+    expr1                  go to state 34
+    expr2                  go to state 35
+    expr3                  go to state 36
+    expr4                  go to state 37
+    factor                 go to state 38
+    constructor            go to state 104
+    memory_parameter_list  go to state 120
+    memory_parameter       go to state 121
+    value                  go to state 122
+
+
+State 52
+
+   75 constructor: JOB LP . job_parameter_list rp
+
+    LP              shift, and go to state 5
+    LSP             shift, and go to state 94
+    NOT             shift, and go to state 6
+    ID              shift, and go to state 7
+    NUM             shift, and go to state 8
+    PROCESSOR       shift, and go to state 9
+    LINK            shift, and go to state 10
+    MEMORY          shift, and go to state 11
+    JOB             shift, and go to state 12
+    CLUSTER         shift, and go to state 13
+    JOB_ID          shift, and go to state 123
+    FLOPS_REQUIRED  shift, and go to state 124
+    DEADLINE        shift, and go to state 125
+    MEM_REQUIRED    shift, and go to state 126
+    AFFINITY        shift, and go to state 127
+    DQUOTE          shift, and go to state 100
+    SQUOTE          shift, and go to state 101
+    SCHEDULER       shift, and go to state 17
+
+    $default  reduce using rule 128 (job_parameter)
+
+    id_arr              go to state 44
+    arithexpr           go to state 103
+    expr1               go to state 34
+    expr2               go to state 35
+    expr3               go to state 36
+    expr4               go to state 37
+    factor              go to state 38
+    constructor         go to state 104
+    job_parameter_list  go to state 128
+    argument            go to state 129
+    job_parameter       go to state 130
+    value               go to state 108
+
+
+State 53
+
+   76 constructor: CLUSTER LP . cluster_parameter_list rp
+
+    LP              shift, and go to state 5
+    LSP             shift, and go to state 94
+    NOT             shift, and go to state 6
+    ID              shift, and go to state 7
+    NUM             shift, and go to state 8
+    PROCESSOR       shift, and go to state 9
+    LINK            shift, and go to state 10
+    MEMORY          shift, and go to state 11
+    JOB             shift, and go to state 12
+    CLUSTER         shift, and go to state 13
+    NAME            shift, and go to state 131
+    PROCESSORS      shift, and go to state 132
+    TOPOLOGY        shift, and go to state 133
+    LINK_BANDWIDTH  shift, and go to state 134
+    LINK_CAPACITY   shift, and go to state 135
+    DQUOTE          shift, and go to state 100
+    SQUOTE          shift, and go to state 101
+    SCHEDULER       shift, and go to state 17
+
+    $default  reduce using rule 135 (cluster_parameter)
+
+    id_arr                  go to state 44
+    arithexpr               go to state 103
+    expr1                   go to state 34
+    expr2                   go to state 35
+    expr3                   go to state 36
+    expr4                   go to state 37
+    factor                  go to state 38
+    constructor             go to state 104
+    cluster_parameter_list  go to state 136
+    argument                go to state 137
+    cluster_parameter       go to state 138
+    value                   go to state 108
+
+
+State 54
+
+   37 expression: RUN LP . func_arg_list rp
+
+    LP         shift, and go to state 5
+    LSP        shift, and go to state 94
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    $default  reduce using rule 149 (func_arg_list)
+
+    id_arr         go to state 44
+    arithexpr      go to state 103
+    expr1          go to state 34
+    expr2          go to state 35
+    expr3          go to state 36
+    expr4          go to state 37
+    factor         go to state 38
+    constructor    go to state 104
+    argument       go to state 139
+    func_arg_list  go to state 140
+    value          go to state 108
+
+
+State 55
+
+   40 expression: DISCARD_JOB LP . func_arg_list rp
+
+    LP         shift, and go to state 5
+    LSP        shift, and go to state 94
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    $default  reduce using rule 149 (func_arg_list)
+
+    id_arr         go to state 44
+    arithexpr      go to state 103
+    expr1          go to state 34
+    expr2          go to state 35
+    expr3          go to state 36
+    expr4          go to state 37
+    factor         go to state 38
+    constructor    go to state 104
+    argument       go to state 139
+    func_arg_list  go to state 141
+    value          go to state 108
+
+
+State 56
+
+   41 expression: WAIT LP . func_arg_list rp
+
+    LP         shift, and go to state 5
+    LSP        shift, and go to state 94
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    $default  reduce using rule 149 (func_arg_list)
+
+    id_arr         go to state 44
+    arithexpr      go to state 103
+    expr1          go to state 34
+    expr2          go to state 35
+    expr3          go to state 36
+    expr4          go to state 37
+    factor         go to state 38
+    constructor    go to state 104
+    argument       go to state 139
+    func_arg_list  go to state 142
+    value          go to state 108
+
+
+State 57
+
+   77 constructor: SCHEDULER LP . scheduler_parameter_list rp
+
+    LP               shift, and go to state 5
+    LSP              shift, and go to state 94
+    NOT              shift, and go to state 6
+    ID               shift, and go to state 7
+    NUM              shift, and go to state 8
+    PROCESSOR        shift, and go to state 9
+    LINK             shift, and go to state 10
+    MEMORY           shift, and go to state 11
+    JOB              shift, and go to state 12
+    CLUSTER          shift, and go to state 143
+    DQUOTE           shift, and go to state 100
+    SQUOTE           shift, and go to state 101
+    SCHEDULER        shift, and go to state 17
+    JOB_ARRAY        shift, and go to state 144
+    PROCESSOR_ARRAY  shift, and go to state 145
+
+    $default  reduce using rule 140 (scheduler_parameter)
+
+    id_arr                    go to state 44
+    arithexpr                 go to state 103
+    expr1                     go to state 34
+    expr2                     go to state 35
+    expr3                     go to state 36
+    expr4                     go to state 37
+    factor                    go to state 38
+    constructor               go to state 104
+    scheduler_parameter_list  go to state 146
+    argument                  go to state 147
+    scheduler_parameter       go to state 148
+    value                     go to state 108
+
+
+State 58
+
+   38 expression: SET_JOB_AFFINITY LP . func_arg_list rp
+
+    LP         shift, and go to state 5
+    LSP        shift, and go to state 94
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    $default  reduce using rule 149 (func_arg_list)
+
+    id_arr         go to state 44
+    arithexpr      go to state 103
+    expr1          go to state 34
+    expr2          go to state 35
+    expr3          go to state 36
+    expr4          go to state 37
+    factor         go to state 38
+    constructor    go to state 104
+    argument       go to state 139
+    func_arg_list  go to state 149
+    value          go to state 108
+
+
+State 59
+
+   39 expression: SET_ALGO LP . func_arg_list rp
+
+    LP         shift, and go to state 5
+    LSP        shift, and go to state 94
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    $default  reduce using rule 149 (func_arg_list)
+
+    id_arr         go to state 44
+    arithexpr      go to state 103
+    expr1          go to state 34
+    expr2          go to state 35
+    expr3          go to state 36
+    expr4          go to state 37
+    factor         go to state 38
+    constructor    go to state 104
+    argument       go to state 139
+    func_arg_list  go to state 150
+    value          go to state 108
+
+
+State 60
+
+    0 $accept: grammar_start $end .
+
+    $default  accept
+
+
+State 61
+
+    2 stmtlist: stmt stmtlist .
+
+    $default  reduce using rule 2 (stmtlist)
+
+
+State 62
+
+  157 semi: error .
+
+    $default  reduce using rule 157 (semi)
+
+
+State 63
+
+  156 semi: SEMI .
+
+    $default  reduce using rule 156 (semi)
+
+
+State 64
+
+    9 stmt: d semi .
+
+    $default  reduce using rule 9 (stmt)
+
+
+State 65
+
+   10 d: type list_var .
+
+    $default  reduce using rule 10 (d)
+
+
+State 66
+
+   14 list_var: id_arr .
+   15         | id_arr . EQ mathexpr
+   16         | id_arr . COMMA list_var
+
+    EQ     shift, and go to state 151
+    COMMA  shift, and go to state 152
+
+    $default  reduce using rule 14 (list_var)
+
+
+State 67
+
+   44 init: id_arr EQ . constructor
+   48 assignexpr: id_arr EQ . mathexpr
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 153
+    mathexpr     go to state 154
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 155
+
+
+State 68
+
+   68 factor: id_arr DOT . function
+
+    IS_RUNNING            shift, and go to state 156
+    SUBMIT_JOBS           shift, and go to state 157
+    GET_CLOCK_SPEED       shift, and go to state 158
+    GET_AVAILABLE_MEMORY  shift, and go to state 159
+    GET_MEMORY            shift, and go to state 160
+    MAX_JOBS              shift, and go to state 161
+    GET_LOAD              shift, and go to state 162
+
+    function  go to state 163
+
+
+State 69
+
+   49 assignexpr: id_arr PLUSEQ . mathexpr
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 153
+    mathexpr     go to state 164
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 70
+
+   50 assignexpr: id_arr MINUSEQ . mathexpr
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 153
+    mathexpr     go to state 165
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 71
+
+   51 assignexpr: id_arr MULTIPLYEQ . mathexpr
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 153
+    mathexpr     go to state 166
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 72
+
+   52 assignexpr: id_arr DIVIDEEQ . mathexpr
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 153
+    mathexpr     go to state 167
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 73
+
+   53 assignexpr: id_arr MINUSMINUS .
+
+    $default  reduce using rule 53 (assignexpr)
+
+
+State 74
+
+   54 assignexpr: id_arr PLUSPLUS .
+
+    $default  reduce using rule 54 (assignexpr)
+
+
+State 75
+
+    8 stmt: expression semi .
+
+    $default  reduce using rule 8 (stmt)
+
+
+State 76
+
+   55 arithexpr: expr1 BITAND . arithexpr
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 168
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 77
+
+   59 expr2: expr2 PLUS . expr3
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    expr3        go to state 169
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 78
+
+   60 expr2: expr2 MINUS . expr3
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    expr3        go to state 170
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 79
+
+   57 expr1: expr2 BITOR . expr1
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    expr1        go to state 171
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 80
+
+   62 expr3: expr3 MULTIPLY . expr4
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    expr4        go to state 172
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 81
+
+   63 expr3: expr3 DIVIDE . expr4
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    expr4        go to state 173
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 82
+
+   69 factor: constructor DOT . function
+
+    IS_RUNNING            shift, and go to state 156
+    SUBMIT_JOBS           shift, and go to state 157
+    GET_CLOCK_SPEED       shift, and go to state 158
+    GET_AVAILABLE_MEMORY  shift, and go to state 159
+    GET_MEMORY            shift, and go to state 160
+    MAX_JOBS              shift, and go to state 161
+    GET_LOAD              shift, and go to state 162
+
+    function  go to state 174
+
+
+State 83
+
+    4 stmt: IF LP exprc . rp LCP stmtlist RCP elsestmt
+   24 exprc: exprc . OR expression A
+   25      | exprc . AND expression A
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+    OR     shift, and go to state 175
+    AND    shift, and go to state 176
+
+    rp  go to state 177
+
+
+State 84
+
+   26 exprc: expression . A
+
+    LT    shift, and go to state 178
+    GT    shift, and go to state 179
+    EQEQ  shift, and go to state 180
+
+    $default  reduce using rule 32 (A)
+
+    A  go to state 181
+
+
+State 85
+
+    5 stmt: WHILE LP exprc . rp LCP stmtlist RCP
+   24 exprc: exprc . OR expression A
+   25      | exprc . AND expression A
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+    OR     shift, and go to state 175
+    AND    shift, and go to state 176
+
+    rp  go to state 182
+
+
+State 86
+
+    6 stmt: FOR LP exprfor . rp LCP stmtlist RCP
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 183
+
+
+State 87
+
+   36 exprfor: expression . semi exprc semi expression
+
+    error  shift, and go to state 62
+    SEMI   shift, and go to state 63
+
+    semi  go to state 184
+
+
+State 88
+
+    7 stmt: SWITCH LP arithexpr . rp switchstmt
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 185
+
+
+State 89
+
+  159 rp: error .
+
+    $default  reduce using rule 159 (rp)
+
+
+State 90
+
+  158 rp: RP .
+
+    $default  reduce using rule 158 (rp)
+
+
+State 91
+
+   71 factor: LP arithexpr rp .
+
+    $default  reduce using rule 71 (factor)
+
+
+State 92
+
+   19 br_dimlist: LSP NUM . RSP
+
+    RSP  shift, and go to state 186
+
+
+State 93
+
+   20 br_dimlist: br_dimlist LSP . NUM RSP
+
+    NUM  shift, and go to state 187
+
+
+State 94
+
+  105 argument: LSP . valuearray rsp
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    $default  reduce using rule 107 (valuearray)
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    valuearray   go to state 188
+    value        go to state 189
+
+
+State 95
+
+   97 proc_parameter: ISA . EQ value
+
+    EQ  shift, and go to state 190
+
+
+State 96
+
+   98 proc_parameter: CLOCK_SPEED . EQ value
+
+    EQ  shift, and go to state 191
+
+
+State 97
+
+   99 proc_parameter: L1_MEMORY . EQ value
+
+    EQ  shift, and go to state 192
+
+
+State 98
+
+  100 proc_parameter: L2_MEMORY . EQ value
+
+    EQ  shift, and go to state 193
+
+
+State 99
+
+  101 proc_parameter: NAME . EQ value
+
+    EQ  shift, and go to state 194
+
+
+State 100
+
+  153 value: DQUOTE . id_arr DQUOTE
+
+    ID  shift, and go to state 7
+
+    id_arr  go to state 195
+
+
+State 101
+
+  152 value: SQUOTE . id_arr SQUOTE
+
+    ID  shift, and go to state 7
+
+    id_arr  go to state 196
+
+
+State 102
+
+   96 proc_parameter: ARCHITECTURE_TYPE . EQ value
+
+    EQ  shift, and go to state 197
+
+
+State 103
+
+  154 value: arithexpr .
+
+    $default  reduce using rule 154 (value)
+
+
+State 104
+
+   69 factor: constructor . DOT function
+  155 value: constructor .
+
+    DOT  shift, and go to state 82
+
+    $default  reduce using rule 155 (value)
+
+
+State 105
+
+   72 constructor: PROCESSOR LP proc_parameter_list . rp
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 198
+
+
+State 106
+
+   78 proc_parameter_list: proc_parameter . C
+
+    COMMA  shift, and go to state 199
+
+    $default  reduce using rule 80 (C)
+
+    C  go to state 200
+
+
+State 107
+
+  102 proc_parameter: argument .
+
+    $default  reduce using rule 102 (proc_parameter)
+
+
+State 108
+
+  104 argument: value .
+
+    $default  reduce using rule 104 (argument)
+
+
+State 109
+
+  114 link_parameter: NAME . EQ value
+
+    EQ  shift, and go to state 201
+
+
+State 110
+
+  110 link_parameter: START_POINT . EQ value
+
+    EQ  shift, and go to state 202
+
+
+State 111
+
+  111 link_parameter: END_POINT . EQ value
+
+    EQ  shift, and go to state 203
+
+
+State 112
+
+  112 link_parameter: BANDWIDTH . EQ value
+
+    EQ  shift, and go to state 204
+
+
+State 113
+
+  113 link_parameter: CHANNEL_CAPACITY . EQ value
+
+    EQ  shift, and go to state 205
+
+
+State 114
+
+   73 constructor: LINK LP link_parameter_list . rp
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 206
+
+
+State 115
+
+   81 link_parameter_list: link_parameter . D
+
+    COMMA  shift, and go to state 207
+
+    $default  reduce using rule 83 (D)
+
+    D  go to state 208
+
+
+State 116
+
+  115 link_parameter: value .
+
+    $default  reduce using rule 115 (link_parameter)
+
+
+State 117
+
+  119 memory_parameter: NAME . EQ value
+
+    EQ  shift, and go to state 209
+
+
+State 118
+
+  117 memory_parameter: MEMORY_TYPE . EQ value
+
+    EQ  shift, and go to state 210
+
+
+State 119
+
+  118 memory_parameter: MEM_SIZE . EQ value
+
+    EQ  shift, and go to state 211
+
+
+State 120
+
+   74 constructor: MEMORY LP memory_parameter_list . rp
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 212
+
+
+State 121
+
+   84 memory_parameter_list: memory_parameter . E
+
+    COMMA  shift, and go to state 213
+
+    $default  reduce using rule 86 (E)
+
+    E  go to state 214
+
+
+State 122
+
+  120 memory_parameter: value .
+
+    $default  reduce using rule 120 (memory_parameter)
+
+
+State 123
+
+  122 job_parameter: JOB_ID . EQ value
+
+    EQ  shift, and go to state 215
+
+
+State 124
+
+  123 job_parameter: FLOPS_REQUIRED . EQ value
+
+    EQ  shift, and go to state 216
+
+
+State 125
+
+  124 job_parameter: DEADLINE . EQ value
+
+    EQ  shift, and go to state 217
+
+
+State 126
+
+  125 job_parameter: MEM_REQUIRED . EQ value
+
+    EQ  shift, and go to state 218
+
+
+State 127
+
+  126 job_parameter: AFFINITY . EQ argument
+
+    EQ  shift, and go to state 219
+
+
+State 128
+
+   75 constructor: JOB LP job_parameter_list . rp
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 220
+
+
+State 129
+
+  127 job_parameter: argument .
+
+    $default  reduce using rule 127 (job_parameter)
+
+
+State 130
+
+   87 job_parameter_list: job_parameter . F
+
+    COMMA  shift, and go to state 221
+
+    $default  reduce using rule 89 (F)
+
+    F  go to state 222
+
+
+State 131
+
+  133 cluster_parameter: NAME . EQ value
+
+    EQ  shift, and go to state 223
+
+
+State 132
+
+  129 cluster_parameter: PROCESSORS . EQ argument
+
+    EQ  shift, and go to state 224
+
+
+State 133
+
+  130 cluster_parameter: TOPOLOGY . EQ value
+
+    EQ  shift, and go to state 225
+
+
+State 134
+
+  131 cluster_parameter: LINK_BANDWIDTH . EQ value
+
+    EQ  shift, and go to state 226
+
+
+State 135
+
+  132 cluster_parameter: LINK_CAPACITY . EQ value
+
+    EQ  shift, and go to state 227
+
+
+State 136
+
+   76 constructor: CLUSTER LP cluster_parameter_list . rp
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 228
+
+
+State 137
+
+  134 cluster_parameter: argument .
+
+    $default  reduce using rule 134 (cluster_parameter)
+
+
+State 138
+
+   90 cluster_parameter_list: cluster_parameter . G
+
+    COMMA  shift, and go to state 229
+
+    $default  reduce using rule 92 (G)
+
+    G  go to state 230
+
+
+State 139
+
+  148 func_arg_list: argument . I
+
+    COMMA  shift, and go to state 231
+
+    $default  reduce using rule 151 (I)
+
+    I  go to state 232
+
+
+State 140
+
+   37 expression: RUN LP func_arg_list . rp
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 233
+
+
+State 141
+
+   40 expression: DISCARD_JOB LP func_arg_list . rp
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 234
+
+
+State 142
+
+   41 expression: WAIT LP func_arg_list . rp
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 235
+
+
+State 143
+
+   76 constructor: CLUSTER . LP cluster_parameter_list rp
+  136 scheduler_parameter: CLUSTER . EQ value
+
+    LP  shift, and go to state 53
+    EQ  shift, and go to state 236
+
+
+State 144
+
+  137 scheduler_parameter: JOB_ARRAY . EQ argument
+
+    EQ  shift, and go to state 237
+
+
+State 145
+
+  138 scheduler_parameter: PROCESSOR_ARRAY . EQ argument
+
+    EQ  shift, and go to state 238
+
+
+State 146
+
+   77 constructor: SCHEDULER LP scheduler_parameter_list . rp
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 239
+
+
+State 147
+
+  139 scheduler_parameter: argument .
+
+    $default  reduce using rule 139 (scheduler_parameter)
+
+
+State 148
+
+   93 scheduler_parameter_list: scheduler_parameter . Z
+
+    COMMA  shift, and go to state 240
+
+    $default  reduce using rule 95 (Z)
+
+    Z  go to state 241
+
+
+State 149
+
+   38 expression: SET_JOB_AFFINITY LP func_arg_list . rp
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 242
+
+
+State 150
+
+   39 expression: SET_ALGO LP func_arg_list . rp
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 243
+
+
+State 151
+
+   15 list_var: id_arr EQ . mathexpr
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 153
+    mathexpr     go to state 244
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 152
+
+   16 list_var: id_arr COMMA . list_var
+
+    ID  shift, and go to state 7
+
+    list_var  go to state 245
+    id_arr    go to state 66
+
+
+State 153
+
+   48 assignexpr: id_arr . EQ mathexpr
+   49           | id_arr . PLUSEQ mathexpr
+   50           | id_arr . MINUSEQ mathexpr
+   51           | id_arr . MULTIPLYEQ mathexpr
+   52           | id_arr . DIVIDEEQ mathexpr
+   53           | id_arr . MINUSMINUS
+   54           | id_arr . PLUSPLUS
+   68 factor: id_arr . DOT function
+   70       | id_arr .
+
+    EQ          shift, and go to state 246
+    DOT         shift, and go to state 68
+    PLUSEQ      shift, and go to state 69
+    MINUSEQ     shift, and go to state 70
+    MULTIPLYEQ  shift, and go to state 71
+    DIVIDEEQ    shift, and go to state 72
+    MINUSMINUS  shift, and go to state 73
+    PLUSPLUS    shift, and go to state 74
+
+    $default  reduce using rule 70 (factor)
+
+
+State 154
+
+   48 assignexpr: id_arr EQ mathexpr .
+
+    $default  reduce using rule 48 (assignexpr)
+
+
+State 155
+
+   44 init: id_arr EQ constructor .
+   69 factor: constructor . DOT function
+
+    DOT  shift, and go to state 82
+
+    $default  reduce using rule 44 (init)
+
+
+State 156
+
+  141 function: IS_RUNNING . LP func_arg_list rp
+
+    LP  shift, and go to state 247
+
+
+State 157
+
+  142 function: SUBMIT_JOBS . LP func_arg_list rp
+
+    LP  shift, and go to state 248
+
+
+State 158
+
+  143 function: GET_CLOCK_SPEED . LP func_arg_list rp
+
+    LP  shift, and go to state 249
+
+
+State 159
+
+  144 function: GET_AVAILABLE_MEMORY . LP func_arg_list rp
+
+    LP  shift, and go to state 250
+
+
+State 160
+
+  145 function: GET_MEMORY . LP func_arg_list rp
+
+    LP  shift, and go to state 251
+
+
+State 161
+
+  147 function: MAX_JOBS . LP func_arg_list rp
+
+    LP  shift, and go to state 252
+
+
+State 162
+
+  146 function: GET_LOAD . LP func_arg_list rp
+
+    LP  shift, and go to state 253
+
+
+State 163
+
+   68 factor: id_arr DOT function .
+
+    $default  reduce using rule 68 (factor)
+
+
+State 164
+
+   49 assignexpr: id_arr PLUSEQ mathexpr .
+
+    $default  reduce using rule 49 (assignexpr)
+
+
+State 165
+
+   50 assignexpr: id_arr MINUSEQ mathexpr .
+
+    $default  reduce using rule 50 (assignexpr)
+
+
+State 166
+
+   51 assignexpr: id_arr MULTIPLYEQ mathexpr .
+
+    $default  reduce using rule 51 (assignexpr)
+
+
+State 167
+
+   52 assignexpr: id_arr DIVIDEEQ mathexpr .
+
+    $default  reduce using rule 52 (assignexpr)
+
+
+State 168
+
+   55 arithexpr: expr1 BITAND arithexpr .
+
+    $default  reduce using rule 55 (arithexpr)
+
+
+State 169
+
+   59 expr2: expr2 PLUS expr3 .
+   62 expr3: expr3 . MULTIPLY expr4
+   63      | expr3 . DIVIDE expr4
+
+    MULTIPLY  shift, and go to state 80
+    DIVIDE    shift, and go to state 81
+
+    $default  reduce using rule 59 (expr2)
+
+
+State 170
+
+   60 expr2: expr2 MINUS expr3 .
+   62 expr3: expr3 . MULTIPLY expr4
+   63      | expr3 . DIVIDE expr4
+
+    MULTIPLY  shift, and go to state 80
+    DIVIDE    shift, and go to state 81
+
+    $default  reduce using rule 60 (expr2)
+
+
+State 171
+
+   57 expr1: expr2 BITOR expr1 .
+
+    $default  reduce using rule 57 (expr1)
+
+
+State 172
+
+   62 expr3: expr3 MULTIPLY expr4 .
+
+    $default  reduce using rule 62 (expr3)
+
+
+State 173
+
+   63 expr3: expr3 DIVIDE expr4 .
+
+    $default  reduce using rule 63 (expr3)
+
+
+State 174
+
+   69 factor: constructor DOT function .
+
+    $default  reduce using rule 69 (factor)
+
+
+State 175
+
+   24 exprc: exprc OR . expression A
+
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+
+    $default  reduce using rule 45 (init)
+
+    id_arr       go to state 28
+    expression   go to state 254
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 176
+
+   25 exprc: exprc AND . expression A
+
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+
+    $default  reduce using rule 45 (init)
+
+    id_arr       go to state 28
+    expression   go to state 255
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 177
+
+    4 stmt: IF LP exprc rp . LCP stmtlist RCP elsestmt
+
+    LCP  shift, and go to state 256
+
+
+State 178
+
+   27 A: LT . expression
+   31  | LT . EQ expression
+
+    LP                shift, and go to state 5
+    EQ                shift, and go to state 257
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+
+    $default  reduce using rule 45 (init)
+
+    id_arr       go to state 28
+    expression   go to state 258
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 179
+
+   28 A: GT . expression
+   30  | GT . EQ expression
+
+    LP                shift, and go to state 5
+    EQ                shift, and go to state 259
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+
+    $default  reduce using rule 45 (init)
+
+    id_arr       go to state 28
+    expression   go to state 260
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 180
+
+   29 A: EQEQ . expression
+
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+
+    $default  reduce using rule 45 (init)
+
+    id_arr       go to state 28
+    expression   go to state 261
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 181
+
+   26 exprc: expression A .
+
+    $default  reduce using rule 26 (exprc)
+
+
+State 182
+
+    5 stmt: WHILE LP exprc rp . LCP stmtlist RCP
+
+    LCP  shift, and go to state 262
+
+
+State 183
+
+    6 stmt: FOR LP exprfor rp . LCP stmtlist RCP
+
+    LCP  shift, and go to state 263
+
+
+State 184
+
+   36 exprfor: expression semi . exprc semi expression
+
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+
+    $default  reduce using rule 45 (init)
+
+    id_arr       go to state 28
+    exprc        go to state 264
+    expression   go to state 84
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 185
+
+    7 stmt: SWITCH LP arithexpr rp . switchstmt
+
+    CASE     shift, and go to state 265
+    DEFAULT  shift, and go to state 266
+
+    $default  reduce using rule 35 (switchstmt)
+
+    switchstmt  go to state 267
+
+
+State 186
+
+   19 br_dimlist: LSP NUM RSP .
+
+    $default  reduce using rule 19 (br_dimlist)
+
+
+State 187
+
+   20 br_dimlist: br_dimlist LSP NUM . RSP
+
+    RSP  shift, and go to state 268
+
+
+State 188
+
+  105 argument: LSP valuearray . rsp
+
+    error  shift, and go to state 269
+    RSP    shift, and go to state 270
+
+    rsp  go to state 271
+
+
+State 189
+
+  106 valuearray: value . H
+
+    COMMA  shift, and go to state 272
+
+    $default  reduce using rule 109 (H)
+
+    H  go to state 273
+
+
+State 190
+
+   97 proc_parameter: ISA EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 274
+
+
+State 191
+
+   98 proc_parameter: CLOCK_SPEED EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 275
+
+
+State 192
+
+   99 proc_parameter: L1_MEMORY EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 276
+
+
+State 193
+
+  100 proc_parameter: L2_MEMORY EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 277
+
+
+State 194
+
+  101 proc_parameter: NAME EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 278
+
+
+State 195
+
+  153 value: DQUOTE id_arr . DQUOTE
+
+    DQUOTE  shift, and go to state 279
+
+
+State 196
+
+  152 value: SQUOTE id_arr . SQUOTE
+
+    SQUOTE  shift, and go to state 280
+
+
+State 197
+
+   96 proc_parameter: ARCHITECTURE_TYPE EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 281
+
+
+State 198
+
+   72 constructor: PROCESSOR LP proc_parameter_list rp .
+
+    $default  reduce using rule 72 (constructor)
+
+
+State 199
+
+   79 C: COMMA . proc_parameter_list
+
+    LP                 shift, and go to state 5
+    LSP                shift, and go to state 94
+    NOT                shift, and go to state 6
+    ID                 shift, and go to state 7
+    NUM                shift, and go to state 8
+    PROCESSOR          shift, and go to state 9
+    LINK               shift, and go to state 10
+    MEMORY             shift, and go to state 11
+    JOB                shift, and go to state 12
+    CLUSTER            shift, and go to state 13
+    ISA                shift, and go to state 95
+    CLOCK_SPEED        shift, and go to state 96
+    L1_MEMORY          shift, and go to state 97
+    L2_MEMORY          shift, and go to state 98
+    NAME               shift, and go to state 99
+    DQUOTE             shift, and go to state 100
+    SQUOTE             shift, and go to state 101
+    ARCHITECTURE_TYPE  shift, and go to state 102
+    SCHEDULER          shift, and go to state 17
+
+    $default  reduce using rule 103 (proc_parameter)
+
+    id_arr               go to state 44
+    arithexpr            go to state 103
+    expr1                go to state 34
+    expr2                go to state 35
+    expr3                go to state 36
+    expr4                go to state 37
+    factor               go to state 38
+    constructor          go to state 104
+    proc_parameter_list  go to state 282
+    proc_parameter       go to state 106
+    argument             go to state 107
+    value                go to state 108
+
+
+State 200
+
+   78 proc_parameter_list: proc_parameter C .
+
+    $default  reduce using rule 78 (proc_parameter_list)
+
+
+State 201
+
+  114 link_parameter: NAME EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 283
+
+
+State 202
+
+  110 link_parameter: START_POINT EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 284
+
+
+State 203
+
+  111 link_parameter: END_POINT EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 285
+
+
+State 204
+
+  112 link_parameter: BANDWIDTH EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 286
+
+
+State 205
+
+  113 link_parameter: CHANNEL_CAPACITY EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 287
+
+
+State 206
+
+   73 constructor: LINK LP link_parameter_list rp .
+
+    $default  reduce using rule 73 (constructor)
+
+
+State 207
+
+   82 D: COMMA . link_parameter_list
+
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    NAME              shift, and go to state 109
+    START_POINT       shift, and go to state 110
+    END_POINT         shift, and go to state 111
+    BANDWIDTH         shift, and go to state 112
+    CHANNEL_CAPACITY  shift, and go to state 113
+    DQUOTE            shift, and go to state 100
+    SQUOTE            shift, and go to state 101
+    SCHEDULER         shift, and go to state 17
+
+    $default  reduce using rule 116 (link_parameter)
+
+    id_arr               go to state 44
+    arithexpr            go to state 103
+    expr1                go to state 34
+    expr2                go to state 35
+    expr3                go to state 36
+    expr4                go to state 37
+    factor               go to state 38
+    constructor          go to state 104
+    link_parameter_list  go to state 288
+    link_parameter       go to state 115
+    value                go to state 116
+
+
+State 208
+
+   81 link_parameter_list: link_parameter D .
+
+    $default  reduce using rule 81 (link_parameter_list)
+
+
+State 209
+
+  119 memory_parameter: NAME EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 289
+
+
+State 210
+
+  117 memory_parameter: MEMORY_TYPE EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 290
+
+
+State 211
+
+  118 memory_parameter: MEM_SIZE EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 291
+
+
+State 212
+
+   74 constructor: MEMORY LP memory_parameter_list rp .
+
+    $default  reduce using rule 74 (constructor)
+
+
+State 213
+
+   85 E: COMMA . memory_parameter_list
+
+    LP           shift, and go to state 5
+    NOT          shift, and go to state 6
+    ID           shift, and go to state 7
+    NUM          shift, and go to state 8
+    PROCESSOR    shift, and go to state 9
+    LINK         shift, and go to state 10
+    MEMORY       shift, and go to state 11
+    JOB          shift, and go to state 12
+    CLUSTER      shift, and go to state 13
+    NAME         shift, and go to state 117
+    MEMORY_TYPE  shift, and go to state 118
+    MEM_SIZE     shift, and go to state 119
+    DQUOTE       shift, and go to state 100
+    SQUOTE       shift, and go to state 101
+    SCHEDULER    shift, and go to state 17
+
+    $default  reduce using rule 121 (memory_parameter)
+
+    id_arr                 go to state 44
+    arithexpr              go to state 103
+    expr1                  go to state 34
+    expr2                  go to state 35
+    expr3                  go to state 36
+    expr4                  go to state 37
+    factor                 go to state 38
+    constructor            go to state 104
+    memory_parameter_list  go to state 292
+    memory_parameter       go to state 121
+    value                  go to state 122
+
+
+State 214
+
+   84 memory_parameter_list: memory_parameter E .
+
+    $default  reduce using rule 84 (memory_parameter_list)
+
+
+State 215
+
+  122 job_parameter: JOB_ID EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 293
+
+
+State 216
+
+  123 job_parameter: FLOPS_REQUIRED EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 294
+
+
+State 217
+
+  124 job_parameter: DEADLINE EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 295
+
+
+State 218
+
+  125 job_parameter: MEM_REQUIRED EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 296
+
+
+State 219
+
+  126 job_parameter: AFFINITY EQ . argument
+
+    LP         shift, and go to state 5
+    LSP        shift, and go to state 94
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    argument     go to state 297
+    value        go to state 108
+
+
+State 220
+
+   75 constructor: JOB LP job_parameter_list rp .
+
+    $default  reduce using rule 75 (constructor)
+
+
+State 221
+
+   88 F: COMMA . job_parameter_list
+
+    LP              shift, and go to state 5
+    LSP             shift, and go to state 94
+    NOT             shift, and go to state 6
+    ID              shift, and go to state 7
+    NUM             shift, and go to state 8
+    PROCESSOR       shift, and go to state 9
+    LINK            shift, and go to state 10
+    MEMORY          shift, and go to state 11
+    JOB             shift, and go to state 12
+    CLUSTER         shift, and go to state 13
+    JOB_ID          shift, and go to state 123
+    FLOPS_REQUIRED  shift, and go to state 124
+    DEADLINE        shift, and go to state 125
+    MEM_REQUIRED    shift, and go to state 126
+    AFFINITY        shift, and go to state 127
+    DQUOTE          shift, and go to state 100
+    SQUOTE          shift, and go to state 101
+    SCHEDULER       shift, and go to state 17
+
+    $default  reduce using rule 128 (job_parameter)
+
+    id_arr              go to state 44
+    arithexpr           go to state 103
+    expr1               go to state 34
+    expr2               go to state 35
+    expr3               go to state 36
+    expr4               go to state 37
+    factor              go to state 38
+    constructor         go to state 104
+    job_parameter_list  go to state 298
+    argument            go to state 129
+    job_parameter       go to state 130
+    value               go to state 108
+
+
+State 222
+
+   87 job_parameter_list: job_parameter F .
+
+    $default  reduce using rule 87 (job_parameter_list)
+
+
+State 223
+
+  133 cluster_parameter: NAME EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 299
+
+
+State 224
+
+  129 cluster_parameter: PROCESSORS EQ . argument
+
+    LP         shift, and go to state 5
+    LSP        shift, and go to state 94
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    argument     go to state 300
+    value        go to state 108
+
+
+State 225
+
+  130 cluster_parameter: TOPOLOGY EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 301
+
+
+State 226
+
+  131 cluster_parameter: LINK_BANDWIDTH EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 302
+
+
+State 227
+
+  132 cluster_parameter: LINK_CAPACITY EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 303
+
+
+State 228
+
+   76 constructor: CLUSTER LP cluster_parameter_list rp .
+
+    $default  reduce using rule 76 (constructor)
+
+
+State 229
+
+   91 G: COMMA . cluster_parameter_list
+
+    LP              shift, and go to state 5
+    LSP             shift, and go to state 94
+    NOT             shift, and go to state 6
+    ID              shift, and go to state 7
+    NUM             shift, and go to state 8
+    PROCESSOR       shift, and go to state 9
+    LINK            shift, and go to state 10
+    MEMORY          shift, and go to state 11
+    JOB             shift, and go to state 12
+    CLUSTER         shift, and go to state 13
+    NAME            shift, and go to state 131
+    PROCESSORS      shift, and go to state 132
+    TOPOLOGY        shift, and go to state 133
+    LINK_BANDWIDTH  shift, and go to state 134
+    LINK_CAPACITY   shift, and go to state 135
+    DQUOTE          shift, and go to state 100
+    SQUOTE          shift, and go to state 101
+    SCHEDULER       shift, and go to state 17
+
+    $default  reduce using rule 135 (cluster_parameter)
+
+    id_arr                  go to state 44
+    arithexpr               go to state 103
+    expr1                   go to state 34
+    expr2                   go to state 35
+    expr3                   go to state 36
+    expr4                   go to state 37
+    factor                  go to state 38
+    constructor             go to state 104
+    cluster_parameter_list  go to state 304
+    argument                go to state 137
+    cluster_parameter       go to state 138
+    value                   go to state 108
+
+
+State 230
+
+   90 cluster_parameter_list: cluster_parameter G .
+
+    $default  reduce using rule 90 (cluster_parameter_list)
+
+
+State 231
+
+  150 I: COMMA . func_arg_list
+
+    LP         shift, and go to state 5
+    LSP        shift, and go to state 94
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    $default  reduce using rule 149 (func_arg_list)
+
+    id_arr         go to state 44
+    arithexpr      go to state 103
+    expr1          go to state 34
+    expr2          go to state 35
+    expr3          go to state 36
+    expr4          go to state 37
+    factor         go to state 38
+    constructor    go to state 104
+    argument       go to state 139
+    func_arg_list  go to state 305
+    value          go to state 108
+
+
+State 232
+
+  148 func_arg_list: argument I .
+
+    $default  reduce using rule 148 (func_arg_list)
+
+
+State 233
+
+   37 expression: RUN LP func_arg_list rp .
+
+    $default  reduce using rule 37 (expression)
+
+
+State 234
+
+   40 expression: DISCARD_JOB LP func_arg_list rp .
+
+    $default  reduce using rule 40 (expression)
+
+
+State 235
+
+   41 expression: WAIT LP func_arg_list rp .
+
+    $default  reduce using rule 41 (expression)
+
+
+State 236
+
+  136 scheduler_parameter: CLUSTER EQ . value
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    value        go to state 306
+
+
+State 237
+
+  137 scheduler_parameter: JOB_ARRAY EQ . argument
+
+    LP         shift, and go to state 5
+    LSP        shift, and go to state 94
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    argument     go to state 307
+    value        go to state 108
+
+
+State 238
+
+  138 scheduler_parameter: PROCESSOR_ARRAY EQ . argument
+
+    LP         shift, and go to state 5
+    LSP        shift, and go to state 94
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    argument     go to state 308
+    value        go to state 108
+
+
+State 239
+
+   77 constructor: SCHEDULER LP scheduler_parameter_list rp .
+
+    $default  reduce using rule 77 (constructor)
+
+
+State 240
+
+   94 Z: COMMA . scheduler_parameter_list
+
+    LP               shift, and go to state 5
+    LSP              shift, and go to state 94
+    NOT              shift, and go to state 6
+    ID               shift, and go to state 7
+    NUM              shift, and go to state 8
+    PROCESSOR        shift, and go to state 9
+    LINK             shift, and go to state 10
+    MEMORY           shift, and go to state 11
+    JOB              shift, and go to state 12
+    CLUSTER          shift, and go to state 143
+    DQUOTE           shift, and go to state 100
+    SQUOTE           shift, and go to state 101
+    SCHEDULER        shift, and go to state 17
+    JOB_ARRAY        shift, and go to state 144
+    PROCESSOR_ARRAY  shift, and go to state 145
+
+    $default  reduce using rule 140 (scheduler_parameter)
+
+    id_arr                    go to state 44
+    arithexpr                 go to state 103
+    expr1                     go to state 34
+    expr2                     go to state 35
+    expr3                     go to state 36
+    expr4                     go to state 37
+    factor                    go to state 38
+    constructor               go to state 104
+    scheduler_parameter_list  go to state 309
+    argument                  go to state 147
+    scheduler_parameter       go to state 148
+    value                     go to state 108
+
+
+State 241
+
+   93 scheduler_parameter_list: scheduler_parameter Z .
+
+    $default  reduce using rule 93 (scheduler_parameter_list)
+
+
+State 242
+
+   38 expression: SET_JOB_AFFINITY LP func_arg_list rp .
+
+    $default  reduce using rule 38 (expression)
+
+
+State 243
+
+   39 expression: SET_ALGO LP func_arg_list rp .
+
+    $default  reduce using rule 39 (expression)
+
+
+State 244
+
+   15 list_var: id_arr EQ mathexpr .
+
+    $default  reduce using rule 15 (list_var)
+
+
+State 245
+
+   16 list_var: id_arr COMMA list_var .
+
+    $default  reduce using rule 16 (list_var)
+
+
+State 246
+
+   48 assignexpr: id_arr EQ . mathexpr
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 153
+    mathexpr     go to state 154
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 247
+
+  141 function: IS_RUNNING LP . func_arg_list rp
+
+    LP         shift, and go to state 5
+    LSP        shift, and go to state 94
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    $default  reduce using rule 149 (func_arg_list)
+
+    id_arr         go to state 44
+    arithexpr      go to state 103
+    expr1          go to state 34
+    expr2          go to state 35
+    expr3          go to state 36
+    expr4          go to state 37
+    factor         go to state 38
+    constructor    go to state 104
+    argument       go to state 139
+    func_arg_list  go to state 310
+    value          go to state 108
+
+
+State 248
+
+  142 function: SUBMIT_JOBS LP . func_arg_list rp
+
+    LP         shift, and go to state 5
+    LSP        shift, and go to state 94
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    $default  reduce using rule 149 (func_arg_list)
+
+    id_arr         go to state 44
+    arithexpr      go to state 103
+    expr1          go to state 34
+    expr2          go to state 35
+    expr3          go to state 36
+    expr4          go to state 37
+    factor         go to state 38
+    constructor    go to state 104
+    argument       go to state 139
+    func_arg_list  go to state 311
+    value          go to state 108
+
+
+State 249
+
+  143 function: GET_CLOCK_SPEED LP . func_arg_list rp
+
+    LP         shift, and go to state 5
+    LSP        shift, and go to state 94
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    $default  reduce using rule 149 (func_arg_list)
+
+    id_arr         go to state 44
+    arithexpr      go to state 103
+    expr1          go to state 34
+    expr2          go to state 35
+    expr3          go to state 36
+    expr4          go to state 37
+    factor         go to state 38
+    constructor    go to state 104
+    argument       go to state 139
+    func_arg_list  go to state 312
+    value          go to state 108
+
+
+State 250
+
+  144 function: GET_AVAILABLE_MEMORY LP . func_arg_list rp
+
+    LP         shift, and go to state 5
+    LSP        shift, and go to state 94
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    $default  reduce using rule 149 (func_arg_list)
+
+    id_arr         go to state 44
+    arithexpr      go to state 103
+    expr1          go to state 34
+    expr2          go to state 35
+    expr3          go to state 36
+    expr4          go to state 37
+    factor         go to state 38
+    constructor    go to state 104
+    argument       go to state 139
+    func_arg_list  go to state 313
+    value          go to state 108
+
+
+State 251
+
+  145 function: GET_MEMORY LP . func_arg_list rp
+
+    LP         shift, and go to state 5
+    LSP        shift, and go to state 94
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    $default  reduce using rule 149 (func_arg_list)
+
+    id_arr         go to state 44
+    arithexpr      go to state 103
+    expr1          go to state 34
+    expr2          go to state 35
+    expr3          go to state 36
+    expr4          go to state 37
+    factor         go to state 38
+    constructor    go to state 104
+    argument       go to state 139
+    func_arg_list  go to state 314
+    value          go to state 108
+
+
+State 252
+
+  147 function: MAX_JOBS LP . func_arg_list rp
+
+    LP         shift, and go to state 5
+    LSP        shift, and go to state 94
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    $default  reduce using rule 149 (func_arg_list)
+
+    id_arr         go to state 44
+    arithexpr      go to state 103
+    expr1          go to state 34
+    expr2          go to state 35
+    expr3          go to state 36
+    expr4          go to state 37
+    factor         go to state 38
+    constructor    go to state 104
+    argument       go to state 139
+    func_arg_list  go to state 315
+    value          go to state 108
+
+
+State 253
+
+  146 function: GET_LOAD LP . func_arg_list rp
+
+    LP         shift, and go to state 5
+    LSP        shift, and go to state 94
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    $default  reduce using rule 149 (func_arg_list)
+
+    id_arr         go to state 44
+    arithexpr      go to state 103
+    expr1          go to state 34
+    expr2          go to state 35
+    expr3          go to state 36
+    expr4          go to state 37
+    factor         go to state 38
+    constructor    go to state 104
+    argument       go to state 139
+    func_arg_list  go to state 316
+    value          go to state 108
+
+
+State 254
+
+   24 exprc: exprc OR expression . A
+
+    LT    shift, and go to state 178
+    GT    shift, and go to state 179
+    EQEQ  shift, and go to state 180
+
+    $default  reduce using rule 32 (A)
+
+    A  go to state 317
+
+
+State 255
+
+   25 exprc: exprc AND expression . A
+
+    LT    shift, and go to state 178
+    GT    shift, and go to state 179
+    EQEQ  shift, and go to state 180
+
+    $default  reduce using rule 32 (A)
+
+    A  go to state 318
+
+
+State 256
+
+    4 stmt: IF LP exprc rp LCP . stmtlist RCP elsestmt
+
+    IF                shift, and go to state 1
+    WHILE             shift, and go to state 2
+    FOR               shift, and go to state 3
+    SWITCH            shift, and go to state 4
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+    INT               shift, and go to state 20
+    FLOAT             shift, and go to state 21
+    CHAR              shift, and go to state 22
+
+    RCP       reduce using rule 3 (stmtlist)
+    $default  reduce using rule 45 (init)
+
+    stmtlist     go to state 319
+    stmt         go to state 25
+    d            go to state 26
+    type         go to state 27
+    id_arr       go to state 28
+    expression   go to state 29
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 257
+
+   31 A: LT EQ . expression
+
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+
+    $default  reduce using rule 45 (init)
+
+    id_arr       go to state 28
+    expression   go to state 320
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 258
+
+   27 A: LT expression .
+
+    $default  reduce using rule 27 (A)
+
+
+State 259
+
+   30 A: GT EQ . expression
+
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+
+    $default  reduce using rule 45 (init)
+
+    id_arr       go to state 28
+    expression   go to state 321
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 260
+
+   28 A: GT expression .
+
+    $default  reduce using rule 28 (A)
+
+
+State 261
+
+   29 A: EQEQ expression .
+
+    $default  reduce using rule 29 (A)
+
+
+State 262
+
+    5 stmt: WHILE LP exprc rp LCP . stmtlist RCP
+
+    IF                shift, and go to state 1
+    WHILE             shift, and go to state 2
+    FOR               shift, and go to state 3
+    SWITCH            shift, and go to state 4
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+    INT               shift, and go to state 20
+    FLOAT             shift, and go to state 21
+    CHAR              shift, and go to state 22
+
+    RCP       reduce using rule 3 (stmtlist)
+    $default  reduce using rule 45 (init)
+
+    stmtlist     go to state 322
+    stmt         go to state 25
+    d            go to state 26
+    type         go to state 27
+    id_arr       go to state 28
+    expression   go to state 29
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 263
+
+    6 stmt: FOR LP exprfor rp LCP . stmtlist RCP
+
+    IF                shift, and go to state 1
+    WHILE             shift, and go to state 2
+    FOR               shift, and go to state 3
+    SWITCH            shift, and go to state 4
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+    INT               shift, and go to state 20
+    FLOAT             shift, and go to state 21
+    CHAR              shift, and go to state 22
+
+    RCP       reduce using rule 3 (stmtlist)
+    $default  reduce using rule 45 (init)
+
+    stmtlist     go to state 323
+    stmt         go to state 25
+    d            go to state 26
+    type         go to state 27
+    id_arr       go to state 28
+    expression   go to state 29
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 264
+
+   24 exprc: exprc . OR expression A
+   25      | exprc . AND expression A
+   36 exprfor: expression semi exprc . semi expression
+
+    error  shift, and go to state 62
+    SEMI   shift, and go to state 63
+    OR     shift, and go to state 175
+    AND    shift, and go to state 176
+
+    semi  go to state 324
+
+
+State 265
+
+   33 switchstmt: CASE . LP arithexpr rp LCP stmtlist RCP switchstmt
+
+    LP  shift, and go to state 325
+
+
+State 266
+
+   34 switchstmt: DEFAULT . LCP stmtlist RCP
+
+    LCP  shift, and go to state 326
+
+
+State 267
+
+    7 stmt: SWITCH LP arithexpr rp switchstmt .
+
+    $default  reduce using rule 7 (stmt)
+
+
+State 268
+
+   20 br_dimlist: br_dimlist LSP NUM RSP .
+
+    $default  reduce using rule 20 (br_dimlist)
+
+
+State 269
+
+  161 rsp: error .
+
+    $default  reduce using rule 161 (rsp)
+
+
+State 270
+
+  160 rsp: RSP .
+
+    $default  reduce using rule 160 (rsp)
+
+
+State 271
+
+  105 argument: LSP valuearray rsp .
+
+    $default  reduce using rule 105 (argument)
+
+
+State 272
+
+  108 H: COMMA . valuearray
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    DQUOTE     shift, and go to state 100
+    SQUOTE     shift, and go to state 101
+    SCHEDULER  shift, and go to state 17
+
+    $default  reduce using rule 107 (valuearray)
+
+    id_arr       go to state 44
+    arithexpr    go to state 103
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 104
+    valuearray   go to state 327
+    value        go to state 189
+
+
+State 273
+
+  106 valuearray: value H .
+
+    $default  reduce using rule 106 (valuearray)
+
+
+State 274
+
+   97 proc_parameter: ISA EQ value .
+
+    $default  reduce using rule 97 (proc_parameter)
+
+
+State 275
+
+   98 proc_parameter: CLOCK_SPEED EQ value .
+
+    $default  reduce using rule 98 (proc_parameter)
+
+
+State 276
+
+   99 proc_parameter: L1_MEMORY EQ value .
+
+    $default  reduce using rule 99 (proc_parameter)
+
+
+State 277
+
+  100 proc_parameter: L2_MEMORY EQ value .
+
+    $default  reduce using rule 100 (proc_parameter)
+
+
+State 278
+
+  101 proc_parameter: NAME EQ value .
+
+    $default  reduce using rule 101 (proc_parameter)
+
+
+State 279
+
+  153 value: DQUOTE id_arr DQUOTE .
+
+    $default  reduce using rule 153 (value)
+
+
+State 280
+
+  152 value: SQUOTE id_arr SQUOTE .
+
+    $default  reduce using rule 152 (value)
+
+
+State 281
+
+   96 proc_parameter: ARCHITECTURE_TYPE EQ value .
+
+    $default  reduce using rule 96 (proc_parameter)
+
+
+State 282
+
+   79 C: COMMA proc_parameter_list .
+
+    $default  reduce using rule 79 (C)
+
+
+State 283
+
+  114 link_parameter: NAME EQ value .
+
+    $default  reduce using rule 114 (link_parameter)
+
+
+State 284
+
+  110 link_parameter: START_POINT EQ value .
+
+    $default  reduce using rule 110 (link_parameter)
+
+
+State 285
+
+  111 link_parameter: END_POINT EQ value .
+
+    $default  reduce using rule 111 (link_parameter)
+
+
+State 286
+
+  112 link_parameter: BANDWIDTH EQ value .
+
+    $default  reduce using rule 112 (link_parameter)
+
+
+State 287
+
+  113 link_parameter: CHANNEL_CAPACITY EQ value .
+
+    $default  reduce using rule 113 (link_parameter)
+
+
+State 288
+
+   82 D: COMMA link_parameter_list .
+
+    $default  reduce using rule 82 (D)
+
+
+State 289
+
+  119 memory_parameter: NAME EQ value .
+
+    $default  reduce using rule 119 (memory_parameter)
+
+
+State 290
+
+  117 memory_parameter: MEMORY_TYPE EQ value .
+
+    $default  reduce using rule 117 (memory_parameter)
+
+
+State 291
+
+  118 memory_parameter: MEM_SIZE EQ value .
+
+    $default  reduce using rule 118 (memory_parameter)
+
+
+State 292
+
+   85 E: COMMA memory_parameter_list .
+
+    $default  reduce using rule 85 (E)
+
+
+State 293
+
+  122 job_parameter: JOB_ID EQ value .
+
+    $default  reduce using rule 122 (job_parameter)
+
+
+State 294
+
+  123 job_parameter: FLOPS_REQUIRED EQ value .
+
+    $default  reduce using rule 123 (job_parameter)
+
+
+State 295
+
+  124 job_parameter: DEADLINE EQ value .
+
+    $default  reduce using rule 124 (job_parameter)
+
+
+State 296
+
+  125 job_parameter: MEM_REQUIRED EQ value .
+
+    $default  reduce using rule 125 (job_parameter)
+
+
+State 297
+
+  126 job_parameter: AFFINITY EQ argument .
+
+    $default  reduce using rule 126 (job_parameter)
+
+
+State 298
+
+   88 F: COMMA job_parameter_list .
+
+    $default  reduce using rule 88 (F)
+
+
+State 299
+
+  133 cluster_parameter: NAME EQ value .
+
+    $default  reduce using rule 133 (cluster_parameter)
+
+
+State 300
+
+  129 cluster_parameter: PROCESSORS EQ argument .
+
+    $default  reduce using rule 129 (cluster_parameter)
+
+
+State 301
+
+  130 cluster_parameter: TOPOLOGY EQ value .
+
+    $default  reduce using rule 130 (cluster_parameter)
+
+
+State 302
+
+  131 cluster_parameter: LINK_BANDWIDTH EQ value .
+
+    $default  reduce using rule 131 (cluster_parameter)
+
+
+State 303
+
+  132 cluster_parameter: LINK_CAPACITY EQ value .
+
+    $default  reduce using rule 132 (cluster_parameter)
+
+
+State 304
+
+   91 G: COMMA cluster_parameter_list .
+
+    $default  reduce using rule 91 (G)
+
+
+State 305
+
+  150 I: COMMA func_arg_list .
+
+    $default  reduce using rule 150 (I)
+
+
+State 306
+
+  136 scheduler_parameter: CLUSTER EQ value .
+
+    $default  reduce using rule 136 (scheduler_parameter)
+
+
+State 307
+
+  137 scheduler_parameter: JOB_ARRAY EQ argument .
+
+    $default  reduce using rule 137 (scheduler_parameter)
+
+
+State 308
+
+  138 scheduler_parameter: PROCESSOR_ARRAY EQ argument .
+
+    $default  reduce using rule 138 (scheduler_parameter)
+
+
+State 309
+
+   94 Z: COMMA scheduler_parameter_list .
+
+    $default  reduce using rule 94 (Z)
+
+
+State 310
+
+  141 function: IS_RUNNING LP func_arg_list . rp
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 328
+
+
+State 311
+
+  142 function: SUBMIT_JOBS LP func_arg_list . rp
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 329
+
+
+State 312
+
+  143 function: GET_CLOCK_SPEED LP func_arg_list . rp
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 330
+
+
+State 313
+
+  144 function: GET_AVAILABLE_MEMORY LP func_arg_list . rp
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 331
+
+
+State 314
+
+  145 function: GET_MEMORY LP func_arg_list . rp
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 332
+
+
+State 315
+
+  147 function: MAX_JOBS LP func_arg_list . rp
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 333
+
+
+State 316
+
+  146 function: GET_LOAD LP func_arg_list . rp
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 334
+
+
+State 317
+
+   24 exprc: exprc OR expression A .
+
+    $default  reduce using rule 24 (exprc)
+
+
+State 318
+
+   25 exprc: exprc AND expression A .
+
+    $default  reduce using rule 25 (exprc)
+
+
+State 319
+
+    4 stmt: IF LP exprc rp LCP stmtlist . RCP elsestmt
+
+    RCP  shift, and go to state 335
+
+
+State 320
+
+   31 A: LT EQ expression .
+
+    $default  reduce using rule 31 (A)
+
+
+State 321
+
+   30 A: GT EQ expression .
+
+    $default  reduce using rule 30 (A)
+
+
+State 322
+
+    5 stmt: WHILE LP exprc rp LCP stmtlist . RCP
+
+    RCP  shift, and go to state 336
+
+
+State 323
+
+    6 stmt: FOR LP exprfor rp LCP stmtlist . RCP
+
+    RCP  shift, and go to state 337
+
+
+State 324
+
+   36 exprfor: expression semi exprc semi . expression
+
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+
+    $default  reduce using rule 45 (init)
+
+    id_arr       go to state 28
+    expression   go to state 338
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 325
+
+   33 switchstmt: CASE LP . arithexpr rp LCP stmtlist RCP switchstmt
+
+    LP         shift, and go to state 5
+    NOT        shift, and go to state 6
+    ID         shift, and go to state 7
+    NUM        shift, and go to state 8
+    PROCESSOR  shift, and go to state 9
+    LINK       shift, and go to state 10
+    MEMORY     shift, and go to state 11
+    JOB        shift, and go to state 12
+    CLUSTER    shift, and go to state 13
+    SCHEDULER  shift, and go to state 17
+
+    id_arr       go to state 44
+    arithexpr    go to state 339
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 326
+
+   34 switchstmt: DEFAULT LCP . stmtlist RCP
+
+    IF                shift, and go to state 1
+    WHILE             shift, and go to state 2
+    FOR               shift, and go to state 3
+    SWITCH            shift, and go to state 4
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+    INT               shift, and go to state 20
+    FLOAT             shift, and go to state 21
+    CHAR              shift, and go to state 22
+
+    RCP       reduce using rule 3 (stmtlist)
+    $default  reduce using rule 45 (init)
+
+    stmtlist     go to state 340
+    stmt         go to state 25
+    d            go to state 26
+    type         go to state 27
+    id_arr       go to state 28
+    expression   go to state 29
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 327
+
+  108 H: COMMA valuearray .
+
+    $default  reduce using rule 108 (H)
+
+
+State 328
+
+  141 function: IS_RUNNING LP func_arg_list rp .
+
+    $default  reduce using rule 141 (function)
+
+
+State 329
+
+  142 function: SUBMIT_JOBS LP func_arg_list rp .
+
+    $default  reduce using rule 142 (function)
+
+
+State 330
+
+  143 function: GET_CLOCK_SPEED LP func_arg_list rp .
+
+    $default  reduce using rule 143 (function)
+
+
+State 331
+
+  144 function: GET_AVAILABLE_MEMORY LP func_arg_list rp .
+
+    $default  reduce using rule 144 (function)
+
+
+State 332
+
+  145 function: GET_MEMORY LP func_arg_list rp .
+
+    $default  reduce using rule 145 (function)
+
+
+State 333
+
+  147 function: MAX_JOBS LP func_arg_list rp .
+
+    $default  reduce using rule 147 (function)
+
+
+State 334
+
+  146 function: GET_LOAD LP func_arg_list rp .
+
+    $default  reduce using rule 146 (function)
+
+
+State 335
+
+    4 stmt: IF LP exprc rp LCP stmtlist RCP . elsestmt
+
+    ELSE    shift, and go to state 341
+    ELSEIF  shift, and go to state 342
+
+    $default  reduce using rule 23 (elsestmt)
+
+    elsestmt  go to state 343
+
+
+State 336
+
+    5 stmt: WHILE LP exprc rp LCP stmtlist RCP .
+
+    $default  reduce using rule 5 (stmt)
+
+
+State 337
+
+    6 stmt: FOR LP exprfor rp LCP stmtlist RCP .
+
+    $default  reduce using rule 6 (stmt)
+
+
+State 338
+
+   36 exprfor: expression semi exprc semi expression .
+
+    $default  reduce using rule 36 (exprfor)
+
+
+State 339
+
+   33 switchstmt: CASE LP arithexpr . rp LCP stmtlist RCP switchstmt
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+
+    rp  go to state 344
+
+
+State 340
+
+   34 switchstmt: DEFAULT LCP stmtlist . RCP
+
+    RCP  shift, and go to state 345
+
+
+State 341
+
+   22 elsestmt: ELSE . LCP stmtlist RCP
+
+    LCP  shift, and go to state 346
+
+
+State 342
+
+   21 elsestmt: ELSEIF . LP exprc rp LCP stmtlist RCP elsestmt
+
+    LP  shift, and go to state 347
+
+
+State 343
+
+    4 stmt: IF LP exprc rp LCP stmtlist RCP elsestmt .
+
+    $default  reduce using rule 4 (stmt)
+
+
+State 344
+
+   33 switchstmt: CASE LP arithexpr rp . LCP stmtlist RCP switchstmt
+
+    LCP  shift, and go to state 348
+
+
+State 345
+
+   34 switchstmt: DEFAULT LCP stmtlist RCP .
+
+    $default  reduce using rule 34 (switchstmt)
+
+
+State 346
+
+   22 elsestmt: ELSE LCP . stmtlist RCP
+
+    IF                shift, and go to state 1
+    WHILE             shift, and go to state 2
+    FOR               shift, and go to state 3
+    SWITCH            shift, and go to state 4
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+    INT               shift, and go to state 20
+    FLOAT             shift, and go to state 21
+    CHAR              shift, and go to state 22
+
+    RCP       reduce using rule 3 (stmtlist)
+    $default  reduce using rule 45 (init)
+
+    stmtlist     go to state 349
+    stmt         go to state 25
+    d            go to state 26
+    type         go to state 27
+    id_arr       go to state 28
+    expression   go to state 29
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 347
+
+   21 elsestmt: ELSEIF LP . exprc rp LCP stmtlist RCP elsestmt
+
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+
+    $default  reduce using rule 45 (init)
+
+    id_arr       go to state 28
+    exprc        go to state 350
+    expression   go to state 84
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 348
+
+   33 switchstmt: CASE LP arithexpr rp LCP . stmtlist RCP switchstmt
+
+    IF                shift, and go to state 1
+    WHILE             shift, and go to state 2
+    FOR               shift, and go to state 3
+    SWITCH            shift, and go to state 4
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+    INT               shift, and go to state 20
+    FLOAT             shift, and go to state 21
+    CHAR              shift, and go to state 22
+
+    RCP       reduce using rule 3 (stmtlist)
+    $default  reduce using rule 45 (init)
+
+    stmtlist     go to state 351
+    stmt         go to state 25
+    d            go to state 26
+    type         go to state 27
+    id_arr       go to state 28
+    expression   go to state 29
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 349
+
+   22 elsestmt: ELSE LCP stmtlist . RCP
+
+    RCP  shift, and go to state 352
+
+
+State 350
+
+   21 elsestmt: ELSEIF LP exprc . rp LCP stmtlist RCP elsestmt
+   24 exprc: exprc . OR expression A
+   25      | exprc . AND expression A
+
+    error  shift, and go to state 89
+    RP     shift, and go to state 90
+    OR     shift, and go to state 175
+    AND    shift, and go to state 176
+
+    rp  go to state 353
+
+
+State 351
+
+   33 switchstmt: CASE LP arithexpr rp LCP stmtlist . RCP switchstmt
+
+    RCP  shift, and go to state 354
+
+
+State 352
+
+   22 elsestmt: ELSE LCP stmtlist RCP .
+
+    $default  reduce using rule 22 (elsestmt)
+
+
+State 353
+
+   21 elsestmt: ELSEIF LP exprc rp . LCP stmtlist RCP elsestmt
+
+    LCP  shift, and go to state 355
+
+
+State 354
+
+   33 switchstmt: CASE LP arithexpr rp LCP stmtlist RCP . switchstmt
+
+    CASE     shift, and go to state 265
+    DEFAULT  shift, and go to state 266
+
+    $default  reduce using rule 35 (switchstmt)
+
+    switchstmt  go to state 356
+
+
+State 355
+
+   21 elsestmt: ELSEIF LP exprc rp LCP . stmtlist RCP elsestmt
+
+    IF                shift, and go to state 1
+    WHILE             shift, and go to state 2
+    FOR               shift, and go to state 3
+    SWITCH            shift, and go to state 4
+    LP                shift, and go to state 5
+    NOT               shift, and go to state 6
+    ID                shift, and go to state 7
+    NUM               shift, and go to state 8
+    PROCESSOR         shift, and go to state 9
+    LINK              shift, and go to state 10
+    MEMORY            shift, and go to state 11
+    JOB               shift, and go to state 12
+    CLUSTER           shift, and go to state 13
+    RUN               shift, and go to state 14
+    DISCARD_JOB       shift, and go to state 15
+    WAIT              shift, and go to state 16
+    SCHEDULER         shift, and go to state 17
+    SET_JOB_AFFINITY  shift, and go to state 18
+    SET_ALGO          shift, and go to state 19
+    INT               shift, and go to state 20
+    FLOAT             shift, and go to state 21
+    CHAR              shift, and go to state 22
+
+    RCP       reduce using rule 3 (stmtlist)
+    $default  reduce using rule 45 (init)
+
+    stmtlist     go to state 357
+    stmt         go to state 25
+    d            go to state 26
+    type         go to state 27
+    id_arr       go to state 28
+    expression   go to state 29
+    init         go to state 30
+    mathexpr     go to state 31
+    assignexpr   go to state 32
+    arithexpr    go to state 33
+    expr1        go to state 34
+    expr2        go to state 35
+    expr3        go to state 36
+    expr4        go to state 37
+    factor       go to state 38
+    constructor  go to state 39
+
+
+State 356
+
+   33 switchstmt: CASE LP arithexpr rp LCP stmtlist RCP switchstmt .
+
+    $default  reduce using rule 33 (switchstmt)
+
+
+State 357
+
+   21 elsestmt: ELSEIF LP exprc rp LCP stmtlist . RCP elsestmt
+
+    RCP  shift, and go to state 358
+
+
+State 358
+
+   21 elsestmt: ELSEIF LP exprc rp LCP stmtlist RCP . elsestmt
+
+    ELSE    shift, and go to state 341
+    ELSEIF  shift, and go to state 342
+
+    $default  reduce using rule 23 (elsestmt)
+
+    elsestmt  go to state 359
+
+
+State 359
+
+   21 elsestmt: ELSEIF LP exprc rp LCP stmtlist RCP elsestmt .
+
+    $default  reduce using rule 21 (elsestmt)

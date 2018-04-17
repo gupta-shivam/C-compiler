@@ -4,7 +4,6 @@
   #include <string.h>
 
 
-
   char* yytext = ""; /* Lexeme (not '\0'
                         terminated)              */
   int yyleng   = 0;  /* Lexeme length.           */

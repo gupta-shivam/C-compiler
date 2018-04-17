@@ -8,6 +8,8 @@
   int yyleng   = 0;  /* Lexeme length.           */
   int yylineno = 0;  /* Input line number        */
 
+extern FILE* fp;
+
   int lex(void){
 
     const char *keywords[10] = {"IFZ","GOTO"}; 
@@ -22,7 +24,7 @@
         while(!*current )
         {
            current = input_buffer;
-           if(!gets(input_buffer))
+           if(!fgets(input_buffer,1000,fp))
            {
               *current = '\0';
               return EOI;
@@ -50,15 +52,13 @@
               return GT;
              case '=':
               return EQCOMP;
-             case ':':
-              return COL;
              case '\n':
              case '\t':
              case ' ' :
               break;
              default:
               {
-                 while(isalnum(*current) || *current=='.')
+                 while(isalnum(*current) || *current=='.' || *current==':' || *current=='_')
                  {
                     ++current;
                  }
@@ -87,15 +87,26 @@
                     flag = 0;
                  }
                  if(flag == 1 && dotcnt <=1)
+                 {
                     return NUM;
+                 }
                  else
                  {
                     if(curword[0]=='t')
+                    {
+                      // printf("recog tempids\n");
                       return TEMPID;
+                    }
                     else if (curword[0]=='L')
+                    {
+                      // printf("recoggnised LABELIDs\n");
                       return LABELID;
+                    }
                     else
+                    {
+                      // printf("var recog\n");
                       return ID;
+                    }
                  }
               }
            }

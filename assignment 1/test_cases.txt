@@ -1,1 +1,0 @@
-if a>2 then if b>3 then c:=5;
