@@ -1,39 +1,109 @@
-a = 5;
-
-p = Processor( isa = "AR", clock_speed = 40, l1_memory = Mem1);
-
-j = Job(job_id=1, flops_required= 100, deadline = 50, mem_required = 512,affinity = [0.2,0.5,1,2]);
-
-c = Cluster(processors=[cluster_1, cluster_2],topology = "star", 100,, name ="cluster3");
-
-
-while(! Ram.get_available_memory())
+int a=3,b='a';
+if(a>b)
 {
-	wait(1);
+	int c = 2+4;
+}
+elseif(a<b)
+{
+	int d = 3+4;
+}
+int d = 10;
+
+
+
+int d = 0,i;
+for(i = 0;i<5;i++)
+{
+	d = d+2;
 }
 
-if (job_1.get_memory() <= ram.get_available_memory())
+
+
+if(20<4)
 {
-	proc_1.submit_jobs(job_1);
+	int c = 2+4;
 }
-else
+int d = 10;
+
+
+int sum(int a,int b)
 {
-	discard_job(job_1);
+	int c = a+b;
+	return c;
 }
+sum(2,sum(1,3));
 
-for ( i=0;i<5;i++)
+
+int b,c;
+b = 12;
+int a=b;
+
+int a,b;
+a = 14;
+if(a<2)
 {
-	processor_array[i] = Processor( isa = 'AMD', clock_speed = 80, l1_memory = Memory(memory_type='primary', mem_size = 512 ));
+	b = 10;
 }
 
-cluster_3.submit_jobs(job_b_array1);
+for(int i=0;i<2 ;i++)
+{
+	i = i+1;
+}
 
-run([proc_1,proc_2,proc_3]);
+int a,b;
+while(a<3)
+{
+	while(b<2)
+	{
+		int c;
+	}
+	int d;
+}
+int e;
 
-s = Scheduler(Cluster = c, job_array = [job1, job2, job3], processor_array = [proc1,proc2,proc3]);
 
-set_algo(proc1,algo1);
+int a;
+switch(a)
+case (1)
+{
+	int b;
+}
 
-set_job_affinity(arg1,arg2);
 
-Scheduler(Cluster = c, job_array = [job1, job2, job3], processor_array = [proc1,proc2,proc3]).get_load();
+for(i=0; i<3; i++)
+{
+	i = i+1;
+}
+
+int a()
+{
+	int c;
+	return c;
+}
+
+int t;
+t = a();
+
+
+int t = 'a';
+
+int t = 'a'+'v';
+
+
+int sum(int a, int b[])
+{
+	return a+b[1];
+}
+
+int c[10],i;
+int d = sum(i,sum(c[0],c[1]));
+************************************************************
+
+void sum(int a)
+{
+	int b;
+	return 0;
+}
+sum(3);
+
+

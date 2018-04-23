@@ -7,8 +7,17 @@
 using namespace std;
 
 struct node{
-    node* child[10];
+    node* child[15];
     string name;
-    string node_val;
     int node_no;
+    // synthesises atributes;
+    int inoffset,outoffset;
+    string node_val;
+    string eletype;
+    string code;
+    float node_val_num;
+    vector<int> dimlist;
+    vector<string> paramlist;
+    int index;
+    // vector<string> v;
 };

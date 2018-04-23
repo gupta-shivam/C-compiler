@@ -129,8 +129,13 @@ extern int yydebug;
     SET_ALGO = 339,
     INT = 340,
     FLOAT = 341,
-    CHAR = 342,
-    INTEGER_LITERAL = 343
+    VOID = 342,
+    CHAR = 343,
+    CHARACTER = 344,
+    RETURN = 345,
+    BREAK = 346,
+    CONTINUE = 347,
+    INTEGER_LITERAL = 348
   };
 #endif
 
@@ -139,11 +144,11 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 22 "bisonfinal.y" /* yacc.c:1909  */
+#line 297 "bisonfinal.y" /* yacc.c:1909  */
 
 	node *Node;
 
-#line 147 "bisonfinal.tab.h" /* yacc.c:1909  */
+#line 152 "bisonfinal.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

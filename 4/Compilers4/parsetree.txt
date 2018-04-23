@@ -1,21 +1,109 @@
 < grammar_start > :  <stmtlist> 
-< stmtlist > :  <d>  <stmtlist> 
-< d > :  <d>  <semi> 
+< stmtlist > :  <stmt>  <stmtlist> 
+< stmt > :  <d>  <semi> 
 < d > :  <type>  <list_var> 
 < type > :  <INT> 
 < INT > : int
-< list_var > :  <id_arr>  <EQ>  <mathexpr> 
+< list_var > :  <id_arr>  <X>  <COMMA>  <list_var> 
 < id_arr > :  <ID> 
 < ID > : a
+< X > :  <EQ>  <arithexpr> 
 < EQ > : =
-< mathexpr > :  <arithexpr> 
 < arithexpr > :  <expr1> 
 < expr1 > :  <expr2> 
 < expr2 > :  <expr3> 
 < expr3 > :  <expr4> 
 < expr4 > :  <factor> 
 < factor > :  <NUM> 
-< NUM > : 5
+< NUM > : 3
+< COMMA > : ,
+< list_var > :  <id_arr> 
+< id_arr > :  <ID> 
+< ID > : b
 < semi > :  <SEMI> 
 < SEMI > : ;
+< stmtlist > :  <stmt>  <stmtlist> 
+< stmt > :  <IF>  <LP>  <exprc>  <rp>  <LCP>  <stmtlist>  <RCP>  <elsestmt> 
+< IF > : if
+< LP > : (
+< exprc > :  <A> 
+< A > :  <expression>  <GT>  <expression> 
+< expression > :  <mathexpr> 
+< mathexpr > :  <arithexpr> 
+< arithexpr > :  <expr1> 
+< expr1 > :  <expr2> 
+< expr2 > :  <expr3> 
+< expr3 > :  <expr4> 
+< expr4 > :  <factor> 
+< factor > :  <id_arr> 
+< id_arr > :  <ID> 
+< ID > : a
+< GT > : >
+< expression > :  <mathexpr> 
+< mathexpr > :  <arithexpr> 
+< arithexpr > :  <expr1> 
+< expr1 > :  <expr2> 
+< expr2 > :  <expr3> 
+< expr3 > :  <expr4> 
+< expr4 > :  <factor> 
+< factor > :  <id_arr> 
+< id_arr > :  <ID> 
+< ID > : b
+< rp > :  <RP> 
+< RP > : )
+< LCP > : {
+< stmtlist > :  <stmt>  <stmtlist> 
+< stmt > :  <d>  <semi> 
+< d > :  <type>  <list_var> 
+< type > :  <INT> 
+< INT > : int
+< list_var > :  <id_arr> 
+< id_arr > :  <ID> 
+< ID > : c
+< semi > :  <SEMI> 
+< SEMI > : ;
+< stmtlist > : 
+< RCP > : }
+< elsestmt > :  <ELSEIF>  <LP>  <exprc>  <rp>  <LCP>  <stmtlist>  <RCP>  <elsestmt> 
+< ELSEIF > : elseif
+< LP > : (
+< exprc > :  <A> 
+< A > :  <expression>  <LT>  <expression> 
+< expression > :  <mathexpr> 
+< mathexpr > :  <arithexpr> 
+< arithexpr > :  <expr1> 
+< expr1 > :  <expr2> 
+< expr2 > :  <expr3> 
+< expr3 > :  <expr4> 
+< expr4 > :  <factor> 
+< factor > :  <id_arr> 
+< id_arr > :  <ID> 
+< ID > : a
+< LT > : <
+< expression > :  <mathexpr> 
+< mathexpr > :  <arithexpr> 
+< arithexpr > :  <expr1> 
+< expr1 > :  <expr2> 
+< expr2 > :  <expr3> 
+< expr3 > :  <expr4> 
+< expr4 > :  <factor> 
+< factor > :  <id_arr> 
+< id_arr > :  <ID> 
+< ID > : b
+< rp > :  <RP> 
+< RP > : )
+< LCP > : {
+< stmtlist > :  <stmt>  <stmtlist> 
+< stmt > :  <d>  <semi> 
+< d > :  <type>  <list_var> 
+< type > :  <INT> 
+< INT > : int
+< list_var > :  <id_arr> 
+< id_arr > :  <ID> 
+< ID > : d
+< semi > :  <SEMI> 
+< SEMI > : ;
+< stmtlist > : 
+< RCP > : }
+< elsestmt > : 
 < stmtlist > : 

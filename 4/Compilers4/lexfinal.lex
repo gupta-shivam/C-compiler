@@ -14,6 +14,10 @@
 "char" { yylval.Node = add_leaf("CHAR","char"); printf("Found %s\n", yytext); return CHAR;}
 "int" { yylval.Node = add_leaf("INT","int"); printf("Found %s\n", yytext); return INT;}
 "float" { yylval.Node = add_leaf("FLOAT","float"); printf("Found %s\n", yytext); return FLOAT;}
+"void" { yylval.Node = add_leaf("VOID","void"); printf("Found %s\n", yytext); return VOID;}
+"break" { yylval.Node = add_leaf("BREAK","break"); printf("Found %s\n", yytext); return BREAK;}
+"continue" { yylval.Node = add_leaf("CONTINUE","continue"); printf("Found %s\n",yytext); return CONTINUE;}
+"return" { yylval.Node = add_leaf("RETURN","return"); printf("Found %s\n", yytext); return RETURN;}
 "if" { yylval.Node = add_leaf("IF","if"); printf("Found %s\n", yytext); return IF;}
 "else"  { yylval.Node = add_leaf("ELSE","else"); printf("Found %s\n", yytext); return ELSE; }
 "elseif" { yylval.Node = add_leaf("ELSEIF","elseif"); printf("Found %s\n", yytext); return ELSEIF; }
@@ -96,7 +100,7 @@
 "get_load" { yylval.Node = add_leaf("GET_LOAD","get_load"); printf("Found %s\n", yytext); return GET_LOAD; }
 "set_algo" { yylval.Node = add_leaf("SET_ALGO","set_algo"); printf("Found %s\n", yytext); return SET_ALGO; }
 
-
+['][a-zA-Z0-9_]['] { yylval.Node = add_leaf("CHARACTER",string(yytext)); printf("Found %s\n", yytext); return CHARACTER; }
 ([0-9]*[.])?[0-9]+ { yylval.Node = add_leaf("NUM",string(yytext)); printf("Found %s\n", yytext); return NUM; }
 
 [a-zA-Z_][a-zA-Z0-9_]* { yylval.Node = add_leaf("ID",string(yytext)); printf("Found ID %s\n", yytext); return ID ; }

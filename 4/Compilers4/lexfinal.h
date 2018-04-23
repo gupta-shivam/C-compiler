@@ -90,3 +90,8 @@
 #define MAX_JOBS 149
 #define GET_ALGO 149
 #define SET_ALGO 149
+
+#define BREAK 170
+#define RETURN 171
+#define CONTINUE 172
+#define TYPE_SPECIFIER 173
