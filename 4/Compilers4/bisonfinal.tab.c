@@ -188,7 +188,7 @@ struct func_tab_entry * search_func_tab(string var_name)
 
 void print_sym_table()
 {
-	cout<<"***********Printing sym_table*****************"<<endl;
+	cout<<endl<<"***********Printing sym_table*****************"<<endl;
 	for(int i = 0; i < sym_tab.size(); i++)
 	{
 		cout<<"Name : "<<sym_tab[i].name<<" Level : "<<sym_tab[i].level<<"  Type : "<<sym_tab[i].type<<"  Eletype : "<<sym_tab[i].eletype<<" Size : "<<sym_tab[i].size<<" Dimlist : ";
@@ -204,7 +204,7 @@ void print_sym_table()
 
 void print_func_table()
 {
-	cout<<"***********Printing func_table*****************"<<endl;
+	cout<<endl<<"***********Printing func_table*****************"<<endl;
 	for(int i = 0; i < func_tab.size(); i++)
 	{
 		cout<<"Name : "<<func_tab[i].name<<" retype : "<<func_tab[i].rettype<<" Paramlist : ";
@@ -822,25 +822,25 @@ static const yytype_uint16 yyrline[] =
        0,   312,   312,   341,   346,   352,   352,   352,   362,   362,
      387,   387,   413,   418,   423,   428,   433,   438,   443,   450,
      455,   460,   488,   488,   488,   498,   498,   498,   508,   514,
-     588,   606,   630,   638,   644,   652,   662,   667,   674,   679,
-     684,   689,   697,   706,   716,   729,   749,   768,   787,   806,
-     825,   836,   836,   836,   845,   852,   856,   860,   864,   868,
-     872,   876,   883,   888,   894,   899,   905,   910,   920,   964,
-    1013,  1060,  1107,  1160,  1205,  1253,  1268,  1278,  1292,  1302,
-    1318,  1333,  1341,  1356,  1378,  1388,  1404,  1414,  1429,  1436,
-    1440,  1444,  1494,  1502,  1511,  1515,  1519,  1523,  1527,  1531,
-    1537,  1542,  1547,  1552,  1557,  1562,  1567,  1573,  1578,  1583,
-    1589,  1594,  1599,  1604,  1609,  1614,  1619,  1624,  1629,  1633,
-    1637,  1641,  1645,  1649,  1653,  1658,  1663,  1667,  1672,  1677,
-    1681,  1686,  1692,  1696,  1700,  1704,  1708,  1712,  1717,  1722,
-    1726,  1730,  1735,  1740,  1745,  1750,  1754,  1758,  1762,  1766,
-    1771,  1776,  1780,  1784,  1788,  1792,  1796,  1801,  1806,  1810,
-    1814,  1818,  1823,  1828,  1832,  1836,  1840,  1844,  1848,  1852,
-    1857,  1862,  1866,  1871,  1876,  1880,  1884,  1888,  1895,  1899,
-    1907,  1911,  1919,  1923,  1931,  1931,  1958,  1958,  1997,  2006,
-    2011,  2016,  2020,  2026,  2035,  2048,  2053,  2059,  2059,  2059,
-    2069,  2069,  2094,  2094,  2120,  2125,  2130,  2135,  2140,  2145,
-    2154,  2203,  2210,  2215,  2224,  2234
+     588,   605,   628,   636,   642,   650,   660,   665,   672,   677,
+     682,   687,   695,   704,   714,   727,   747,   766,   785,   804,
+     823,   834,   834,   834,   842,   849,   853,   857,   861,   865,
+     869,   873,   880,   885,   891,   896,   902,   907,   917,   959,
+    1006,  1051,  1096,  1147,  1190,  1236,  1250,  1260,  1274,  1284,
+    1300,  1315,  1323,  1338,  1360,  1370,  1386,  1396,  1411,  1418,
+    1422,  1426,  1473,  1481,  1490,  1494,  1498,  1502,  1506,  1510,
+    1516,  1521,  1526,  1531,  1536,  1541,  1546,  1552,  1557,  1562,
+    1568,  1573,  1578,  1583,  1588,  1593,  1598,  1603,  1608,  1612,
+    1616,  1620,  1624,  1628,  1632,  1637,  1642,  1646,  1651,  1656,
+    1660,  1665,  1671,  1675,  1679,  1683,  1687,  1691,  1696,  1701,
+    1705,  1709,  1714,  1719,  1724,  1729,  1733,  1737,  1741,  1745,
+    1750,  1755,  1759,  1763,  1767,  1771,  1775,  1780,  1785,  1789,
+    1793,  1797,  1802,  1807,  1811,  1815,  1819,  1823,  1827,  1831,
+    1836,  1841,  1845,  1850,  1855,  1859,  1863,  1867,  1874,  1878,
+    1886,  1890,  1898,  1902,  1910,  1910,  1937,  1937,  1976,  1985,
+    1990,  1995,  1999,  2005,  2014,  2027,  2032,  2038,  2038,  2038,
+    2048,  2048,  2073,  2073,  2099,  2104,  2109,  2114,  2119,  2124,
+    2133,  2181,  2188,  2193,  2202,  2212
 };
 #endif
 
@@ -2141,7 +2141,7 @@ yyreduce:
 
   case 6:
 #line 352 "bisonfinal.y" /* yacc.c:1646  */
-    { level--; }
+    { clear_sym_tab(level); level--; }
 #line 2146 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
@@ -2149,7 +2149,7 @@ yyreduce:
 #line 353 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("stmt",(yyvsp[-9].Node),(yyvsp[-8].Node),(yyvsp[-7].Node),(yyvsp[-6].Node),(yyvsp[-5].Node),(yyvsp[-3].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
-	clear_sym_tab(level);
+	
 	(yyval.Node)->code = (yyvsp[-7].Node)->code + "li $t0,1" + "\n" + "blt	$a0,$t0," + "L_"+to_string(label)+"\n" + (yyvsp[-3].Node)->code;
 	if(!noelseflag)
 		(yyval.Node)->code =(yyval.Node)->code + "j L_" +to_string(label-1);
@@ -2176,13 +2176,13 @@ yyreduce:
     label++;
 
 	int break_index = (yyvsp[-1].Node)->code.find("break");
-	string break_replace = "jr L_" + to_string(label);
+	string break_replace = "j L_" + to_string(label)+"\n";
 
 	if (break_index!=std::string::npos)
 	     (yyvsp[-1].Node)->code.replace(break_index, break_replace.size()-1, break_replace);
 
-	int continue_index = (yyvsp[-1].Node)->code.find("continue");
-	string continue_replace = "jr L_" + to_string(label-1);
+	int continue_index = (yyvsp[-1].Node)->code.find("conti");
+	string continue_replace = "j L_" + to_string(label-1)+"\n";
 
 	if (continue_index!=std::string::npos)
 	     (yyvsp[-1].Node)->code.replace(continue_index, continue_replace.size()-1, continue_replace);
@@ -2211,13 +2211,13 @@ yyreduce:
 
 	int index = (yyvsp[-1].Node)->code.find("break");
 
-	string break_replace = "jr L_" + to_string(label+1);
+	string break_replace = "j L_" + to_string(label+1)+"\n";
 	if (index!=std::string::npos)
 	     (yyvsp[-1].Node)->code.replace(index, break_replace.size()-1, break_replace);
 
-	int continue_index = (yyvsp[-1].Node)->code.find("continue");
-	string continue_replace = "jr L_" + to_string(label);
-
+	int continue_index = (yyvsp[-1].Node)->code.find("conti");
+	string continue_replace = "j L_" + to_string(label)+"\n";
+	cout<<"!@#$!@#$12#$!@33"<<continue_replace.size()<<" " <<continue_replace<<endl;
 	if (continue_index!=std::string::npos)
 	     (yyvsp[-1].Node)->code.replace(continue_index, continue_replace.size()-1, continue_replace);
 
@@ -2234,7 +2234,7 @@ yyreduce:
 #line 414 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("stmt",(yyvsp[-4].Node),(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
-	(yyval.Node)->code = (yyvsp[-2].Node)->code+"\n"+ "sw $a0,(9000)\n" + (yyvsp[0].Node)->code;
+	(yyval.Node)->code = (yyvsp[-2].Node)->code+"\n"+ "sw $a0,268501992\n" + (yyvsp[0].Node)->code;
 }
 #line 2240 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
@@ -2304,7 +2304,7 @@ yyreduce:
   case 20:
 #line 456 "bisonfinal.y" /* yacc.c:1646  */
     {
-	(yyval.Node)->code = "continue";
+	(yyval.Node)->code = "conti";
 }
 #line 2310 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
@@ -2332,7 +2332,7 @@ yyreduce:
     }
     else
     {
-    	cout<<"return statement outside function"<<endl;
+    	cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"return statement outside function"<<endl;
     }
 }
 #line 2339 "bisonfinal.tab.c" /* yacc.c:1646  */
@@ -2346,7 +2346,7 @@ yyreduce:
 
   case 23:
 #line 488 "bisonfinal.y" /* yacc.c:1646  */
-    {level--; }
+    { clear_sym_tab(level); level--; }
 #line 2351 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
@@ -2372,7 +2372,7 @@ yyreduce:
 
   case 26:
 #line 498 "bisonfinal.y" /* yacc.c:1646  */
-    {level--; }
+    {clear_sym_tab(level); level--; }
 #line 2377 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
@@ -2440,7 +2440,7 @@ yyreduce:
 				{
 					if(namelist[i].type=="arraytype")
 					{
-						cout<<"whole array cant be initialised"<<endl;
+						cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"whole array cant be initialised"<<endl;
 						(yyval.Node)->eletype = "errortype";						
 					}
 					else
@@ -2454,13 +2454,13 @@ yyreduce:
 			}
 			else
 			{
-				cout<<"variable is declared of "<<(yyvsp[-1].Node)->eletype<<" but the expression is assigned "<<namelist[i].eletype<<endl;
+				cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"variable is declared of "<<(yyvsp[-1].Node)->eletype<<" but the expression is assigned "<<namelist[i].eletype<<endl;
 				(yyval.Node)->eletype = "errortype";
 			}
 		}
 		else
 		{
-			printf("Variable already declared.\n");
+			cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"Variable already declared"<<endl;
 			(yyval.Node)->eletype = "errortype";
 		}
 	}
@@ -2487,15 +2487,14 @@ yyreduce:
 	if((yyvsp[0].Node)->code != "")
 	{
 		(yyval.Node)->code = (yyvsp[0].Node)->code + "***" + (yyvsp[-1].Node)->node_val;
-		cout<<"*************************************************"<<(yyvsp[-1].Node)->node_val<<"\n";
 	}
 
 }
-#line 2495 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2494 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 607 "bisonfinal.y" /* yacc.c:1646  */
+#line 606 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("list_var",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	(yyval.Node)->eletype = (yyvsp[-3].Node)->eletype;
@@ -2509,7 +2508,6 @@ yyreduce:
 	if((yyvsp[-2].Node)->code != "")
 	{
 		(yyval.Node)->code = (yyvsp[-2].Node)->code + "***" + (yyvsp[-3].Node)->node_val + (yyvsp[0].Node)->code;
-		cout<<"*************************************************"<<(yyvsp[-3].Node)->node_val<<"\n";
 	}
 	else
 	{
@@ -2517,31 +2515,31 @@ yyreduce:
 	}
 
 }
-#line 2521 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2519 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 631 "bisonfinal.y" /* yacc.c:1646  */
+#line 629 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node)=add_new_node("X",(yyvsp[-1].Node),(yyvsp[0].Node));
 	(yyval.Node)->eletype=(yyvsp[0].Node)->eletype;
 
 	(yyval.Node)->code= (yyvsp[0].Node)->code;
 }
-#line 2532 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2530 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 638 "bisonfinal.y" /* yacc.c:1646  */
+#line 636 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node)=add_new_node("X");
 	(yyval.Node)->eletype="any";
 }
-#line 2541 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2539 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 645 "bisonfinal.y" /* yacc.c:1646  */
+#line 643 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("id_arr",(yyvsp[0].Node));
 	(yyval.Node)->node_val = (yyvsp[0].Node)->node_val;
@@ -2549,11 +2547,11 @@ yyreduce:
 	(yyval.Node)->dimlist = dim_list;
 	dim_list.clear();
 }
-#line 2553 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2551 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 653 "bisonfinal.y" /* yacc.c:1646  */
+#line 651 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("id_arr",(yyvsp[-1].Node),(yyvsp[0].Node));
 	(yyval.Node)->node_val = (yyvsp[-1].Node)->node_val;
@@ -2561,65 +2559,65 @@ yyreduce:
 	(yyval.Node)->dimlist = dim_list;
 	dim_list.clear();
 }
-#line 2565 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2563 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 663 "bisonfinal.y" /* yacc.c:1646  */
+#line 661 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("br_dimlist",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	dim_list.insert(dim_list.begin(), (yyvsp[-1].Node)->node_val_num);
 }
-#line 2574 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2572 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 668 "bisonfinal.y" /* yacc.c:1646  */
+#line 666 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) =add_new_node("br_dimlist",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	dim_list.push_back((yyvsp[-1].Node)->node_val_num);
 }
-#line 2583 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2581 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 675 "bisonfinal.y" /* yacc.c:1646  */
+#line 673 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("type",(yyvsp[0].Node));
 	(yyval.Node)->eletype = (yyvsp[0].Node)->node_val;
 }
-#line 2592 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2590 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 680 "bisonfinal.y" /* yacc.c:1646  */
+#line 678 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("type",(yyvsp[0].Node));
 	(yyval.Node)->eletype = (yyvsp[0].Node)->node_val;
 }
-#line 2601 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2599 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 685 "bisonfinal.y" /* yacc.c:1646  */
+#line 683 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("type",(yyvsp[0].Node));
 	(yyval.Node)->eletype = (yyvsp[0].Node)->node_val;
 }
-#line 2610 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2608 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 690 "bisonfinal.y" /* yacc.c:1646  */
+#line 688 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("type",(yyvsp[0].Node));
 	(yyval.Node)->eletype = (yyvsp[0].Node)->node_val;
 }
-#line 2619 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2617 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 698 "bisonfinal.y" /* yacc.c:1646  */
+#line 696 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("exprc",(yyvsp[0].Node));
 
@@ -2628,11 +2626,11 @@ yyreduce:
 	(yyval.Node)->code = (yyvsp[0].Node)->code;
 
 }
-#line 2632 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2630 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 707 "bisonfinal.y" /* yacc.c:1646  */
+#line 705 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("exprc",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	(yyval.Node)->node_val_num = (yyvsp[-2].Node)->node_val_num || (yyvsp[0].Node)->node_val_num;
@@ -2642,11 +2640,11 @@ yyreduce:
 	int label2 = label++;
 	(yyval.Node)->code = (yyvsp[-2].Node)->code + "sw $a0,0($sp)\naddiu $sp,$sp,-4\n" + (yyvsp[0].Node)->code + "lw $t1,4($sp)\naddiu $sp,$sp,4\nmove $t2,$a0\nadd $t1,$t1,$t2\nli $t2,0\nbeq $t1,$t2,L_" + to_string(label1) + "\nli $a0,1\nj L_" + to_string(label2) +"\nL_" + to_string(label1) + ": li $a0,0\nL_" + to_string(label2) + ":\n";
 }
-#line 2646 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2644 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 717 "bisonfinal.y" /* yacc.c:1646  */
+#line 715 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("exprc",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	(yyval.Node)->node_val_num = (yyvsp[-2].Node)->node_val_num && (yyvsp[0].Node)->node_val_num;
@@ -2657,11 +2655,11 @@ yyreduce:
 	int label2 = label++;
 	(yyval.Node)->code = (yyvsp[-2].Node)->code + "sw $a0,0($sp)\naddiu $sp,$sp,-4\n" + (yyvsp[0].Node)->code + "lw $t1,4($sp)\naddiu $sp,$sp,4\nmove $t2,$a0\nmult $t1,$t2\nmflo $t1\nli $t2,0\nbeq $t1,$t2,L_" + to_string(label1) + "\nli $a0,1\nj L_" + to_string(label2) +"\nL_" + to_string(label1) + ": li $a0,0\nL_" + to_string(label2) + ":\n";
 }
-#line 2661 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2659 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 730 "bisonfinal.y" /* yacc.c:1646  */
+#line 728 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("A",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	if(compatible_arithop((yyvsp[-2].Node)->eletype,(yyvsp[0].Node)->eletype))
@@ -2678,14 +2676,14 @@ yyreduce:
 	else
 	{
 		(yyval.Node)->eletype = "errortype";
-		printf("Operands not compatible.\n");
+    	cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"Operands not compatible"<<endl;
 	}
 }
-#line 2685 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2683 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 750 "bisonfinal.y" /* yacc.c:1646  */
+#line 748 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("A",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	if(compatible_arithop((yyvsp[-2].Node)->eletype,(yyvsp[0].Node)->eletype))
@@ -2701,14 +2699,14 @@ yyreduce:
 	else
 	{
 		(yyval.Node)->eletype = "errortype";
-		printf("Operands not compatible.\n");
+    	cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"Operands not compatible"<<endl;		
 	}
 }
-#line 2708 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2706 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 769 "bisonfinal.y" /* yacc.c:1646  */
+#line 767 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("A",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	if(compatible_arithop((yyvsp[-2].Node)->eletype,(yyvsp[0].Node)->eletype))
@@ -2724,14 +2722,14 @@ yyreduce:
 	else
 	{
 		(yyval.Node)->eletype = "errortype";
-		printf("Operands not compatible.\n");
+    	cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"Operands not compatible"<<endl;				
 	}
 }
-#line 2731 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2729 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 788 "bisonfinal.y" /* yacc.c:1646  */
+#line 786 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("A",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	if(compatible_arithop((yyvsp[-3].Node)->eletype,(yyvsp[-1].Node)->eletype))
@@ -2747,14 +2745,14 @@ yyreduce:
 	else
 	{
 		(yyval.Node)->eletype = "errortype";
-		printf("Operands not compatible.\n");
+    	cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"Operands not compatible"<<endl;				
 	}
 }
-#line 2754 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2752 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 807 "bisonfinal.y" /* yacc.c:1646  */
+#line 805 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("A",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	if(compatible_arithop((yyvsp[-3].Node)->eletype,(yyvsp[-1].Node)->eletype))
@@ -2770,14 +2768,14 @@ yyreduce:
 	else
 	{
 		(yyval.Node)->eletype = "errortype";
-		printf("Operands not compatible.\n");
+    	cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"Operands not compatible"<<endl;				
 	}
 }
-#line 2777 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2775 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 826 "bisonfinal.y" /* yacc.c:1646  */
+#line 824 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("A",(yyvsp[0].Node));
 	(yyval.Node)->node_val_num = (yyvsp[0].Node)->node_val_num;
@@ -2786,153 +2784,152 @@ yyreduce:
 	//code generation
 	(yyval.Node)->code = (yyvsp[0].Node)->code;
 }
-#line 2790 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2788 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 836 "bisonfinal.y" /* yacc.c:1646  */
+#line 834 "bisonfinal.y" /* yacc.c:1646  */
     { level++; }
-#line 2796 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2794 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 836 "bisonfinal.y" /* yacc.c:1646  */
-    { level--; }
-#line 2802 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 834 "bisonfinal.y" /* yacc.c:1646  */
+    { clear_sym_tab(level); level--; }
+#line 2800 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 837 "bisonfinal.y" /* yacc.c:1646  */
+#line 835 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("switchstmt",(yyvsp[-9].Node),(yyvsp[-8].Node),(yyvsp[-7].Node),(yyvsp[-6].Node),(yyvsp[-5].Node),(yyvsp[-3].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
-	clear_sym_tab(level);
 
-	(yyval.Node)->code = "lw $t0,(9000)\n" + (yyvsp[-7].Node)->code + "bne $t0,$a0,L_" + to_string(label+1) +":\n" + (yyvsp[-3].Node)->code + "L_" + to_string(label+1) + ":" + (yyvsp[0].Node)->code;
+	(yyval.Node)->code = "lw $t0,268501992\n" + (yyvsp[-7].Node)->code + "bne $t0,$a0,L_" + to_string(label+1) +"\n" + (yyvsp[-3].Node)->code + "L_" + to_string(label+1) + ":" + (yyvsp[0].Node)->code;
 	label++;
 }
-#line 2814 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2811 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 845 "bisonfinal.y" /* yacc.c:1646  */
+#line 842 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("switchstmt");
 }
-#line 2822 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2819 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 853 "bisonfinal.y" /* yacc.c:1646  */
+#line 850 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("expression",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 2830 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2827 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 857 "bisonfinal.y" /* yacc.c:1646  */
+#line 854 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("expression",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 2838 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2835 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 57:
-#line 861 "bisonfinal.y" /* yacc.c:1646  */
+#line 858 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("expression",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 2846 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2843 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 865 "bisonfinal.y" /* yacc.c:1646  */
+#line 862 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("expression",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 2854 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2851 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 869 "bisonfinal.y" /* yacc.c:1646  */
+#line 866 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("expression",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 2862 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2859 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 873 "bisonfinal.y" /* yacc.c:1646  */
+#line 870 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("expression",(yyvsp[0].Node));
 }
-#line 2870 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2867 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 61:
-#line 877 "bisonfinal.y" /* yacc.c:1646  */
+#line 874 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("expression",(yyvsp[0].Node));
 	(yyval.Node)->eletype = (yyvsp[0].Node)->eletype;
 	(yyval.Node)->code = (yyvsp[0].Node)->code;
 }
-#line 2880 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2877 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 62:
-#line 883 "bisonfinal.y" /* yacc.c:1646  */
+#line 880 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("expression");
 }
-#line 2888 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2885 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 63:
-#line 889 "bisonfinal.y" /* yacc.c:1646  */
+#line 886 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("initial",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 2896 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2893 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 64:
-#line 895 "bisonfinal.y" /* yacc.c:1646  */
+#line 892 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("init",(yyvsp[0].Node));
 }
-#line 2904 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2901 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 65:
-#line 900 "bisonfinal.y" /* yacc.c:1646  */
+#line 897 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("init",(yyvsp[0].Node));
 }
-#line 2912 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2909 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 66:
-#line 906 "bisonfinal.y" /* yacc.c:1646  */
+#line 903 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("mathexpr",(yyvsp[0].Node));
 	(yyval.Node)->code = (yyvsp[0].Node)->code;
 }
-#line 2921 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2918 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 911 "bisonfinal.y" /* yacc.c:1646  */
+#line 908 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("mathexpr",(yyvsp[0].Node));
 	(yyval.Node)->node_val_num = (yyvsp[0].Node)->node_val_num ;
 	(yyval.Node)->eletype = (yyvsp[0].Node)->eletype ;
 	(yyval.Node)->code = (yyvsp[0].Node)->code;
 }
-#line 2932 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2929 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 68:
-#line 921 "bisonfinal.y" /* yacc.c:1646  */
+#line 918 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("assignexpr",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	int var=0;
@@ -2944,8 +2941,6 @@ yyreduce:
 		{
 			if(temp->type=="simple")
 			{
-				// temp->name is name of variable
-				// code generation
 				if(func_flag==1)
 				{
 					(yyval.Node)->code = (yyvsp[0].Node)->code + "move $a" + to_string(index)+ ",$a0\n";
@@ -2972,15 +2967,15 @@ yyreduce:
 		}
 		else
 		{
-			cout<<"Expected type "<<temp->eletype<<" , Found "<<(yyvsp[0].Node)->eletype<<endl;
+			cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"Expected type "<<temp->eletype<<" , Found "<<(yyvsp[0].Node)->eletype<<endl;
 		}
 	}
 }
-#line 2980 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2975 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 69:
-#line 965 "bisonfinal.y" /* yacc.c:1646  */
+#line 960 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("assignexpr",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	(yyval.Node)->eletype = (yyvsp[0].Node)->eletype;
@@ -2994,8 +2989,6 @@ yyreduce:
 			temp->eletype = compare_types(temp->eletype,(yyvsp[0].Node)->eletype);
 			if(temp->eletype=="simple")
 			{
-				// temp->name is name of variable
-				// code generation
 				if(func_flag==1)
 				{
 					(yyval.Node)->code= (yyvsp[0].Node)->code + "move $t1,$a" + to_string(index) + "\n add $a0,$a0,$t1\n"+  "move $a0,$a"+to_string(index)+"\n"+ "li $a0,1\n";
@@ -3025,15 +3018,15 @@ yyreduce:
 		}
 		else
 		{
-			cout<<(yyvsp[0].Node)->eletype<<" can't be assigned to a "<<temp->eletype<<endl;
+			cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<(yyvsp[0].Node)->eletype<<" can't be assigned to a "<<temp->eletype<<endl;
 		}
 	}
 }
-#line 3033 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3026 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 70:
-#line 1014 "bisonfinal.y" /* yacc.c:1646  */
+#line 1007 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("assignexpr",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	(yyval.Node)->eletype = (yyvsp[0].Node)->eletype;
@@ -3047,8 +3040,6 @@ yyreduce:
 			temp->eletype = compare_types(temp->eletype,(yyvsp[0].Node)->eletype);
 			if(temp->eletype=="simple")
 			{
-				// temp->name is name of variable
-				// code generation
 				if(func_flag==1)
 				{
 					(yyval.Node)->code= (yyvsp[0].Node)->code + "move $t1,$a" + to_string(index) + "\n sub $a0,$a0,$t1\n"+  "move $a0,$a"+to_string(index)+"\n"+ "li $a0,1\n";
@@ -3076,15 +3067,15 @@ yyreduce:
 		}
 		else
 		{
-			cout<<(yyvsp[0].Node)->eletype<<" can't be assigned to a "<<temp->eletype<<endl;
+			cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<(yyvsp[0].Node)->eletype<<" can't be assigned to a "<<temp->eletype<<endl;
 		}
 	}
 }
-#line 3084 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3075 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 71:
-#line 1061 "bisonfinal.y" /* yacc.c:1646  */
+#line 1052 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("assignexpr",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	(yyval.Node)->eletype = (yyvsp[0].Node)->eletype;
@@ -3098,8 +3089,6 @@ yyreduce:
 			temp->eletype = compare_types(temp->eletype,(yyvsp[0].Node)->eletype);
 			if(temp->eletype=="simple")
 			{
-				// temp->name is name of variable
-				// code generation
 				if(func_flag==1)
 				{	
 					(yyval.Node)->code= (yyvsp[0].Node)->code + "move $t1,$a" + to_string(index)+ "\n mul $a0,$t1\n" + "mflo $a0" +  "move $a0,$a"+to_string(index) + "\n"+ "li $a0,1\n";
@@ -3127,15 +3116,15 @@ yyreduce:
 		}
 		else
 		{
-			cout<<(yyvsp[0].Node)->eletype<<" can't be assigned to a "<<temp->eletype<<endl;
+			cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<(yyvsp[0].Node)->eletype<<" can't be assigned to a "<<temp->eletype<<endl;
 		}
 	}
 }
-#line 3135 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3124 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 72:
-#line 1108 "bisonfinal.y" /* yacc.c:1646  */
+#line 1097 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("assignexpr",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	int func_flag=0,index=0;
@@ -3151,8 +3140,6 @@ yyreduce:
 				(yyval.Node)->eletype = temp->eletype;
 				if(temp->eletype=="simple")
 				{
-					// temp->name is name of variable
-					// code generation
 					if(func_flag==1)
 					{
 						(yyval.Node)->code= (yyvsp[0].Node)->code + "move $t1,$a" + to_string(index) + "\n div $a0,$t1\n" + "mflo $a0" +  "move $a0,$a"+to_string(index)+"\n"+ "li $a0,1\n";
@@ -3180,19 +3167,19 @@ yyreduce:
 		}
 		else
 		{
-			cout<<(yyvsp[0].Node)->eletype<<" can't be assigned to a "<<temp->eletype<<endl;
+			cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<(yyvsp[0].Node)->eletype<<" can't be assigned to a "<<temp->eletype<<endl;
 		}
 	}
 	else
 	{
-		printf("Division by 0 not allowed\n");
+		cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"Division by 0 not allowed"<<temp->eletype<<endl;	
 	}
 }
-#line 3192 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3179 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 73:
-#line 1161 "bisonfinal.y" /* yacc.c:1646  */
+#line 1148 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("assignexpr",(yyvsp[-1].Node),(yyvsp[0].Node));
 	(yyval.Node)->eletype = (yyvsp[-1].Node)->eletype;
@@ -3205,8 +3192,6 @@ yyreduce:
 		{
 			if(temp->eletype=="simple")
 			{
-				// temp->name is name of variable
-				// code generation
 				if(func_flag==1)
 				{
 					(yyval.Node)->code= "move $t1,$a" + to_string(index) + "\nsubi $a0,$t1,1 \n" + "move $a0,$a"+to_string(index)+"\n"+ "li $a0,1\n";
@@ -3233,15 +3218,15 @@ yyreduce:
 		}
 		else
 		{
-			cout<<"-- operation not supported for "<<temp->eletype<<endl;
+			cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"-- operation not supported for "<<temp->eletype<<endl;
 		}
 	}
 }
-#line 3241 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3226 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 74:
-#line 1206 "bisonfinal.y" /* yacc.c:1646  */
+#line 1191 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("assignexpr",(yyvsp[-1].Node),(yyvsp[0].Node));
 	(yyval.Node)->eletype = (yyvsp[-1].Node)->eletype;
@@ -3254,8 +3239,6 @@ yyreduce:
 		{
 			if(temp->eletype=="simple")
 			{
-				// temp->name is name of variable
-				// code generation
 				if(func_flag==1)
 				{
 					(yyval.Node)->code= "move $t1,$a" + to_string(index)+ "\n addi $a0, $t1,1 \n" + "move $a0,$a"+to_string(index)+"\n"+ "li $a0,1\n";
@@ -3282,34 +3265,33 @@ yyreduce:
 		}
 		else
 		{
-			cout<<"++ operation not supported for "<<temp->eletype<<endl;
+			cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"++ operation not supported for "<<temp->eletype<<endl;
 		}
 	}
 }
-#line 3290 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3273 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 75:
-#line 1254 "bisonfinal.y" /* yacc.c:1646  */
+#line 1237 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("arithexpr",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	if((yyvsp[-2].Node)->eletype == "int" && (yyvsp[0].Node)->eletype == "int")
 	{
 		(yyval.Node)->eletype=(yyvsp[-2].Node)->eletype;
 		(yyval.Node)->node_val_num = (int)(yyvsp[-2].Node)->node_val_num & (int)(yyvsp[0].Node)->node_val_num;
-		// code generation
 		(yyval.Node)->code = (yyvsp[-2].Node)->code + "move $t1,$a0\n" + (yyvsp[0].Node)->code+ "move $t2,$a0\n" + "and $a0,$t1,$t2\n";
 	}
 	else
 	{
-		printf("bitwise and operation is allowed only for integers\n");
+		cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"bitwise and operation is allowed only for integers"<<endl;	
 	}
 }
-#line 3309 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3291 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 76:
-#line 1269 "bisonfinal.y" /* yacc.c:1646  */
+#line 1251 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("arithexpr",(yyvsp[0].Node));
 	(yyval.Node)->eletype = (yyvsp[0].Node)->eletype;
@@ -3317,11 +3299,11 @@ yyreduce:
 	(yyval.Node)->code = (yyvsp[0].Node)->code;
 
 }
-#line 3321 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3303 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 77:
-#line 1279 "bisonfinal.y" /* yacc.c:1646  */
+#line 1261 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("expr1",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	if((yyvsp[-2].Node)->eletype == "int" && (yyvsp[0].Node)->eletype == "int")
@@ -3332,14 +3314,14 @@ yyreduce:
 	}
 	else
 	{
-		printf("bitwise or operation is allowed only for integers\n");
+		cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"bitwise or operation is allowed only for integers"<<endl;	
 	}
 }
-#line 3339 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3321 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 78:
-#line 1293 "bisonfinal.y" /* yacc.c:1646  */
+#line 1275 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("expr1",(yyvsp[0].Node));
 	(yyval.Node)->eletype = (yyvsp[0].Node)->eletype;
@@ -3347,11 +3329,11 @@ yyreduce:
 	(yyval.Node)->code = (yyvsp[0].Node)->code;
 
 }
-#line 3351 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3333 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 79:
-#line 1303 "bisonfinal.y" /* yacc.c:1646  */
+#line 1285 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("expr2",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	cout<<(yyvsp[-2].Node)->eletype<<" "<<(yyvsp[0].Node)->eletype<<endl;
@@ -3364,14 +3346,14 @@ yyreduce:
 	else
 	{
 		(yyval.Node)->eletype = "errortype";
-		printf("Operands are not compatible for addition.\n");
+		cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"Operands are not compatible for addition"<<endl;	
 	}
 }
-#line 3371 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3353 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 80:
-#line 1319 "bisonfinal.y" /* yacc.c:1646  */
+#line 1301 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("expr2",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	if(compatible_arithop((yyvsp[-2].Node)->eletype,(yyvsp[0].Node)->eletype))
@@ -3383,25 +3365,25 @@ yyreduce:
 	else
 	{
 		(yyval.Node)->eletype = "errortype";
-		printf("Operands are not compatible for subtraction.\n");
+		cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"Operands are not compatible for subtraction"<<endl;	
 	}
 }
-#line 3390 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3372 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 81:
-#line 1334 "bisonfinal.y" /* yacc.c:1646  */
+#line 1316 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("expr2",(yyvsp[0].Node));
 	(yyval.Node)->node_val_num = (yyvsp[0].Node)->node_val_num;
 	(yyval.Node)->eletype = (yyvsp[0].Node)->eletype;
 	(yyval.Node)->code = (yyvsp[0].Node)->code;
 }
-#line 3401 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3383 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 82:
-#line 1342 "bisonfinal.y" /* yacc.c:1646  */
+#line 1324 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("expr3",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	if(compatible_arithop((yyvsp[-2].Node)->eletype,(yyvsp[0].Node)->eletype))
@@ -3413,14 +3395,14 @@ yyreduce:
 	else
 	{
 		(yyval.Node)->eletype = "errortype";
-		printf("Operands are not compatible for multiplication.\n");
+		cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"Operands are not compatible for multiplication"<<endl;	
 	}
 }
-#line 3420 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3402 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 83:
-#line 1357 "bisonfinal.y" /* yacc.c:1646  */
+#line 1339 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("expr3",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	if(compatible_arithop((yyvsp[-2].Node)->eletype,(yyvsp[0].Node)->eletype))
@@ -3433,20 +3415,20 @@ yyreduce:
 		}
 		else
 		{
-			printf("Division by Zero not allowed.\n");
+			cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"Division by zero not allowed"<<endl;	
 		}
 	}
 	else
 	{
 		(yyval.Node)->eletype = "errortype";
-		printf("Operands are not compatible for division.\n");
+		cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"Operands are not compatible for division"<<endl;	
 	}
 }
-#line 3446 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3428 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 84:
-#line 1379 "bisonfinal.y" /* yacc.c:1646  */
+#line 1361 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("expr3",(yyvsp[0].Node));
 	(yyval.Node)->node_val_num = (yyvsp[0].Node)->node_val_num;
@@ -3454,11 +3436,11 @@ yyreduce:
 
 	(yyval.Node)->code = (yyvsp[0].Node)->code;
 }
-#line 3458 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3440 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 85:
-#line 1389 "bisonfinal.y" /* yacc.c:1646  */
+#line 1371 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("expr4",(yyvsp[-1].Node),(yyvsp[0].Node));
 	if((yyvsp[0].Node)->eletype =="int")
@@ -3471,14 +3453,14 @@ yyreduce:
 	else
 	{
 		(yyval.Node)->eletype = "errortype";
-		printf("NOT operation is allowed only for integers.\n");
+		cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"NOT operation is allowed only for integers"<<endl;	
 	}
 }
-#line 3478 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3460 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 86:
-#line 1405 "bisonfinal.y" /* yacc.c:1646  */
+#line 1387 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("expr4",(yyvsp[0].Node));
 	(yyval.Node)->node_val_num = (yyvsp[0].Node)->node_val_num;
@@ -3486,11 +3468,11 @@ yyreduce:
 	(yyval.Node)->code = (yyvsp[0].Node)->code;
 
 }
-#line 3490 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3472 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 87:
-#line 1415 "bisonfinal.y" /* yacc.c:1646  */
+#line 1397 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("factor",(yyvsp[0].Node));
 	(yyval.Node)->node_val_num = (yyvsp[0].Node)->node_val_num;
@@ -3505,38 +3487,38 @@ yyreduce:
 	}
 
 }
-#line 3509 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3491 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 88:
-#line 1430 "bisonfinal.y" /* yacc.c:1646  */
+#line 1412 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("factor",(yyvsp[0].Node));
 	(yyval.Node)->node_val_num = (yyvsp[0].Node)->node_val_num;
 	(yyval.Node)->eletype = (yyvsp[0].Node)->eletype;
     (yyval.Node)->code = "li $a0,"+to_string((int)(yyvsp[0].Node)->node_val_num)+"\n";
 }
-#line 3520 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3502 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 89:
-#line 1437 "bisonfinal.y" /* yacc.c:1646  */
+#line 1419 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("factor",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3528 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3510 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 90:
-#line 1441 "bisonfinal.y" /* yacc.c:1646  */
+#line 1423 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("factor",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3536 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3518 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 91:
-#line 1445 "bisonfinal.y" /* yacc.c:1646  */
+#line 1427 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("factor",(yyvsp[0].Node));
 	int var=0;
@@ -3547,8 +3529,6 @@ yyreduce:
 		(yyval.Node)->eletype = temp->eletype;
 		if(temp->eletype=="simple")
 		{
-			// temp->name is name of variable
-			// code generation
 			if(func_flag=1)
 			{
 	            (yyval.Node)->code= "move $a0,$a" + to_string(index) +"\n";
@@ -3560,7 +3540,6 @@ yyreduce:
 		}
 		else
 		{
-			cout<<"Var :"<<var<<endl;
 			if(var != -1)
 			{
 				int offset_of_array = temp->offset + 4*var;
@@ -3580,17 +3559,17 @@ yyreduce:
 			}
 		}
 	}
-	// piyush
+	
 	else
 	{
 		(yyval.Node)->eletype = "errortype";
 	}
 }
-#line 3590 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3569 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 92:
-#line 1495 "bisonfinal.y" /* yacc.c:1646  */
+#line 1474 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("factor",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	(yyval.Node)->node_val_num = (yyvsp[-1].Node)->node_val_num;
@@ -3598,756 +3577,756 @@ yyreduce:
 	(yyval.Node)->code = (yyvsp[-2].Node)->code;
 
 }
-#line 3602 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3581 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 93:
-#line 1503 "bisonfinal.y" /* yacc.c:1646  */
+#line 1482 "bisonfinal.y" /* yacc.c:1646  */
     {
 		(yyval.Node) = add_new_node("factor",(yyvsp[0].Node));
-		// piyush
+		
 		(yyval.Node)->eletype = (yyvsp[0].Node)->eletype;
 		(yyval.Node)->code = (yyvsp[0].Node)->code;
 }
-#line 3613 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3592 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 94:
-#line 1512 "bisonfinal.y" /* yacc.c:1646  */
+#line 1491 "bisonfinal.y" /* yacc.c:1646  */
     {
  	(yyval.Node) = add_new_node("constructor",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3621 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3600 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 95:
-#line 1516 "bisonfinal.y" /* yacc.c:1646  */
+#line 1495 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("constructor",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3629 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3608 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 96:
-#line 1520 "bisonfinal.y" /* yacc.c:1646  */
+#line 1499 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("constructor",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3637 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3616 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 97:
-#line 1524 "bisonfinal.y" /* yacc.c:1646  */
+#line 1503 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("constructor",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3645 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3624 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 98:
-#line 1528 "bisonfinal.y" /* yacc.c:1646  */
+#line 1507 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("constructor",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3653 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3632 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 99:
-#line 1532 "bisonfinal.y" /* yacc.c:1646  */
+#line 1511 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("constructor",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3661 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3640 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 100:
-#line 1538 "bisonfinal.y" /* yacc.c:1646  */
+#line 1517 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("proc_parameter_list",(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3669 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3648 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 101:
-#line 1543 "bisonfinal.y" /* yacc.c:1646  */
+#line 1522 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("C",(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3677 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3656 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 102:
-#line 1547 "bisonfinal.y" /* yacc.c:1646  */
+#line 1526 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("C");
 }
-#line 3685 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3664 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 103:
-#line 1553 "bisonfinal.y" /* yacc.c:1646  */
+#line 1532 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("link_parameter_list",(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3693 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3672 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 104:
-#line 1558 "bisonfinal.y" /* yacc.c:1646  */
+#line 1537 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("D",(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3701 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3680 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 105:
-#line 1562 "bisonfinal.y" /* yacc.c:1646  */
+#line 1541 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("D");
 }
-#line 3709 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3688 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 106:
-#line 1568 "bisonfinal.y" /* yacc.c:1646  */
+#line 1547 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("memory_parameter_list",(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3717 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3696 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 107:
-#line 1574 "bisonfinal.y" /* yacc.c:1646  */
+#line 1553 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("E",(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3725 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3704 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 108:
-#line 1578 "bisonfinal.y" /* yacc.c:1646  */
+#line 1557 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("E");
 }
-#line 3733 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3712 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 109:
-#line 1584 "bisonfinal.y" /* yacc.c:1646  */
+#line 1563 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("job_parameter_list",(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3741 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3720 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 110:
-#line 1590 "bisonfinal.y" /* yacc.c:1646  */
+#line 1569 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("F",(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3749 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3728 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 111:
-#line 1594 "bisonfinal.y" /* yacc.c:1646  */
+#line 1573 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("F");
 }
-#line 3757 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3736 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 112:
-#line 1600 "bisonfinal.y" /* yacc.c:1646  */
+#line 1579 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("cluster_parameter_list",(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3765 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3744 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 113:
-#line 1605 "bisonfinal.y" /* yacc.c:1646  */
+#line 1584 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("G",(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3773 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3752 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 114:
-#line 1609 "bisonfinal.y" /* yacc.c:1646  */
+#line 1588 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("G");
 }
-#line 3781 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3760 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 115:
-#line 1615 "bisonfinal.y" /* yacc.c:1646  */
+#line 1594 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("scheduler_parameter_list",(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3789 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3768 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 116:
-#line 1620 "bisonfinal.y" /* yacc.c:1646  */
+#line 1599 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("Z",(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3797 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3776 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 117:
-#line 1624 "bisonfinal.y" /* yacc.c:1646  */
+#line 1603 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("Z");
 }
-#line 3805 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3784 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 118:
-#line 1630 "bisonfinal.y" /* yacc.c:1646  */
+#line 1609 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("proc_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3813 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3792 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 119:
-#line 1634 "bisonfinal.y" /* yacc.c:1646  */
+#line 1613 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("proc_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3821 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3800 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 120:
-#line 1638 "bisonfinal.y" /* yacc.c:1646  */
+#line 1617 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("proc_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3829 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3808 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 121:
-#line 1642 "bisonfinal.y" /* yacc.c:1646  */
+#line 1621 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("proc_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3837 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3816 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 122:
-#line 1646 "bisonfinal.y" /* yacc.c:1646  */
+#line 1625 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("proc_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3845 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3824 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 123:
-#line 1650 "bisonfinal.y" /* yacc.c:1646  */
+#line 1629 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("proc_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3853 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3832 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 124:
-#line 1654 "bisonfinal.y" /* yacc.c:1646  */
+#line 1633 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("proc_parameter",(yyvsp[0].Node));
 }
-#line 3861 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3840 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 125:
-#line 1658 "bisonfinal.y" /* yacc.c:1646  */
+#line 1637 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("proc_parameter");
 }
-#line 3869 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3848 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 126:
-#line 1664 "bisonfinal.y" /* yacc.c:1646  */
+#line 1643 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("argument",(yyvsp[0].Node));
 }
-#line 3877 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3856 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 127:
-#line 1668 "bisonfinal.y" /* yacc.c:1646  */
+#line 1647 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("argument",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3885 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3864 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 128:
-#line 1673 "bisonfinal.y" /* yacc.c:1646  */
+#line 1652 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("valuearray",(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3893 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3872 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 129:
-#line 1677 "bisonfinal.y" /* yacc.c:1646  */
+#line 1656 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("valuearray");
 }
-#line 3901 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3880 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 130:
-#line 1682 "bisonfinal.y" /* yacc.c:1646  */
+#line 1661 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("H",(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3909 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3888 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 131:
-#line 1686 "bisonfinal.y" /* yacc.c:1646  */
+#line 1665 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("H");
 }
-#line 3917 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3896 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 132:
-#line 1693 "bisonfinal.y" /* yacc.c:1646  */
+#line 1672 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("link_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3925 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3904 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 133:
-#line 1697 "bisonfinal.y" /* yacc.c:1646  */
+#line 1676 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("link_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3933 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3912 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 134:
-#line 1701 "bisonfinal.y" /* yacc.c:1646  */
+#line 1680 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("link_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3941 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3920 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 135:
-#line 1705 "bisonfinal.y" /* yacc.c:1646  */
+#line 1684 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("link_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3949 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3928 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 136:
-#line 1709 "bisonfinal.y" /* yacc.c:1646  */
+#line 1688 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("link_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3957 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3936 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 137:
-#line 1713 "bisonfinal.y" /* yacc.c:1646  */
+#line 1692 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("link_parameter",(yyvsp[0].Node));
 }
-#line 3965 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3944 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 138:
-#line 1717 "bisonfinal.y" /* yacc.c:1646  */
+#line 1696 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("link_parameter");
 }
-#line 3973 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3952 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 139:
-#line 1723 "bisonfinal.y" /* yacc.c:1646  */
+#line 1702 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("memory_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3981 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3960 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 140:
-#line 1727 "bisonfinal.y" /* yacc.c:1646  */
+#line 1706 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("memory_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 3989 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3968 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 141:
-#line 1731 "bisonfinal.y" /* yacc.c:1646  */
+#line 1710 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("memory_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 
 }
-#line 3998 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3977 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 142:
-#line 1736 "bisonfinal.y" /* yacc.c:1646  */
+#line 1715 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("memory_parameter",(yyvsp[0].Node));
 }
-#line 4006 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3985 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 143:
-#line 1740 "bisonfinal.y" /* yacc.c:1646  */
+#line 1719 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("memory_parameter");
 }
-#line 4014 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 3993 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 144:
-#line 1746 "bisonfinal.y" /* yacc.c:1646  */
+#line 1725 "bisonfinal.y" /* yacc.c:1646  */
     {
 	printf("JOB ID FOUND\n");
 	(yyval.Node) = add_new_node("job_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4023 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4002 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 145:
-#line 1751 "bisonfinal.y" /* yacc.c:1646  */
+#line 1730 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("job_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4031 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4010 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 146:
-#line 1755 "bisonfinal.y" /* yacc.c:1646  */
+#line 1734 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("job_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4039 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4018 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 147:
-#line 1759 "bisonfinal.y" /* yacc.c:1646  */
+#line 1738 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("job_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4047 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4026 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 148:
-#line 1763 "bisonfinal.y" /* yacc.c:1646  */
+#line 1742 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("job_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4055 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4034 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 149:
-#line 1767 "bisonfinal.y" /* yacc.c:1646  */
+#line 1746 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("job_parameter",(yyvsp[0].Node));
 }
-#line 4063 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4042 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 150:
-#line 1771 "bisonfinal.y" /* yacc.c:1646  */
+#line 1750 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("job_parameter");
 }
-#line 4071 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4050 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 151:
-#line 1777 "bisonfinal.y" /* yacc.c:1646  */
+#line 1756 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("cluster_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4079 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4058 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 152:
-#line 1781 "bisonfinal.y" /* yacc.c:1646  */
+#line 1760 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("cluster_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4087 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4066 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 153:
-#line 1785 "bisonfinal.y" /* yacc.c:1646  */
+#line 1764 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("cluster_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4095 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4074 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 154:
-#line 1789 "bisonfinal.y" /* yacc.c:1646  */
+#line 1768 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("cluster_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4103 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4082 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 155:
-#line 1793 "bisonfinal.y" /* yacc.c:1646  */
+#line 1772 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("cluster_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4111 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4090 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 156:
-#line 1797 "bisonfinal.y" /* yacc.c:1646  */
+#line 1776 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("cluster_parameter",(yyvsp[0].Node));
 }
-#line 4119 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4098 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 157:
-#line 1801 "bisonfinal.y" /* yacc.c:1646  */
+#line 1780 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("cluster_parameter");
 }
-#line 4127 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4106 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 158:
-#line 1807 "bisonfinal.y" /* yacc.c:1646  */
+#line 1786 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("scheduler_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4135 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4114 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 159:
-#line 1811 "bisonfinal.y" /* yacc.c:1646  */
+#line 1790 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("scheduler_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4143 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4122 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 160:
-#line 1815 "bisonfinal.y" /* yacc.c:1646  */
+#line 1794 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("scheduler_parameter",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4151 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4130 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 161:
-#line 1819 "bisonfinal.y" /* yacc.c:1646  */
+#line 1798 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("scheduler_parameter",(yyvsp[0].Node));
 }
-#line 4159 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4138 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 162:
-#line 1823 "bisonfinal.y" /* yacc.c:1646  */
+#line 1802 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("scheduler_parameter");
 }
-#line 4167 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4146 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 163:
-#line 1829 "bisonfinal.y" /* yacc.c:1646  */
+#line 1808 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("function",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4175 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4154 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 164:
-#line 1833 "bisonfinal.y" /* yacc.c:1646  */
+#line 1812 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("function",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4183 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4162 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 165:
-#line 1837 "bisonfinal.y" /* yacc.c:1646  */
+#line 1816 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("function",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4191 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4170 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 166:
-#line 1841 "bisonfinal.y" /* yacc.c:1646  */
+#line 1820 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("function",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4199 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4178 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 167:
-#line 1845 "bisonfinal.y" /* yacc.c:1646  */
+#line 1824 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("function",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4207 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4186 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 168:
-#line 1849 "bisonfinal.y" /* yacc.c:1646  */
+#line 1828 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("function",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4215 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4194 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 169:
-#line 1853 "bisonfinal.y" /* yacc.c:1646  */
+#line 1832 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("function",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4223 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4202 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 170:
-#line 1858 "bisonfinal.y" /* yacc.c:1646  */
+#line 1837 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("func_arg_list",(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4231 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4210 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 171:
-#line 1862 "bisonfinal.y" /* yacc.c:1646  */
+#line 1841 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("func_arg_list");
 }
-#line 4239 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4218 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 172:
-#line 1867 "bisonfinal.y" /* yacc.c:1646  */
+#line 1846 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("I",(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4247 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4226 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 173:
-#line 1871 "bisonfinal.y" /* yacc.c:1646  */
+#line 1850 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("func_arg_list");
 }
-#line 4255 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4234 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 174:
-#line 1877 "bisonfinal.y" /* yacc.c:1646  */
+#line 1856 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("value",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4263 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4242 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 175:
-#line 1881 "bisonfinal.y" /* yacc.c:1646  */
+#line 1860 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("value",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4271 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4250 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 176:
-#line 1885 "bisonfinal.y" /* yacc.c:1646  */
+#line 1864 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("value",(yyvsp[0].Node));
 }
-#line 4279 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4258 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 177:
-#line 1889 "bisonfinal.y" /* yacc.c:1646  */
+#line 1868 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("value",(yyvsp[0].Node));
 }
-#line 4287 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4266 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 178:
-#line 1896 "bisonfinal.y" /* yacc.c:1646  */
+#line 1875 "bisonfinal.y" /* yacc.c:1646  */
     {
     (yyval.Node) = add_new_node("semi",(yyvsp[0].Node));
 }
-#line 4295 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4274 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 179:
-#line 1900 "bisonfinal.y" /* yacc.c:1646  */
+#line 1879 "bisonfinal.y" /* yacc.c:1646  */
     {
 	printf("Error: Missing ';' in line no %d\n", lineno);
 	flag = 1;
 	(yyval.Node) = NULL;
 }
-#line 4305 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4284 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 180:
-#line 1908 "bisonfinal.y" /* yacc.c:1646  */
+#line 1887 "bisonfinal.y" /* yacc.c:1646  */
     {
     (yyval.Node) = add_new_node("rp",(yyvsp[0].Node));
 }
-#line 4313 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4292 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 181:
-#line 1912 "bisonfinal.y" /* yacc.c:1646  */
+#line 1891 "bisonfinal.y" /* yacc.c:1646  */
     {
 	printf("Error: Missing ')' in line no %d\n", lineno);
 	flag = 1;
 	(yyval.Node) = NULL;
 }
-#line 4323 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4302 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 182:
-#line 1920 "bisonfinal.y" /* yacc.c:1646  */
+#line 1899 "bisonfinal.y" /* yacc.c:1646  */
     {
     (yyval.Node) = add_new_node("rsp",(yyvsp[0].Node));
 }
-#line 4331 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4310 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 183:
-#line 1924 "bisonfinal.y" /* yacc.c:1646  */
+#line 1903 "bisonfinal.y" /* yacc.c:1646  */
     {
 	printf("Error: Missing ']' in line no %d\n", lineno);
 	flag = 1;
 	(yyval.Node) = NULL;
 }
-#line 4341 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4320 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 184:
-#line 1931 "bisonfinal.y" /* yacc.c:1646  */
+#line 1910 "bisonfinal.y" /* yacc.c:1646  */
     { level=2; }
-#line 4347 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4326 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 185:
-#line 1932 "bisonfinal.y" /* yacc.c:1646  */
+#line 1911 "bisonfinal.y" /* yacc.c:1646  */
     {
     (yyval.Node) = add_new_node("func_decl",(yyvsp[-4].Node),(yyvsp[-3].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
     clear_sym_tab(2);
@@ -4358,7 +4337,7 @@ yyreduce:
 		int index = (yyvsp[-1].Node)->code.find("jr $ra");
 		if (index==std::string::npos)
 		{
-			cout<<"function is of returntype : "<< active_function_ptr->rettype << " but no return mentioned"<<endl;
+			cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"function is of returntype : "<< active_function_ptr->rettype << " but no return mentioned"<<endl;
 		}
 	}
 
@@ -4372,17 +4351,17 @@ yyreduce:
 
 
 }
-#line 4376 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4355 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 186:
-#line 1958 "bisonfinal.y" /* yacc.c:1646  */
+#line 1937 "bisonfinal.y" /* yacc.c:1646  */
     { level=1; }
-#line 4382 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4361 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 187:
-#line 1959 "bisonfinal.y" /* yacc.c:1646  */
+#line 1938 "bisonfinal.y" /* yacc.c:1646  */
     {
     (yyval.Node) = add_new_node("func_head",(yyvsp[-4].Node),(yyvsp[-3].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
     active_function_ptr=search_func_tab((yyvsp[-4].Node)->node_val);
@@ -4416,56 +4395,56 @@ yyreduce:
     }
     else
     {
-    	cout<<"Function "<<(yyvsp[-4].Node)->node_val<<" already exists."<<endl;
+    	cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"Function "<<(yyvsp[-4].Node)->node_val<<" already exists."<<endl;
     }
 }
-#line 4423 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4402 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 188:
-#line 1998 "bisonfinal.y" /* yacc.c:1646  */
+#line 1977 "bisonfinal.y" /* yacc.c:1646  */
     {
     (yyval.Node) = add_new_node("res_id",(yyvsp[-1].Node),(yyvsp[0].Node));
     (yyval.Node)->eletype = (yyvsp[-1].Node)->eletype;
     (yyval.Node)->node_val = (yyvsp[0].Node)->node_val;
 }
-#line 4433 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4412 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 189:
-#line 2007 "bisonfinal.y" /* yacc.c:1646  */
+#line 1986 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("decl_plist",(yyvsp[0].Node));
 }
-#line 4441 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4420 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 190:
-#line 2011 "bisonfinal.y" /* yacc.c:1646  */
+#line 1990 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("decl_plist");
 }
-#line 4449 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4428 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 191:
-#line 2017 "bisonfinal.y" /* yacc.c:1646  */
+#line 1996 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("decl_pl",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 }
-#line 4457 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4436 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 192:
-#line 2021 "bisonfinal.y" /* yacc.c:1646  */
+#line 2000 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("decl_pl",(yyvsp[0].Node));
 }
-#line 4465 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4444 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 193:
-#line 2027 "bisonfinal.y" /* yacc.c:1646  */
+#line 2006 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("decl_param",(yyvsp[-1].Node),(yyvsp[0].Node));
 	sym_tab_entry temp;
@@ -4474,11 +4453,11 @@ yyreduce:
 	temp.name = (yyvsp[0].Node)->node_val;
 	param_list.push_back(temp);
 }
-#line 4478 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4457 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 194:
-#line 2036 "bisonfinal.y" /* yacc.c:1646  */
+#line 2015 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("decl_param",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	sym_tab_entry temp;
@@ -4489,60 +4468,60 @@ yyreduce:
 	dim_list.clear();
 	param_list.push_back(temp);
 }
-#line 4493 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4472 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 195:
-#line 2049 "bisonfinal.y" /* yacc.c:1646  */
+#line 2028 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("stmtlist_body",(yyvsp[-1].Node),(yyvsp[0].Node));
 	(yyval.Node)->code = (yyvsp[-1].Node)->code + (yyvsp[0].Node)->code;
 }
-#line 4502 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4481 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 196:
-#line 2054 "bisonfinal.y" /* yacc.c:1646  */
+#line 2033 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("stmtlist_body",(yyvsp[0].Node));
 }
-#line 4510 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4489 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 197:
-#line 2059 "bisonfinal.y" /* yacc.c:1646  */
+#line 2038 "bisonfinal.y" /* yacc.c:1646  */
     { level++;}
-#line 4516 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4495 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 198:
-#line 2059 "bisonfinal.y" /* yacc.c:1646  */
-    { level--; }
-#line 4522 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 2038 "bisonfinal.y" /* yacc.c:1646  */
+    {clear_sym_tab(level); level--; }
+#line 4501 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 199:
-#line 2060 "bisonfinal.y" /* yacc.c:1646  */
+#line 2039 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("stmt_body",(yyvsp[-9].Node),(yyvsp[-8].Node),(yyvsp[-7].Node),(yyvsp[-6].Node),(yyvsp[-5].Node),(yyvsp[-3].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
-	clear_sym_tab(level);
+	
 	(yyval.Node)->code = (yyvsp[-7].Node)->code + "li $t0,1" + "\n" + "blt	$a0,$t0," + "L_"+to_string(label)+"\n" + (yyvsp[-3].Node)->code;
 	if(!noelseflag)
 		(yyval.Node)->code =(yyval.Node)->code + "j L_" +to_string(label-1);
 	(yyval.Node)->code =(yyval.Node)->code+"\nL_"+to_string(label)+":\n" + (yyvsp[0].Node)->code;
     label++;
 }
-#line 4536 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4515 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 200:
-#line 2069 "bisonfinal.y" /* yacc.c:1646  */
+#line 2048 "bisonfinal.y" /* yacc.c:1646  */
     { level++; }
-#line 4542 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4521 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 201:
-#line 2070 "bisonfinal.y" /* yacc.c:1646  */
+#line 2049 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("stmt_body",(yyvsp[-7].Node),(yyvsp[-6].Node),(yyvsp[-5].Node),(yyvsp[-4].Node),(yyvsp[-3].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	clear_sym_tab(level);
@@ -4552,13 +4531,13 @@ yyreduce:
     label++;
 
 	int break_index = (yyvsp[-1].Node)->code.find("break");
-	string break_replace = "jr L_" + to_string(label);
+	string break_replace = "j L_" + to_string(label)+"\n";
 
 	if (break_index!=std::string::npos)
 	     (yyvsp[-1].Node)->code.replace(break_index, break_replace.size()-1, break_replace);
 
-	int continue_index = (yyvsp[-1].Node)->code.find("continue");
-	string continue_replace = "jr L_" + to_string(label-1);
+	int continue_index = (yyvsp[-1].Node)->code.find("conti");
+	string continue_replace = "j L_" + to_string(label-1)+"\n";
 
 	if (continue_index!=std::string::npos)
 	     (yyvsp[-1].Node)->code.replace(continue_index, continue_replace.size()-1, continue_replace);
@@ -4567,17 +4546,17 @@ yyreduce:
 
     label++;
 }
-#line 4571 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4550 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 202:
-#line 2094 "bisonfinal.y" /* yacc.c:1646  */
+#line 2073 "bisonfinal.y" /* yacc.c:1646  */
     { level++; }
-#line 4577 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4556 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 203:
-#line 2095 "bisonfinal.y" /* yacc.c:1646  */
+#line 2074 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("stmt_body",(yyvsp[-11].Node),(yyvsp[-10].Node),(yyvsp[-9].Node),(yyvsp[-8].Node),(yyvsp[-7].Node),(yyvsp[-6].Node),(yyvsp[-5].Node),(yyvsp[-4].Node),(yyvsp[-3].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 	clear_sym_tab(level);
@@ -4587,81 +4566,81 @@ yyreduce:
 
 	int index = (yyvsp[-1].Node)->code.find("break");
 
-	string break_replace = "jr L_" + to_string(label+1);
+	string break_replace = "j L_" + to_string(label+1)+"\n";
 	if (index!=std::string::npos)
 	     (yyvsp[-1].Node)->code.replace(index, break_replace.size()-1, break_replace);
 
-	int continue_index = (yyvsp[-1].Node)->code.find("continue");
-	string continue_replace = "jr L_" + to_string(label);
+	int continue_index = (yyvsp[-1].Node)->code.find("conti");
+	string continue_replace = "j L_" + to_string(label)+"\n";
 
 	if (continue_index!=std::string::npos)
 	     (yyvsp[-1].Node)->code.replace(continue_index, continue_replace.size()-1, continue_replace);
 
 
-	(yyval.Node)->code = (yyval.Node)->code + (yyvsp[-5].Node)->code+ (yyvsp[-1].Node)->code+"\njr L_" + to_string(label) + "\nL_" + to_string(label+1) + ":\n";
+	(yyval.Node)->code = (yyval.Node)->code + (yyvsp[-5].Node)->code+ (yyvsp[-1].Node)->code+"\nj L_" + to_string(label) + "\nL_" + to_string(label+1) + ":\n";
 
 	label++;
 	label++;
 }
-#line 4607 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4586 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 204:
-#line 2121 "bisonfinal.y" /* yacc.c:1646  */
+#line 2100 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("stmt_body",(yyvsp[-4].Node),(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
-	(yyval.Node)->code = (yyvsp[-2].Node)->code+"\n"+ "sw $a0,(9000)\n" + (yyvsp[0].Node)->code;
+	(yyval.Node)->code = (yyvsp[-2].Node)->code+"\n"+ "sw $a0,268501992\n" + (yyvsp[0].Node)->code;
 }
-#line 4616 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4595 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 205:
-#line 2126 "bisonfinal.y" /* yacc.c:1646  */
+#line 2105 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("stmt_body",(yyvsp[-1].Node),(yyvsp[0].Node));
 	(yyval.Node)->code = (yyvsp[-1].Node)->code;
 }
-#line 4625 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4604 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 206:
-#line 2131 "bisonfinal.y" /* yacc.c:1646  */
+#line 2110 "bisonfinal.y" /* yacc.c:1646  */
     {
 	(yyval.Node) = add_new_node("stmt_body",(yyvsp[-1].Node),(yyvsp[0].Node));
 	(yyval.Node)->code = (yyvsp[-1].Node)->code;
 }
-#line 4634 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4613 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 207:
-#line 2136 "bisonfinal.y" /* yacc.c:1646  */
+#line 2115 "bisonfinal.y" /* yacc.c:1646  */
     {
 		(yyval.Node) = add_new_node("stmt_body",(yyvsp[0].Node));
 	    (yyval.Node)->code = (yyvsp[0].Node)->code;
 }
-#line 4643 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4622 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 208:
-#line 2141 "bisonfinal.y" /* yacc.c:1646  */
+#line 2120 "bisonfinal.y" /* yacc.c:1646  */
     {
 		(yyval.Node) = add_new_node("stmt_body",(yyvsp[0].Node));
 	    (yyval.Node)->code = (yyvsp[0].Node)->code;
 }
-#line 4652 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4631 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 209:
-#line 2146 "bisonfinal.y" /* yacc.c:1646  */
+#line 2125 "bisonfinal.y" /* yacc.c:1646  */
     {
 		(yyval.Node) = add_new_node("stmt_body",(yyvsp[0].Node));
 	    (yyval.Node)->code = (yyvsp[0].Node)->code;
 }
-#line 4661 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4640 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 210:
-#line 2155 "bisonfinal.y" /* yacc.c:1646  */
+#line 2134 "bisonfinal.y" /* yacc.c:1646  */
     {
 		(yyval.Node) = add_new_node("func_call",(yyvsp[-3].Node),(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
 		
@@ -4682,55 +4661,54 @@ yyreduce:
 				}
 				if(m == 1)
 				{
-					// code generation
             		(yyval.Node)->code = (yyvsp[-1].Node)->code + "jal func_" + call_name_ptr->name+"\n";
-            		// piyush
+            		
             		(yyval.Node)->eletype = call_name_ptr->rettype;
 				}
 				else
 				{
-					cout<<"Parameter Type Mismatch"<<endl;
-					// piyush
+					cout<<"ERROR IN LINENO : "<<lineno<<"-->"<<"Parameter Type Mismatch"<<endl;
+					
 					(yyval.Node)->eletype = "errortype";
 				}
 			}
 			else
 			{
-				// piyush
+				
 				(yyval.Node)->eletype = "errortype";
-				cout<<"Number of Parameters mismatch\n"<<endl;
+				cout<<"ERROR IN LINENO : "<<lineno<<"Number of Parameters mismatch\n"<<endl;
 			}
 		}
 		else
 		{
-			// piyush
+			
 			(yyval.Node)->eletype = "errortype";
-			cout<<"Function "<<(yyvsp[-3].Node)->node_val<<" not found"<<endl;
+			cout<<"ERROR IN LINENO : "<<lineno<<"Function "<<(yyvsp[-3].Node)->node_val<<" not found"<<endl;
 		}
 }
-#line 4712 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4690 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 211:
-#line 2204 "bisonfinal.y" /* yacc.c:1646  */
+#line 2182 "bisonfinal.y" /* yacc.c:1646  */
     {
 		(yyval.Node) = add_new_node("paramlist",(yyvsp[0].Node));
     	(yyval.Node)->code = (yyvsp[0].Node)->code;
     	(yyval.Node)->paramlist = ((yyvsp[0].Node)->paramlist);
 }
-#line 4722 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4700 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 212:
-#line 2210 "bisonfinal.y" /* yacc.c:1646  */
+#line 2188 "bisonfinal.y" /* yacc.c:1646  */
     {
 		(yyval.Node) = add_new_node("paramlist");
 }
-#line 4730 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4708 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 213:
-#line 2216 "bisonfinal.y" /* yacc.c:1646  */
+#line 2194 "bisonfinal.y" /* yacc.c:1646  */
     {
 		(yyval.Node) = add_new_node("plist",(yyvsp[-2].Node),(yyvsp[-1].Node),(yyvsp[0].Node));
     	(yyval.Node)->index =(yyvsp[-2].Node)->index + 1;
@@ -4739,30 +4717,30 @@ yyreduce:
 		string temp_code = (yyvsp[0].Node)->code + "move $a" + to_string((yyval.Node)->index) + ", $a0\n";
     	(yyval.Node)->code = temp_code + (yyvsp[-2].Node)->code;
 }
-#line 4743 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4721 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 214:
-#line 2225 "bisonfinal.y" /* yacc.c:1646  */
+#line 2203 "bisonfinal.y" /* yacc.c:1646  */
     {
 		(yyval.Node) = add_new_node("plist",(yyvsp[0].Node));
     	(yyval.Node)->index =0;
 		((yyval.Node)->paramlist).push_back((yyvsp[0].Node)->eletype);
     	(yyval.Node)->code = (yyvsp[0].Node)->code + "move $a" + to_string((yyval.Node)->index) + ", $a0\n";
 }
-#line 4754 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4732 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
   case 215:
-#line 2234 "bisonfinal.y" /* yacc.c:1646  */
+#line 2212 "bisonfinal.y" /* yacc.c:1646  */
     {
     (yyval.Node) = NULL;
 }
-#line 4762 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4740 "bisonfinal.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 4766 "bisonfinal.tab.c" /* yacc.c:1646  */
+#line 4744 "bisonfinal.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -4990,7 +4968,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 2241 "bisonfinal.y" /* yacc.c:1906  */
+#line 2219 "bisonfinal.y" /* yacc.c:1906  */
 
 int main()
 {

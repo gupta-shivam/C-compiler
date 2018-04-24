@@ -1050,447 +1050,447 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 14 "lexfinal.lex"
-{ yylval.Node = add_leaf("CHAR","char"); printf("Found %s\n", yytext); return CHAR;}
+{ yylval.Node = add_leaf("CHAR","char"); return CHAR;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
 #line 15 "lexfinal.lex"
-{ yylval.Node = add_leaf("INT","int"); printf("Found %s\n", yytext); return INT;}
+{ yylval.Node = add_leaf("INT","int"); return INT;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 16 "lexfinal.lex"
-{ yylval.Node = add_leaf("FLOAT","float"); printf("Found %s\n", yytext); return FLOAT;}
+{ yylval.Node = add_leaf("FLOAT","float"); return FLOAT;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 17 "lexfinal.lex"
-{ yylval.Node = add_leaf("VOID","void"); printf("Found %s\n", yytext); return VOID;}
+{ yylval.Node = add_leaf("VOID","void"); return VOID;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 18 "lexfinal.lex"
-{ yylval.Node = add_leaf("BREAK","break"); printf("Found %s\n", yytext); return BREAK;}
+{ yylval.Node = add_leaf("BREAK","break"); return BREAK;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 19 "lexfinal.lex"
-{ yylval.Node = add_leaf("CONTINUE","continue"); printf("Found %s\n",yytext); return CONTINUE;}
+{ yylval.Node = add_leaf("CONTINUE","continue");return CONTINUE;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 20 "lexfinal.lex"
-{ yylval.Node = add_leaf("RETURN","return"); printf("Found %s\n", yytext); return RETURN;}
+{ yylval.Node = add_leaf("RETURN","return"); return RETURN;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 21 "lexfinal.lex"
-{ yylval.Node = add_leaf("IF","if"); printf("Found %s\n", yytext); return IF;}
+{ yylval.Node = add_leaf("IF","if"); return IF;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 22 "lexfinal.lex"
-{ yylval.Node = add_leaf("ELSE","else"); printf("Found %s\n", yytext); return ELSE; }
+{ yylval.Node = add_leaf("ELSE","else"); return ELSE; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 23 "lexfinal.lex"
-{ yylval.Node = add_leaf("ELSEIF","elseif"); printf("Found %s\n", yytext); return ELSEIF; }
+{ yylval.Node = add_leaf("ELSEIF","elseif"); return ELSEIF; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 24 "lexfinal.lex"
-{ yylval.Node = add_leaf("WHILE","while"); printf("Found %s\n", yytext); return WHILE; }
+{ yylval.Node = add_leaf("WHILE","while"); return WHILE; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 25 "lexfinal.lex"
-{ yylval.Node = add_leaf("FOR","for"); printf("Found %s\n", yytext); return FOR; }
+{ yylval.Node = add_leaf("FOR","for"); return FOR; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 26 "lexfinal.lex"
-{ yylval.Node = add_leaf("SWITCH","switch"); printf("Found %s\n", yytext); return SWITCH;}
+{ yylval.Node = add_leaf("SWITCH","switch"); return SWITCH;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 27 "lexfinal.lex"
-{ yylval.Node = add_leaf("CASE","case"); printf("Found %s\n", yytext); return CASE;}
+{ yylval.Node = add_leaf("CASE","case"); return CASE;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 28 "lexfinal.lex"
-{ yylval.Node = add_leaf("DEFAULT","default"); printf("Found %s\n", yytext); return DEFAULT;}
+{ yylval.Node = add_leaf("DEFAULT","default"); return DEFAULT;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 29 "lexfinal.lex"
-{ yylval.Node = add_leaf("LP","("); printf("Found %s\n", yytext); return LP ;}
+{ yylval.Node = add_leaf("LP","("); return LP ;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 30 "lexfinal.lex"
-{ yylval.Node = add_leaf("LCP", "{"); printf("Found %s\n", yytext); return LCP; }
+{ yylval.Node = add_leaf("LCP", "{"); return LCP; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 31 "lexfinal.lex"
-{ yylval.Node = add_leaf("LSP", "["); printf("Found %s\n", yytext); return LSP;}
+{ yylval.Node = add_leaf("LSP", "["); return LSP;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 32 "lexfinal.lex"
-{ yylval.Node = add_leaf("RP",")"); printf("Found %s\n", yytext); return RP ;}
+{ yylval.Node = add_leaf("RP",")"); return RP ;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 33 "lexfinal.lex"
-{ yylval.Node = add_leaf("RCP","}"); printf("Found %s\n", yytext); return RCP;}
+{ yylval.Node = add_leaf("RCP","}"); return RCP;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 34 "lexfinal.lex"
-{ yylval.Node = add_leaf("RSP","]"); printf("Found %s\n", yytext); return RSP; }
+{ yylval.Node = add_leaf("RSP","]"); return RSP; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
 #line 35 "lexfinal.lex"
-{ yylval.Node = add_leaf("SEMI",";"); printf("Found %s\n", yytext); return SEMI;}
+{ yylval.Node = add_leaf("SEMI",";"); return SEMI;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 36 "lexfinal.lex"
-{ yylval.Node = add_leaf("COMMA",","); printf("Found %s\n", yytext); return COMMA ;}
+{ yylval.Node = add_leaf("COMMA",","); return COMMA ;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 37 "lexfinal.lex"
-{ yylval.Node = add_leaf("DOT","."); printf("Found %s\n", yytext); return DOT ;}
+{ yylval.Node = add_leaf("DOT","."); return DOT ;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 38 "lexfinal.lex"
-{ yylval.Node = add_leaf("LT","<"); printf("Found %s\n", yytext); return LT ;}
+{ yylval.Node = add_leaf("LT","<"); return LT ;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
 #line 39 "lexfinal.lex"
-{ yylval.Node = add_leaf("GT",">"); printf("Found %s\n", yytext); return GT ;}
+{ yylval.Node = add_leaf("GT",">"); return GT ;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 40 "lexfinal.lex"
-{ yylval.Node = add_leaf("EQ","="); printf("Found %s\n", yytext); return EQ;}
+{ yylval.Node = add_leaf("EQ","="); return EQ;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 41 "lexfinal.lex"
-{ yylval.Node = add_leaf("COLON",":"); printf("Found %s\n", yytext); return COLON ;}
+{ yylval.Node = add_leaf("COLON",":"); return COLON ;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
 #line 42 "lexfinal.lex"
-{ yylval.Node = add_leaf("EQEQ","=="); printf("Found %s\n", yytext); return EQEQ; }
+{ yylval.Node = add_leaf("EQEQ","=="); return EQEQ; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
 #line 43 "lexfinal.lex"
-{ yylval.Node = add_leaf("PLUSEQ","+="); printf("Found %s\n", yytext); return PLUSEQ; }
+{ yylval.Node = add_leaf("PLUSEQ","+="); return PLUSEQ; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
 #line 44 "lexfinal.lex"
-{ yylval.Node = add_leaf("MINUSEQ","-="); printf("Found %s\n", yytext); return MINUSEQ;}
+{ yylval.Node = add_leaf("MINUSEQ","-="); return MINUSEQ;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
 #line 45 "lexfinal.lex"
-{ yylval.Node = add_leaf("MULTIPLYEQ","*="); printf("Found %s\n", yytext); return MULTIPLYEQ;}
+{ yylval.Node = add_leaf("MULTIPLYEQ","*="); return MULTIPLYEQ;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
 #line 46 "lexfinal.lex"
-{ yylval.Node = add_leaf("DIVIDEEQ","/="); printf("Found %s\n", yytext); return DIVIDEEQ;}
+{ yylval.Node = add_leaf("DIVIDEEQ","/="); return DIVIDEEQ;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
 #line 47 "lexfinal.lex"
-{ yylval.Node = add_leaf("PLUSPLUS","++"); printf("Found %s\n", yytext); return PLUSPLUS;}
+{ yylval.Node = add_leaf("PLUSPLUS","++"); return PLUSPLUS;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
 #line 48 "lexfinal.lex"
-{ yylval.Node = add_leaf("MINUSMINUS","--"); printf("Found %s\n", yytext); return MINUSMINUS;}
+{ yylval.Node = add_leaf("MINUSMINUS","--"); return MINUSMINUS;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
 #line 49 "lexfinal.lex"
-{ yylval.Node = add_leaf("OR","||"); printf("Found %s\n", yytext); return OR;}
+{ yylval.Node = add_leaf("OR","||"); return OR;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
 #line 50 "lexfinal.lex"
-{ yylval.Node = add_leaf("AND","&&"); printf("Found %s\n", yytext); return AND;}
+{ yylval.Node = add_leaf("AND","&&"); return AND;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
 #line 51 "lexfinal.lex"
-{ yylval.Node = add_leaf("BITOR","|"); printf("Found %s\n", yytext); return BITOR; }
+{ yylval.Node = add_leaf("BITOR","|"); return BITOR; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
 #line 52 "lexfinal.lex"
-{ yylval.Node = add_leaf("BITAND","&"); printf("Found %s\n", yytext); return BITAND; }
+{ yylval.Node = add_leaf("BITAND","&"); return BITAND; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
 #line 53 "lexfinal.lex"
-{ yylval.Node = add_leaf("NOT","not"); printf("Found %s\n", yytext); return NOT ;}
+{ yylval.Node = add_leaf("NOT","not"); return NOT ;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
 #line 54 "lexfinal.lex"
-{ yylval.Node = add_leaf("PLUS","+"); printf("Found %s\n", yytext); return PLUS ;}
+{ yylval.Node = add_leaf("PLUS","+"); return PLUS ;}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
 #line 55 "lexfinal.lex"
-{ yylval.Node = add_leaf("MINUS","-"); printf("Found %s\n", yytext); return MINUS ;}
+{ yylval.Node = add_leaf("MINUS","-"); return MINUS ;}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
 #line 56 "lexfinal.lex"
-{ yylval.Node = add_leaf("MULTIPLY","*"); printf("Found %s\n", yytext); return MULTIPLY; }
+{ yylval.Node = add_leaf("MULTIPLY","*"); return MULTIPLY; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
 #line 57 "lexfinal.lex"
-{ yylval.Node = add_leaf("DIVIDE","/"); printf("Found %s\n", yytext); return DIVIDE ;}
+{ yylval.Node = add_leaf("DIVIDE","/"); return DIVIDE ;}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
 #line 58 "lexfinal.lex"
-{ yylval.Node = add_leaf("DQUOTE","\""); printf("Found %s\n", yytext); return DQUOTE; }
+{ yylval.Node = add_leaf("DQUOTE","\""); return DQUOTE; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
 #line 59 "lexfinal.lex"
-{ yylval.Node = add_leaf("SQUOTE","'"); printf("Found %s\n", yytext); return SQUOTE; }
+{ yylval.Node = add_leaf("SQUOTE","'"); return SQUOTE; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
 #line 60 "lexfinal.lex"
-{ yylval.Node = add_leaf("PROCESSOR","Processor"); printf("Found %s\n", yytext); return PROCESSOR; }
+{ yylval.Node = add_leaf("PROCESSOR","Processor"); return PROCESSOR; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
 #line 61 "lexfinal.lex"
-{ yylval.Node = add_leaf("ARCHITECTURE_TYPE","architecture_type"); printf("Found %s\n", yytext); return ARCHITECTURE_TYPE;}
+{ yylval.Node = add_leaf("ARCHITECTURE_TYPE","architecture_type"); return ARCHITECTURE_TYPE;}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
 #line 62 "lexfinal.lex"
-{ yylval.Node = add_leaf("ISA","isa"); printf("Found %s\n", yytext); return ISA;}
+{ yylval.Node = add_leaf("ISA","isa"); return ISA;}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
 #line 63 "lexfinal.lex"
-{ yylval.Node = add_leaf("CLOCK_SPEED","clock_speed"); printf("Found %s\n", yytext); return CLOCK_SPEED; }
+{ yylval.Node = add_leaf("CLOCK_SPEED","clock_speed"); return CLOCK_SPEED; }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
 #line 64 "lexfinal.lex"
-{ yylval.Node = add_leaf("L1_MEMORY","l1_memory"); printf("Found %s\n", yytext); return L1_MEMORY ;}
+{ yylval.Node = add_leaf("L1_MEMORY","l1_memory"); return L1_MEMORY ;}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
 #line 65 "lexfinal.lex"
-{ yylval.Node = add_leaf("L2_MEMORY","l2_memory"); printf("Found %s\n", yytext); return L2_MEMORY ;}
+{ yylval.Node = add_leaf("L2_MEMORY","l2_memory"); return L2_MEMORY ;}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
 #line 66 "lexfinal.lex"
-{ yylval.Node = add_leaf("NAME","name"); printf("Found %s\n", yytext); return NAME ;}
+{ yylval.Node = add_leaf("NAME","name"); return NAME ;}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
 #line 67 "lexfinal.lex"
-{ yylval.Node = add_leaf("IS_RUNNING","is_running"); printf("Found %s\n", yytext); return IS_RUNNING ;}
+{ yylval.Node = add_leaf("IS_RUNNING","is_running"); return IS_RUNNING ;}
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
 #line 68 "lexfinal.lex"
-{ yylval.Node = add_leaf("SUBMIT_JOBS","submit_jobs"); printf("Found %s\n", yytext); return SUBMIT_JOBS; }
+{ yylval.Node = add_leaf("SUBMIT_JOBS","submit_jobs"); return SUBMIT_JOBS; }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
 #line 69 "lexfinal.lex"
-{ yylval.Node = add_leaf("GET_CLOCK_SPEED","get_clock_speed"); printf("Found %s\n", yytext); return GET_CLOCK_SPEED ; }
+{ yylval.Node = add_leaf("GET_CLOCK_SPEED","get_clock_speed"); return GET_CLOCK_SPEED ; }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
 #line 70 "lexfinal.lex"
-{ yylval.Node = add_leaf("RUN","run"); printf("Found %s\n", yytext); return RUN ;}
+{ yylval.Node = add_leaf("RUN","run"); return RUN ;}
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
 #line 71 "lexfinal.lex"
-{ yylval.Node = add_leaf("DISCARD_JOB","discard_job"); printf("Found %s\n", yytext); return DISCARD_JOB ;}
+{ yylval.Node = add_leaf("DISCARD_JOB","discard_job"); return DISCARD_JOB ;}
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
 #line 72 "lexfinal.lex"
-{ yylval.Node = add_leaf("LINK","Link"); printf("Found %s\n", yytext); return LINK ;}
+{ yylval.Node = add_leaf("LINK","Link"); return LINK ;}
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
 #line 73 "lexfinal.lex"
-{ yylval.Node = add_leaf("START_POINT","start_point"); printf("Found %s\n", yytext); return START_POINT ; }
+{ yylval.Node = add_leaf("START_POINT","start_point"); return START_POINT ; }
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
 #line 74 "lexfinal.lex"
-{ yylval.Node = add_leaf("END_POINT","end_point"); printf("Found %s\n", yytext); return END_POINT ;}
+{ yylval.Node = add_leaf("END_POINT","end_point"); return END_POINT ;}
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
 #line 75 "lexfinal.lex"
-{ yylval.Node = add_leaf("BANDWIDTH","bandwidth"); printf("Found %s\n", yytext); return BANDWIDTH ;}
+{ yylval.Node = add_leaf("BANDWIDTH","bandwidth"); return BANDWIDTH ;}
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
 #line 76 "lexfinal.lex"
-{ yylval.Node = add_leaf("CHANNEL_CAPACITY","channel_capacity"); printf("Found %s\n", yytext); return CHANNEL_CAPACITY ;}
+{ yylval.Node = add_leaf("CHANNEL_CAPACITY","channel_capacity"); return CHANNEL_CAPACITY ;}
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
 #line 77 "lexfinal.lex"
-{ yylval.Node = add_leaf("MEMORY","memory"); printf("Found %s\n", yytext); return MEMORY ;}
+{ yylval.Node = add_leaf("MEMORY","memory"); return MEMORY ;}
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
 #line 78 "lexfinal.lex"
-{ yylval.Node = add_leaf("MEMORY_TYPE","memory_type"); printf("Found %s\n", yytext); return MEMORY_TYPE ;}
+{ yylval.Node = add_leaf("MEMORY_TYPE","memory_type"); return MEMORY_TYPE ;}
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
 #line 79 "lexfinal.lex"
-{ yylval.Node = add_leaf("MEM_SIZE","mem_size"); printf("Found %s\n", yytext); return MEM_SIZE ; }
+{ yylval.Node = add_leaf("MEM_SIZE","mem_size"); return MEM_SIZE ; }
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
 #line 80 "lexfinal.lex"
-{ yylval.Node = add_leaf("GET_AVAILABLE_MEMORY","get_available_memory"); printf("Found %s\n", yytext); return GET_AVAILABLE_MEMORY ;}
+{ yylval.Node = add_leaf("GET_AVAILABLE_MEMORY","get_available_memory"); return GET_AVAILABLE_MEMORY ;}
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
 #line 81 "lexfinal.lex"
-{ yylval.Node = add_leaf("JOB","job"); printf("Found %s\n", yytext); return JOB ;}
+{ yylval.Node = add_leaf("JOB","job"); return JOB ;}
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
 #line 82 "lexfinal.lex"
-{ yylval.Node = add_leaf("JOB_ID","job_id"); printf("Found %s\n", yytext); return JOB_ID ; }
+{ yylval.Node = add_leaf("JOB_ID","job_id"); return JOB_ID ; }
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
 #line 83 "lexfinal.lex"
-{ yylval.Node = add_leaf("FLOPS_REQUIRED","flops_required"); printf("Found %s\n", yytext); return FLOPS_REQUIRED ; }
+{ yylval.Node = add_leaf("FLOPS_REQUIRED","flops_required"); return FLOPS_REQUIRED ; }
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
 #line 84 "lexfinal.lex"
-{ yylval.Node = add_leaf("DEADLINE","deadline"); printf("Found %s\n", yytext); return DEADLINE ;}
+{ yylval.Node = add_leaf("DEADLINE","deadline"); return DEADLINE ;}
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
 #line 85 "lexfinal.lex"
-{ yylval.Node = add_leaf("MEM_REQUIRED","mem_required"); printf("Found %s\n", yytext); return MEM_REQUIRED ;}
+{ yylval.Node = add_leaf("MEM_REQUIRED","mem_required"); return MEM_REQUIRED ;}
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
 #line 86 "lexfinal.lex"
-{ yylval.Node = add_leaf("AFFINITY","affinity"); printf("Found %s\n", yytext); return AFFINITY ;}
+{ yylval.Node = add_leaf("AFFINITY","affinity"); return AFFINITY ;}
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
 #line 87 "lexfinal.lex"
-{ yylval.Node = add_leaf("GET_MEMORY","get_memory"); printf("Found %s\n", yytext); return GET_MEMORY ; }
+{ yylval.Node = add_leaf("GET_MEMORY","get_memory"); return GET_MEMORY ; }
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
 #line 88 "lexfinal.lex"
-{ yylval.Node = add_leaf("CLUSTER","cluster"); printf("Found %s\n", yytext); return CLUSTER ;}
+{ yylval.Node = add_leaf("CLUSTER","cluster"); return CLUSTER ;}
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
 #line 89 "lexfinal.lex"
-{ yylval.Node = add_leaf("PROCESSORS","processors"); printf("Found %s\n", yytext); return PROCESSORS ; }
+{ yylval.Node = add_leaf("PROCESSORS","processors"); return PROCESSORS ; }
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
 #line 90 "lexfinal.lex"
-{ yylval.Node = add_leaf("TOPOLOGY","topology"); printf("Found %s\n", yytext); return TOPOLOGY ;}
+{ yylval.Node = add_leaf("TOPOLOGY","topology"); return TOPOLOGY ;}
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
 #line 91 "lexfinal.lex"
-{ yylval.Node = add_leaf("LINK_BANDWIDTH","link_bandwidth"); printf("Found %s\n", yytext); return LINK_BANDWIDTH ;}
+{ yylval.Node = add_leaf("LINK_BANDWIDTH","link_bandwidth"); return LINK_BANDWIDTH ;}
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
 #line 92 "lexfinal.lex"
-{ yylval.Node = add_leaf("LINK_CAPACITY","link_capacity"); printf("Found %s\n", yytext); return LINK_CAPACITY ;}
+{ yylval.Node = add_leaf("LINK_CAPACITY","link_capacity"); return LINK_CAPACITY ;}
 	YY_BREAK
 case 80:
 YY_RULE_SETUP
 #line 93 "lexfinal.lex"
-{ yylval.Node = add_leaf("WAIT","wait"); printf("Found %s\n", yytext); return WAIT; }
+{ yylval.Node = add_leaf("WAIT","wait"); return WAIT; }
 	YY_BREAK
 case 81:
 YY_RULE_SETUP
 #line 95 "lexfinal.lex"
-{ yylval.Node = add_leaf("scheduler","SCHEDULER"); printf("Found %s\n", yytext); return SCHEDULER; }
+{ yylval.Node = add_leaf("scheduler","SCHEDULER"); return SCHEDULER; }
 	YY_BREAK
 case 82:
 YY_RULE_SETUP
 #line 96 "lexfinal.lex"
-{ yylval.Node = add_leaf("JOB_ARRAY","job_array"); printf("Found %s\n", yytext); return JOB_ARRAY; }
+{ yylval.Node = add_leaf("JOB_ARRAY","job_array"); return JOB_ARRAY; }
 	YY_BREAK
 case 83:
 YY_RULE_SETUP
 #line 97 "lexfinal.lex"
-{ yylval.Node = add_leaf("PROCESSOR_ARRAY","processor_array"); printf("Found %s\n", yytext); return PROCESSOR_ARRAY; }
+{ yylval.Node = add_leaf("PROCESSOR_ARRAY","processor_array"); return PROCESSOR_ARRAY; }
 	YY_BREAK
 case 84:
 YY_RULE_SETUP
 #line 98 "lexfinal.lex"
-{ yylval.Node = add_leaf("SET_JOB_AFFINITY","set_job_affinity"); printf("Found %s\n", yytext); return SET_JOB_AFFINITY; }
+{ yylval.Node = add_leaf("SET_JOB_AFFINITY","set_job_affinity"); return SET_JOB_AFFINITY; }
 	YY_BREAK
 case 85:
 YY_RULE_SETUP
 #line 99 "lexfinal.lex"
-{ yylval.Node = add_leaf("MAX_JOBS","max_jobs"); printf("Found %s\n", yytext); return MAX_JOBS; }
+{ yylval.Node = add_leaf("MAX_JOBS","max_jobs"); return MAX_JOBS; }
 	YY_BREAK
 case 86:
 YY_RULE_SETUP
 #line 100 "lexfinal.lex"
-{ yylval.Node = add_leaf("GET_LOAD","get_load"); printf("Found %s\n", yytext); return GET_LOAD; }
+{ yylval.Node = add_leaf("GET_LOAD","get_load"); return GET_LOAD; }
 	YY_BREAK
 case 87:
 YY_RULE_SETUP
 #line 101 "lexfinal.lex"
-{ yylval.Node = add_leaf("SET_ALGO","set_algo"); printf("Found %s\n", yytext); return SET_ALGO; }
+{ yylval.Node = add_leaf("SET_ALGO","set_algo"); return SET_ALGO; }
 	YY_BREAK
 case 88:
 YY_RULE_SETUP
 #line 103 "lexfinal.lex"
-{ yylval.Node = add_leaf("CHARACTER",string(yytext)); printf("Found %s\n", yytext); return CHARACTER; }
+{ yylval.Node = add_leaf("CHARACTER",string(yytext)); return CHARACTER; }
 	YY_BREAK
 case 89:
 YY_RULE_SETUP
 #line 104 "lexfinal.lex"
-{ yylval.Node = add_leaf("NUM",string(yytext)); printf("Found %s\n", yytext); return NUM; }
+{ yylval.Node = add_leaf("NUM",string(yytext)); return NUM; }
 	YY_BREAK
 case 90:
 YY_RULE_SETUP
