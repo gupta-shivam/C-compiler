@@ -14,5 +14,5 @@ Assignment 4: Semantic analysis and MIPS target code generation
 
 1. go to mars simulator folder and run the following command : 
         java Mars.java
-2. Paste the MIPS code generated from the code to the simulator gui.
+2. Paste the MIPS code generated from the code to the simulator GUI.
 3. Assemble the code and run it :) .
